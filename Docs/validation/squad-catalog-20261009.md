@@ -37,6 +37,8 @@
 | 最新Lifecycle | `command-flow-20261009-025134-965` | 普通/快速模式暂停、反应覆盖、施放接攻击、取消与退出清理PASS |
 | 最新Routing | `command-flow-20261009-025210-649` | 同上伤害路由复测，新增明确验证飞碟攻击者被荆棘反杀后不再抽牌PASS |
 | 最新Finisher | `command-flow-20261009-025343-465` | 真正单体/群攻清场、非清场/保命抑制、一次原生命中配置、活力与取消PASS |
+| 干净提交最终Costs | `command-flow-20261009-025838-626` | 最终安装候选的真实蛇眼/子弹时间/X费/复制复测PASS |
+| 干净提交最终Alignment | `command-flow-20261009-025917-214` | 最终安装候选的12段飞抵目标/连接/返回录像和断言PASS |
 
 最后击杀：Feed上限＋3、HandOfGreed金币＋20、TheHunt原生额外奖励正常；Sunder非清场回能3，清场时原生 `PlayerCmd.GainEnergy` 因 `IsEnding` no-op，保留此原生规则。
 
@@ -45,6 +47,7 @@
 ## 工程与编辑板
 
 - 工程身份/三语/包边界检查PASS；784项纯逻辑断言PASS；1739份本地历史参考散列PASS（该参考不上传）。
+- 本轮另跑9项动作资源契约、7项原生命中录音判定工具测试，16项全部PASS。
 - 真实双宿主编译通过；preview有66条、stable有70条可空性警告，不称为零警告。PCK白名单6631条通过。
 - 编辑板270条记录：176卡、10角色、20遗物、10基础附效、54原生能力说明。真实headless Chromium编辑、标记、排序、下载保存、重开、新增/删除、安全差异提取与基线拒绝PASS。证据 `build/authoring-proof/`。
 - 基线SHA256：`52dc1e98395820e8132618ca4a82897311d9d88e3e84a184685e3905797477c2`。回交仅解析固定JSON数据，不执行脚本。运行 `node tools/card-board.mjs diff <回交HTML>`。
@@ -62,6 +65,22 @@ NOT RUN：0.107.1实机、多人、跨平台、本轮物理鼠标/手柄全链�
 ## 交付入口
 
 - 编辑板：`Docs/authoring/DohnaDohna-card-board.html`。
-- 飞碟影片：`build/smoke/preview/command-flow-20261009-023639-886/clips/`（12段MP4、逐段联系表、index与SHA256）。
+- 最终飞碟影片：`build/smoke/preview/command-flow-20261009-025917-214/clips/`（12段MP4、逐段联系表、index与SHA256）。
 - 公开仓库只含源码、工具、文档和文本编辑板；商业输入、影片、游戏包、存档、凭据不上传。见 `../PUBLIC-SOURCE.md`。
-- 最终包、候选复测、安装收据和源码提交在收尾追加；此处不预先宣称已安装。
+
+## 最终构建、安装与公开源码
+
+候选从干净源码提交 `eecb0229c5adaa49132bfcde6d1c1c042d93e3d9` 构建。后续收尾提交只更新本文和实施勾选，不改变运行源码。最终候选DLL与隔离测试所加载DLL逐字节散列相同；安装脚本重新确认实际宿主0.111.0及无游戏进程后才备份替换。
+
+| 最终文件 | SHA256 |
+| --- | --- |
+| preview DLL（已安装） | `347361ada131151fb3bb76ae6918b9b11c9b0714affd5b70a4194b6321676b61` |
+| PCK（已安装） | `aad8f9a3abe7c0e5e1e71c60c4813c961adbd39c11b2838363779c7562b7a048` |
+| preview manifest | `5a2fc90f03d23e4b07612af8c7db3f3ebaa0eb7cee73095280405a547c145858` |
+| stable DLL（仅编译） | `47165df962ca3dbcc6f484d1e09d95ded2f6f00f675f988814791cbc875f042c` |
+
+真实宿主输入：preview MVID `73b63ee0-6c0a-47bb-b0d1-b21f6d94222e`，SHA256 `0861bfa1df347538d932f22d580e75420f08082792eb914e53b4882764acdbe9`；stable MVID `97f10687-c306-4798-ab75-8b9f23f34dfb`，SHA256 `a1f9e653f1e28e4076558fee1e60d218619cb7e057b887c6417f62c62c6d7a52`。MVID只作证据，不作为运行时白名单。
+
+已安装：`C:/Program Files/steam/steamapps/common/Slay the Spire 2/mods/DohnaDohna`。备份和机器可读收据：工程内 `build/local-install/20261009-030042-357/`，旧包位于 `previous-mod/`。安装未传SettingsFile，未更改正常存档、用户设置、其他模组或全局音量，没有强制结束日常游戏。
+
+按用户授权新建公开源码仓库 https://github.com/2223M1/DohnaDohna ，独立 `main`，688份文本文件通过公开边界与常见凭据扫描；未上传原作素材/完整导出、游戏DLL、银行文件、存档、私人配置、参考副本、录像或安装包。首个源码提交的GitHub CI已通过：https://github.com/2223M1/DohnaDohna/actions/runs/37828243259 。没有发布Workshop或GitHub二进制Release。
