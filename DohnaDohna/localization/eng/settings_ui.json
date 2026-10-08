@@ -1,0 +1,5 @@
+{
+  "DOHNA_PRESENTATION.title": "Presentation",
+  "DOHNA_FEMALE_DEATH_CUT_IN.title": "Female character special defeat presentation",
+  "DOHNA_FEMALE_DEATH_CUT_IN.description": "Off by default. When off, female characters use the same fall animation and death voice flow as male characters, without a defeat poster. Takes effect on the next death."
+}

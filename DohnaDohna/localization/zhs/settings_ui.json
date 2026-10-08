@@ -1,0 +1,5 @@
+{
+  "DOHNA_PRESENTATION.title": "演出",
+  "DOHNA_FEMALE_DEATH_CUT_IN.title": "女性角色特殊死亡演出",
+  "DOHNA_FEMALE_DEATH_CUT_IN.description": "默认关闭。关闭时，女性角色与男性一样只播放倒下动作和死亡语音，不显示战败海报。更改从下一次死亡起生效。"
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "多娜多娜·STS2 原版查证"
+  short_description: "Trace exact-version STS2 behavior for DohnaDohna features"
+  default_prompt: "使用 $dohnadohna-sts2-reference 查证公共 API 尚未定义的精确 STS2 行为，只读取当前目标版本的相关源码。"

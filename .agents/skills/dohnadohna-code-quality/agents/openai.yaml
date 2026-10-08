@@ -1,0 +1,4 @@
+interface:
+  display_name: "多娜多娜·代码质量"
+  short_description: "Evidence-first DohnaDohna architecture and ownership review"
+  default_prompt: "使用 $dohnadohna-code-quality 审查或按授权简化 DohnaDohna 工程，保留玩家行为与真实接口契约。"

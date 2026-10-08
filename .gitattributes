@@ -1,0 +1,10 @@
+* text=auto
+*.cs text eol=lf
+*.ps1 text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.png binary
+*.bank binary
+*.pck binary
+# Preserve the source snapshot bytes used by migration-manifest.json on all OSes.
+Reference/** -text

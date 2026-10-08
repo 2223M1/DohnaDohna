@@ -1,0 +1,40 @@
+.godot/
+/build/
+bin/
+obj/
+.local/
+.env
+.env.*
+!.env.example
+node_modules/
+.wrangler/
+*.user
+*.log
+*.zip
+*.pck
+*.dll
+*.pdb
+*.epub
+.lore-cache/
+.local-reference/
+__pycache__/
+*.py[cod]
+*.local.json
+
+# Selected commercial artwork/audio are generated locally, not public source assets.
+/DohnaDohna/roles/
+/DohnaDohna/images/original/
+/DohnaDohna/images/shadows/
+/DohnaDohna/images/cards/*.png
+/DohnaDohna/images/icons/*.png
+/DohnaDohna/audio/fmod/*.bank
+/.local/fmod/
+
+# Private game source reference; keep out of public repositories.
+/Reference/Vanilla/
+
+# Local research/migration evidence is not part of the public source repository.
+/Reference/*
+!/Reference/.gdignore
+/Docs/migration-manifest.json
+/Docs/excluded-source-files.json

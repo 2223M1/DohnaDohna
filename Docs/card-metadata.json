@@ -1,0 +1,5201 @@
+[
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ABRASIVE",
+    "title": "磨蚀",
+    "cost": 3,
+    "upgradedCost": 3,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "porno",
+    "melee": false,
+    "prototype": "Abrasive",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/abrasive.tres",
+    "baseVars": {
+      "ThornsPower": 4,
+      "DexterityPower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "ThornsPower": 6,
+      "DexterityPower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]奇巧[/gold]。\n给予一名存活队员1点[gold]敏捷[/gold]和4点[gold]荆棘[/gold]。",
+    "upgradedText": "[gold]奇巧[/gold]。\n给予一名存活队员1点[gold]敏捷[/gold]和[green]6[/green]点[gold]荆棘[/gold]。",
+    "baseKeywords": [
+      "Sly"
+    ],
+    "upgradedKeywords": [
+      "Sly"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ACCELERANT",
+    "title": "触媒",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "kirakira",
+    "melee": false,
+    "prototype": "Accelerant",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/accelerant.tres",
+    "baseVars": {
+      "Accelerant": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Accelerant": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]中毒[/gold]会额外触发1次。",
+    "upgradedText": "[gold]中毒[/gold]会额外触发[green]2[/green]次。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ACROBATICS",
+    "title": "杂技",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "joker",
+    "melee": false,
+    "prototype": "Acrobatics",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/acrobatics.tres",
+    "baseVars": {
+      "Cards": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Cards": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "抽3张牌。\n丢弃1张牌。",
+    "upgradedText": "抽[green]4[/green]张牌。\n丢弃1张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ADRENALINE",
+    "title": "肾上腺素",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "joker",
+    "melee": false,
+    "prototype": "Adrenaline",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/adrenaline.tres",
+    "baseVars": {
+      "Energy": 1,
+      "Cards": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Energy": 2,
+      "Cards": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。\n抽2张牌。\n[gold]消耗[/gold]。",
+    "upgradedText": "获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。\n抽2张牌。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_AGGRESSION",
+    "title": "好勇斗狠",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "kikuchiyo",
+    "melee": false,
+    "prototype": "Aggression",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/aggression.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在你的回合开始时，将你[gold]弃牌堆[/gold]的一张随机攻击牌放入你的[gold]手牌[/gold]并将其[gold]升级[/gold]。",
+    "upgradedText": "[gold]固有[/gold]。\n在你的回合开始时，将你[gold]弃牌堆[/gold]的一张随机攻击牌放入你的[gold]手牌[/gold]并将其[gold]升级[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": [
+      "Innate"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ALCHEMIZE",
+    "title": "炼制药水",
+    "cost": 1,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "medhico",
+    "melee": false,
+    "prototype": "Alchemize",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/alchemize.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得一瓶随机药水。\n[gold]消耗[/gold]。",
+    "upgradedText": "获得一瓶随机药水。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ALL_FOR_ONE",
+    "title": "万物一心",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "joker",
+    "melee": false,
+    "prototype": "AllForOne",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/all_for_one.tres",
+    "baseVars": {
+      "Damage": 10,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 14,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成10点伤害。\n将你[gold]弃牌堆[/gold]中的所有0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]牌放入你的[gold]手牌[/gold]。",
+    "upgradedText": "造成[green]14[/green]点伤害。\n将你[gold]弃牌堆[/gold]中的所有0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]牌放入你的[gold]手牌[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ANGER",
+    "title": "愤怒",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Attack",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "Anger",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/anger.tres",
+    "baseVars": {
+      "Damage": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 8,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成6点伤害。\n将一张此牌的复制品加入你的[gold]弃牌堆[/gold]。",
+    "upgradedText": "造成[green]8[/green]点伤害。\n将一张此牌的复制品加入你的[gold]弃牌堆[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ANTICIPATE",
+    "title": "预判",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "tora",
+    "melee": false,
+    "prototype": "Anticipate",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/anticipate.tres",
+    "baseVars": {
+      "DexterityPower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "DexterityPower": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在本回合获得2点[gold]敏捷[/gold]。",
+    "upgradedText": "在本回合获得[green]4[/green]点[gold]敏捷[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ARMAMENTS",
+    "title": "武装",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "kuma",
+    "melee": false,
+    "prototype": "Armaments",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/armaments.tres",
+    "baseVars": {
+      "Block": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得5点[gold]格挡[/gold]。\n[gold]升级[/gold]你[gold]手牌[/gold]中的一张牌。",
+    "upgradedText": "获得5点[gold]格挡[/gold]。\n[gold]升级[/gold]你[gold]手牌[/gold]中的所有牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ASSASSINATE",
+    "title": "刺杀",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "alyce",
+    "melee": false,
+    "prototype": "Assassinate",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/assassinate.tres",
+    "baseVars": {
+      "Damage": 10,
+      "VulnerablePower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 13,
+      "VulnerablePower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]固有[/gold]。\n造成10点伤害。\n给予1层[gold]易伤[/gold]。\n[gold]消耗[/gold]。",
+    "upgradedText": "[gold]固有[/gold]。\n造成[green]13[/green]点伤害。\n给予[green]2[/green]层[gold]易伤[/gold]。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Innate",
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Innate",
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_BACKFLIP",
+    "title": "后空翻",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "Backflip",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/backflip.tres",
+    "baseVars": {
+      "Block": 5,
+      "Cards": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 8,
+      "Cards": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得5点[gold]格挡[/gold]。\n抽2张牌。",
+    "upgradedText": "获得[green]8[/green]点[gold]格挡[/gold]。\n抽2张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_BACKSTAB",
+    "title": "背刺",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "joker",
+    "melee": true,
+    "prototype": "Backstab",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/backstab.tres",
+    "baseVars": {
+      "Damage": 11,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 15,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]固有[/gold]。\n造成11点伤害。\n[gold]消耗[/gold]。",
+    "upgradedText": "[gold]固有[/gold]。\n造成[green]15[/green]点伤害。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust",
+      "Innate"
+    ],
+    "upgradedKeywords": [
+      "Exhaust",
+      "Innate"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_BALL_LIGHTNING",
+    "title": "球状闪电",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "antena",
+    "melee": false,
+    "prototype": "BallLightning",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/ball_lightning.tres",
+    "baseVars": {
+      "Damage": 7,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 10,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成7点伤害。\n[gold]生成[/gold]1个[gold]闪电[/gold]充能球。",
+    "upgradedText": "造成[green]10[/green]点伤害。\n[gold]生成[/gold]1个[gold]闪电[/gold]充能球。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_BARRICADE",
+    "title": "壁垒",
+    "cost": 3,
+    "upgradedCost": 2,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "zappa",
+    "melee": false,
+    "prototype": "Barricade",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/barricade.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]格挡[/gold]不再在你的回合开始时消失。",
+    "upgradedText": "[gold]格挡[/gold]不再在你的回合开始时消失。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_BEACON_OF_HOPE",
+    "title": "希望灯塔",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "zappa",
+    "melee": false,
+    "prototype": "BeaconOfHope",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/beacon_of_hope.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "每当你在你的回合获得[gold]格挡[/gold]时，其他队员获得相应一半的[gold]格挡[/gold]。",
+    "upgradedText": "[gold]固有[/gold]。\n每当你在你的回合获得[gold]格挡[/gold]时，其他队员获得相应一半的[gold]格挡[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": [
+      "Innate"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_BEAM_CELL",
+    "title": "光束射线",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "alyce",
+    "melee": false,
+    "prototype": "BeamCell",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/beam_cell.tres",
+    "baseVars": {
+      "Damage": 3,
+      "VulnerablePower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 4,
+      "VulnerablePower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成3点伤害。\n给予1层[gold]易伤[/gold]。",
+    "upgradedText": "造成[green]4[/green]点伤害。\n给予[green]2[/green]层[gold]易伤[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_BLUR",
+    "title": "残影",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "kirakira",
+    "melee": false,
+    "prototype": "Blur",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/blur.tres",
+    "baseVars": {
+      "Block": 5,
+      "Blur": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 8,
+      "Blur": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得5点[gold]格挡[/gold]。\n你的下一回合开始时[gold]格挡[/gold]不会消失。",
+    "upgradedText": "获得[green]8[/green]点[gold]格挡[/gold]。\n你的下一回合开始时[gold]格挡[/gold]不会消失。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_BODY_SLAM",
+    "title": "全身撞击",
+    "cost": 1,
+    "upgradedCost": 0,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "zappa",
+    "melee": true,
+    "prototype": "BodySlam",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/body_slam.tres",
+    "baseVars": {
+      "CalculationBase": 0,
+      "ExtraDamage": 1,
+      "CalculatedDamage": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "CalculationBase": 0,
+      "ExtraDamage": 1,
+      "CalculatedDamage": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成你当前[gold]格挡[/gold]值的伤害。",
+    "upgradedText": "造成你当前[gold]格挡[/gold]值的伤害。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_BOMBARDMENT",
+    "title": "轰击",
+    "cost": 3,
+    "upgradedCost": 3,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "alyce",
+    "melee": false,
+    "prototype": "Bombardment",
+    "portrait": "res://images/atlases/card_atlas.sprites/regent/bombardment.tres",
+    "baseVars": {
+      "Damage": 18,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 24,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成18点伤害。\n你的回合开始时，如果这张牌在你的[gold]消耗牌堆[/gold]中，则将其打出。\n[gold]消耗[/gold]。",
+    "upgradedText": "造成[green]24[/green]点伤害。\n你的回合开始时，如果这张牌在你的[gold]消耗牌堆[/gold]中，则将其打出。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_BOUNCING_FLASK",
+    "title": "弹跳药瓶",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "kirakira",
+    "melee": false,
+    "prototype": "BouncingFlask",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/bouncing_flask.tres",
+    "baseVars": {
+      "PoisonPower": 3,
+      "Repeat": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "PoisonPower": 3,
+      "Repeat": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "随机给予敌人3层[gold]中毒[/gold]3次。",
+    "upgradedText": "随机给予敌人3层[gold]中毒[/gold][green]4[/green]次。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_BUFFER",
+    "title": "缓冲",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "medhico",
+    "melee": false,
+    "prototype": "Buffer",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/buffer.tres",
+    "baseVars": {
+      "BufferPower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "BufferPower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "使一名存活队员接下来受到的1次生命损伤无效。",
+    "upgradedText": "使一名存活队员接下来受到的[green]2[/green]次生命损伤无效。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_CALCULATED_GAMBLE",
+    "title": "计算下注",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "joker",
+    "melee": false,
+    "prototype": "CalculatedGamble",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/calculated_gamble.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "丢弃你的所有[gold]手牌[/gold],\n然后抽相同数量的牌。\n[gold]消耗[/gold]。",
+    "upgradedText": "[gold]保留[/gold]。\n丢弃你的所有[gold]手牌[/gold],\n然后抽相同数量的牌。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust",
+      "Retain"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_CAPACITOR",
+    "title": "扩容",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Uncommon",
+    "role": "antena",
+    "melee": false,
+    "prototype": "Capacitor",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/capacitor.tres",
+    "baseVars": {
+      "Repeat": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Repeat": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得2个充能球栏位。",
+    "upgradedText": "获得[green]3[/green]个充能球栏位。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_CHARGE_BATTERY",
+    "title": "充电",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "ChargeBattery",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/charge_battery.tres",
+    "baseVars": {
+      "Block": 7,
+      "Energy": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 10,
+      "Energy": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得7点[gold]格挡[/gold]。\n在下个回合获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "upgradedText": "获得[green]10[/green]点[gold]格挡[/gold]。\n在下个回合获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_CHILL",
+    "title": "冰寒",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "antena",
+    "melee": false,
+    "prototype": "Chill",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/chill.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "当前每有一名敌人，就[gold]生成[/gold]1个[gold]冰霜[/gold]充能球。\n[gold]消耗[/gold]。",
+    "upgradedText": "当前每有一名敌人，就[gold]生成[/gold]1个[gold]冰霜[/gold]充能球。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_COLD_SNAP",
+    "title": "寒流",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "antena",
+    "melee": false,
+    "prototype": "ColdSnap",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/cold_snap.tres",
+    "baseVars": {
+      "Damage": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 9,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成6点伤害。\n[gold]生成[/gold]1个[gold]冰霜[/gold]充能球。",
+    "upgradedText": "造成[green]9[/green]点伤害。\n[gold]生成[/gold]1个[gold]冰霜[/gold]充能球。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_COLOSSUS",
+    "title": "巨像",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "porno",
+    "melee": false,
+    "prototype": "Colossus",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/colossus.tres",
+    "baseVars": {
+      "Block": 4,
+      "Colossus": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 7,
+      "Colossus": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得4点[gold]格挡[/gold]。\n在本回合中，有[gold]易伤[/gold]状态的敌人对你造成的伤害降低50%。",
+    "upgradedText": "获得[green]7[/green]点[gold]格挡[/gold]。\n在本回合中，有[gold]易伤[/gold]状态的敌人对你造成的伤害降低50%。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_COOLHEADED",
+    "title": "冷静头脑",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "antena",
+    "melee": false,
+    "prototype": "Coolheaded",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/coolheaded.tres",
+    "baseVars": {
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Cards": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]生成[/gold]1个[gold]冰霜[/gold]充能球。\n抽1张牌。",
+    "upgradedText": "[gold]生成[/gold]1个[gold]冰霜[/gold]充能球。\n抽[green]2[/green]张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_COORDINATE",
+    "title": "协同配合",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "kuma",
+    "melee": false,
+    "prototype": "Coordinate",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/coordinate.tres",
+    "baseVars": {
+      "StrengthPower": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "StrengthPower": 8,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在本回合给予其他队员5点[gold]力量[/gold]。",
+    "upgradedText": "在本回合给予其他队员[green]8[/green]点[gold]力量[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_CORROSIVE_WAVE",
+    "title": "腐蚀波",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "kirakira",
+    "melee": false,
+    "prototype": "CorrosiveWave",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/corrosive_wave.tres",
+    "baseVars": {
+      "CorrosiveWave": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "CorrosiveWave": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "打出此牌后，你在本回合每抽到一张牌，就给予所有敌人2层[gold]中毒[/gold]。",
+    "upgradedText": "打出此牌后，你在本回合每抽到一张牌，就给予所有敌人[green]3[/green]层[gold]中毒[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_COSMIC_INDIFFERENCE",
+    "title": "宇宙冷漠",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "CosmicIndifference",
+    "portrait": "res://images/atlases/card_atlas.sprites/regent/cosmic_indifference.tres",
+    "baseVars": {
+      "Block": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 9,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得6点[gold]格挡[/gold]。\n将[gold]弃牌堆[/gold]中的一张牌放到你的[gold]抽牌堆[/gold]的顶部。",
+    "upgradedText": "获得[green]9[/green]点[gold]格挡[/gold]。\n将[gold]弃牌堆[/gold]中的一张牌放到你的[gold]抽牌堆[/gold]的顶部。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_CREATIVE_AI",
+    "title": "创造性AI",
+    "cost": 3,
+    "upgradedCost": 2,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "antena",
+    "melee": false,
+    "prototype": "CreativeAi",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/creative_ai.tres",
+    "baseVars": {
+      "CreativeAi": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "CreativeAi": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在你的回合开始时，将一张随机能力牌加入你的[gold]手牌[/gold]。",
+    "upgradedText": "在你的回合开始时，将一张随机能力牌加入你的[gold]手牌[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DAGGER_THROW",
+    "title": "投掷匕首",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "DaggerThrow",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/dagger_throw.tres",
+    "baseVars": {
+      "Damage": 9,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 12,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成9点伤害。\n抽1张牌。\n丢弃1张牌。",
+    "upgradedText": "造成[green]12[/green]点伤害。\n抽1张牌。\n丢弃1张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DARK_SHACKLES",
+    "title": "黑暗镣铐",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "porno",
+    "melee": false,
+    "prototype": "DarkShackles",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/dark_shackles.tres",
+    "baseVars": {
+      "StrengthLoss": 9,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "StrengthLoss": 15,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "使一名敌人在本回合失去9点[gold]力量[/gold]。\n[gold]消耗[/gold]。",
+    "upgradedText": "使一名敌人在本回合失去[green]15[/green]点[gold]力量[/gold]。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DEADLY_POISON",
+    "title": "致命毒药",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "kirakira",
+    "melee": false,
+    "prototype": "DeadlyPoison",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/deadly_poison.tres",
+    "baseVars": {
+      "PoisonPower": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "PoisonPower": 7,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "给予5层[gold]中毒[/gold]。",
+    "upgradedText": "给予[green]7[/green]层[gold]中毒[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DEATH_MARCH",
+    "title": "死亡行军",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "kikuchiyo",
+    "melee": true,
+    "prototype": "DeathMarch",
+    "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/death_march.tres",
+    "baseVars": {
+      "CalculationBase": 8,
+      "ExtraDamage": 4,
+      "CalculatedDamage": 8,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "CalculationBase": 9,
+      "ExtraDamage": 6,
+      "CalculatedDamage": 9,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成8点伤害。\n你在回合进行中每抽到一张牌，都会使其额外造成4点伤害。",
+    "upgradedText": "造成[green]9[/green]点伤害。\n你在回合进行中每抽到一张牌，都会使其额外造成[green]6[/green]点伤害。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DEBILITATE",
+    "title": "摧残",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "porno",
+    "melee": true,
+    "prototype": "Debilitate",
+    "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/debilitate.tres",
+    "baseVars": {
+      "Damage": 10,
+      "DebilitatePower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 12,
+      "DebilitatePower": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成10点伤害。\n在接下来的2回合内，该敌人身上的[gold]易伤[/gold]与[gold]虚弱[/gold]效果翻倍。",
+    "upgradedText": "造成[green]12[/green]点伤害。\n在接下来的[green]3[/green]回合内，该敌人身上的[gold]易伤[/gold]与[gold]虚弱[/gold]效果翻倍。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DEFLECT",
+    "title": "偏折",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "Deflect",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/deflect.tres",
+    "baseVars": {
+      "Block": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 7,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得4点[gold]格挡[/gold]。",
+    "upgradedText": "获得[green]7[/green]点[gold]格挡[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DEFRAGMENT",
+    "title": "碎片整理",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "antena",
+    "melee": false,
+    "prototype": "Defragment",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/defragment.tres",
+    "baseVars": {
+      "FocusPower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FocusPower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得1点[gold]集中[/gold]。",
+    "upgradedText": "获得[green]2[/green]点[gold]集中[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DEFY",
+    "title": "违逆",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "Defy",
+    "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/defy.tres",
+    "baseVars": {
+      "Block": 6,
+      "WeakPower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 9,
+      "WeakPower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]虚无[/gold]。\n获得6点[gold]格挡[/gold]。\n给予1层[gold]虚弱[/gold]。",
+    "upgradedText": "[gold]虚无[/gold]。\n获得[green]9[/green]点[gold]格挡[/gold]。\n给予1层[gold]虚弱[/gold]。",
+    "baseKeywords": [
+      "Ethereal"
+    ],
+    "upgradedKeywords": [
+      "Ethereal"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DELAY",
+    "title": "拖延",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "medhico",
+    "melee": false,
+    "prototype": "Delay",
+    "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/delay.tres",
+    "baseVars": {
+      "Block": 11,
+      "Energy": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 13,
+      "Energy": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得11点[gold]格挡[/gold]。\n在下个回合，\n获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "upgradedText": "获得[green]13[/green]点[gold]格挡[/gold]。\n在下个回合，\n获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DEMON_FORM",
+    "title": "恶魔形态",
+    "cost": 3,
+    "upgradedCost": 3,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "tora",
+    "melee": false,
+    "prototype": "DemonForm",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/demon_form.tres",
+    "baseVars": {
+      "StrengthPower": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "StrengthPower": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在你的回合开始时，获得3点[gold]力量[/gold]。",
+    "upgradedText": "在你的回合开始时，获得[green]4[/green]点[gold]力量[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DEMONIC_SHIELD",
+    "title": "恶魔护盾",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "zappa",
+    "melee": false,
+    "prototype": "DemonicShield",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/demonic_shield.tres",
+    "baseVars": {
+      "CalculationBase": 0,
+      "HpLoss": 1,
+      "CalculationExtra": 1,
+      "CalculatedBlock": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "CalculationBase": 0,
+      "HpLoss": 1,
+      "CalculationExtra": 1,
+      "CalculatedBlock": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "失去1点生命。\n给予另一位玩家你当前[gold]格挡[/gold]值的[gold]格挡[/gold]。\n[gold]消耗[/gold]。",
+    "upgradedText": "失去1点生命。\n给予另一位玩家你当前[gold]格挡[/gold]值的[gold]格挡[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DISMANTLE",
+    "title": "拆卸",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "tora",
+    "melee": true,
+    "prototype": "Dismantle",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/dismantle.tres",
+    "baseVars": {
+      "Damage": 8,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 10,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成8点伤害。\n如果该敌人有[gold]易伤[/gold]状态，则攻击两次。",
+    "upgradedText": "造成[green]10[/green]点伤害。\n如果该敌人有[gold]易伤[/gold]状态，则攻击两次。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DRAIN_POWER",
+    "title": "能量汲取",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "DrainPower",
+    "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/drain_power.tres",
+    "baseVars": {
+      "Damage": 10,
+      "Cards": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 12,
+      "Cards": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成10点伤害。\n随机[gold]升级[/gold]你[gold]弃牌堆[/gold]中的2张牌。",
+    "upgradedText": "造成[green]12[/green]点伤害。\n随机[gold]升级[/gold]你[gold]弃牌堆[/gold]中的[green]3[/green]张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ECHO_FORM",
+    "title": "回响形态",
+    "cost": 3,
+    "upgradedCost": 3,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "kuma",
+    "melee": false,
+    "prototype": "EchoForm",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/echo_form.tres",
+    "baseVars": {
+      "EchoForm": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "EchoForm": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]虚无[/gold]。\n你每回合打出的第一张牌会被打出两次。",
+    "upgradedText": "你每回合打出的第一张牌会被打出两次。",
+    "baseKeywords": [
+      "Ethereal"
+    ],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ECHOING_SLASH",
+    "title": "回响斩击",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "kikuchiyo",
+    "melee": true,
+    "prototype": "EchoingSlash",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/echoing_slash.tres",
+    "baseVars": {
+      "Damage": 10,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 13,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "对所有敌人造成10点伤害。\n每有一名敌人被击杀，就重复此效果。",
+    "upgradedText": "对所有敌人造成[green]13[/green]点伤害。\n每有一名敌人被击杀，就重复此效果。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ENERGY_SURGE",
+    "title": "能量涌动",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "medhico",
+    "melee": false,
+    "prototype": "EnergySurge",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/energy_surge.tres",
+    "baseVars": {
+      "Energy": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Energy": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。\n[gold]消耗[/gold]。",
+    "upgradedText": "获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ENVENOM",
+    "title": "涂毒",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "kirakira",
+    "melee": false,
+    "prototype": "Envenom",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/envenom.tres",
+    "baseVars": {
+      "EnvenomPower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "EnvenomPower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "每有一次攻击造成未被格挡的伤害，就给予1层[gold]中毒[/gold]。",
+    "upgradedText": "每有一次攻击造成未被格挡的伤害，就给予[green]2[/green]层[gold]中毒[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_EQUILIBRIUM",
+    "title": "均衡",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "medhico",
+    "melee": false,
+    "prototype": "Equilibrium",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/equilibrium.tres",
+    "baseVars": {
+      "Block": 13,
+      "Equilibrium": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 16,
+      "Equilibrium": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得13点[gold]格挡[/gold]。\n在本回合[gold]保留[/gold]你的[gold]手牌[/gold]。",
+    "upgradedText": "获得[green]16[/green]点[gold]格挡[/gold]。\n在本回合[gold]保留[/gold]你的[gold]手牌[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ESCAPE_PLAN",
+    "title": "逃脱计划",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "kirakira",
+    "melee": false,
+    "prototype": "EscapePlan",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/escape_plan.tres",
+    "baseVars": {
+      "Block": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "抽1张牌。\n如果抽到的是技能牌，则获得3点[gold]格挡[/gold]。",
+    "upgradedText": "抽1张牌。\n如果抽到的是技能牌，则获得[green]5[/green]点[gold]格挡[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_EXPECT_A_FIGHT",
+    "title": "跃跃欲试",
+    "cost": 3,
+    "upgradedCost": 3,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "zappa",
+    "melee": false,
+    "prototype": "ExpectAFight",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/expect_a_fight.tres",
+    "baseVars": {
+      "CalculationBase": 15,
+      "CalculationExtra": 5,
+      "CalculatedBlock": 15,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "CalculationBase": 16,
+      "CalculationExtra": 8,
+      "CalculatedBlock": 16,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得15点[gold]格挡[/gold]。\n你每拥有一点[gold]力量[/gold]，这张牌就额外获得5点[gold]格挡[/gold]。",
+    "upgradedText": "获得[green]16[/green]点[gold]格挡[/gold]。\n你每拥有一点[gold]力量[/gold]，这张牌就额外获得[green]8[/green]点[gold]格挡[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_EXPERTISE",
+    "title": "独门技术",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "medhico",
+    "melee": false,
+    "prototype": "Expertise",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/expertise.tres",
+    "baseVars": {
+      "Cards": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Cards": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "抽2张牌。\n这些牌在本回合获得[gold]保留[/gold]。",
+    "upgradedText": "抽[green]3[/green]张牌。\n这些牌在本回合获得[gold]保留[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_EXPOSE",
+    "title": "暴露",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "alyce",
+    "melee": false,
+    "prototype": "Expose",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/expose.tres",
+    "baseVars": {
+      "Power": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Power": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "去除敌人身上的所有[gold]格挡[/gold]值和[gold]人工制品[/gold]。\n并给予2层[gold]易伤[/gold]。\n[gold]消耗[/gold]。",
+    "upgradedText": "去除敌人身上的所有[gold]格挡[/gold]值和[gold]人工制品[/gold]。\n并给予[green]3[/green]层[gold]易伤[/gold]。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FEED",
+    "title": "狂宴",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "kikuchiyo",
+    "melee": true,
+    "prototype": "Feed",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/feed.tres",
+    "baseVars": {
+      "Damage": 10,
+      "MaxHp": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 12,
+      "MaxHp": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成10点伤害。\n[gold]斩杀[/gold]时，永久获得3点最大生命值。\n[gold]消耗[/gold]。",
+    "upgradedText": "造成[green]12[/green]点伤害。\n[gold]斩杀[/gold]时，永久获得[green]4[/green]点最大生命值。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FIEND_FIRE",
+    "title": "恶魔之焰",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "tora",
+    "melee": false,
+    "prototype": "FiendFire",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/fiend_fire.tres",
+    "baseVars": {
+      "Damage": 7,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 10,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]消耗[/gold]所有[gold]手牌[/gold]。\n每张被[gold]消耗[/gold]的牌造成7点伤害。\n[gold]消耗[/gold]。",
+    "upgradedText": "[gold]消耗[/gold]所有[gold]手牌[/gold]。\n每张被[gold]消耗[/gold]的牌造成[green]10[/green]点伤害。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FIGHT_ME",
+    "title": "与我一战！",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "tora",
+    "melee": true,
+    "prototype": "FightMe",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/fight_me.tres",
+    "baseVars": {
+      "Damage": 5,
+      "Repeat": 2,
+      "StrengthPower": 3,
+      "EnemyStrength": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 6,
+      "Repeat": 2,
+      "StrengthPower": 4,
+      "EnemyStrength": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成5点伤害两次。\n获得3点[gold]力量[/gold]。\n该敌人获得1点[gold]力量[/gold]。",
+    "upgradedText": "造成[green]6[/green]点伤害两次。\n获得[green]4[/green]点[gold]力量[/gold]。\n该敌人获得1点[gold]力量[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FIGHT_THROUGH",
+    "title": "强撑",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "zappa",
+    "melee": false,
+    "prototype": "FightThrough",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/fight_through.tres",
+    "baseVars": {
+      "Block": 13,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 17,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得13点[gold]格挡[/gold]。\n将2张[gold]伤口[/gold]加入你的[gold]弃牌堆[/gold]。",
+    "upgradedText": "获得[green]17[/green]点[gold]格挡[/gold]。\n将2张[gold]伤口[/gold]加入你的[gold]弃牌堆[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FINESSE",
+    "title": "妙计",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "medhico",
+    "melee": false,
+    "prototype": "Finesse",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/finesse.tres",
+    "baseVars": {
+      "Block": 4,
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 7,
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得4点[gold]格挡[/gold]。\n抽1张牌。",
+    "upgradedText": "获得[green]7[/green]点[gold]格挡[/gold]。\n抽1张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FINISHER",
+    "title": "终结技",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "joker",
+    "melee": true,
+    "prototype": "Finisher",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/finisher.tres",
+    "baseVars": {
+      "Damage": 6,
+      "CalculationBase": 0,
+      "CalculationExtra": 1,
+      "CalculatedHits": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 8,
+      "CalculationBase": 0,
+      "CalculationExtra": 1,
+      "CalculatedHits": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在这个回合内每打出过一张攻击牌，就造成6点伤害一次。",
+    "upgradedText": "在这个回合内每打出过一张攻击牌，就造成[green]8[/green]点伤害一次。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FISTICUFFS",
+    "title": "拳斗",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "kuma",
+    "melee": true,
+    "prototype": "Fisticuffs",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/fisticuffs.tres",
+    "baseVars": {
+      "Damage": 7,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 9,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成7点伤害。\n获得等量于所造成伤害的[gold]格挡[/gold]。",
+    "upgradedText": "造成[green]9[/green]点伤害。\n获得等量于所造成伤害的[gold]格挡[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FLAME_BARRIER",
+    "title": "火焰屏障",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "porno",
+    "melee": false,
+    "prototype": "FlameBarrier",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/flame_barrier.tres",
+    "baseVars": {
+      "Block": 12,
+      "DamageBack": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 16,
+      "DamageBack": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "给予一名存活队员12点[gold]格挡[/gold]。\n该队员在这个回合每受到一次攻击，对攻击者造成4点伤害。",
+    "upgradedText": "给予一名存活队员[green]16[/green]点[gold]格挡[/gold]。\n该队员在这个回合每受到一次攻击，对攻击者造成[green]6[/green]点伤害。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FLANKING",
+    "title": "夹击",
+    "cost": 2,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "kuma",
+    "melee": false,
+    "prototype": "Flanking",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/flanking.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "一名敌人在本回合受到的来自其他队员的攻击伤害翻倍。",
+    "upgradedText": "一名敌人在本回合受到的来自其他队员的攻击伤害翻倍。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FLASH_OF_STEEL",
+    "title": "亮剑",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "kikuchiyo",
+    "melee": true,
+    "prototype": "FlashOfSteel",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/flash_of_steel.tres",
+    "baseVars": {
+      "Damage": 5,
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 8,
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成5点伤害。\n抽1张牌。",
+    "upgradedText": "造成[green]8[/green]点伤害。\n抽1张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FLECHETTES",
+    "title": "飞镖",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "tora",
+    "melee": false,
+    "prototype": "Flechettes",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/flechettes.tres",
+    "baseVars": {
+      "Damage": 5,
+      "CalculationBase": 0,
+      "CalculationExtra": 1,
+      "CalculatedHits": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 7,
+      "CalculationBase": 0,
+      "CalculationExtra": 1,
+      "CalculatedHits": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]手牌[/gold]中每有一张技能牌，造成5点伤害。",
+    "upgradedText": "[gold]手牌[/gold]中每有一张技能牌，造成[green]7[/green]点伤害。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FOOTWORK",
+    "title": "灵动步法",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Uncommon",
+    "role": "kirakira",
+    "melee": false,
+    "prototype": "Footwork",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/footwork.tres",
+    "baseVars": {
+      "DexterityPower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "DexterityPower": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得2点[gold]敏捷[/gold]。",
+    "upgradedText": "获得[green]3[/green]点[gold]敏捷[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FTL",
+    "title": "超越光速",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "kikuchiyo",
+    "melee": true,
+    "prototype": "Ftl",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/ftl.tres",
+    "baseVars": {
+      "Damage": 5,
+      "PlayMax": 3,
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 6,
+      "PlayMax": 4,
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成5点伤害。\n如果你在这回合打出的牌数小于3张，抽1张牌。",
+    "upgradedText": "造成[green]6[/green]点伤害。\n如果你在这回合打出的牌数小于[green]4[/green]张，抽1张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_GANG_UP",
+    "title": "群起攻之",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "alyce",
+    "melee": false,
+    "prototype": "GangUp",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/gang_up.tres",
+    "baseVars": {
+      "CalculationBase": 5,
+      "ExtraDamage": 5,
+      "CalculatedDamage": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "CalculationBase": 5,
+      "ExtraDamage": 7,
+      "CalculatedDamage": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成5点伤害。\n本回合其他队员每攻击过一次该敌人，该牌造成的伤害就额外增加5点。",
+    "upgradedText": "造成5点伤害。\n本回合其他队员每攻击过一次该敌人，该牌造成的伤害就额外增加[green]7[/green]点。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_GLACIER",
+    "title": "冰川",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "antena",
+    "melee": false,
+    "prototype": "Glacier",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/glacier.tres",
+    "baseVars": {
+      "Block": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 9,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得6点[gold]格挡[/gold]。\n[gold]生成[/gold]2个[gold]冰霜[/gold]充能球。",
+    "upgradedText": "获得[green]9[/green]点[gold]格挡[/gold]。\n[gold]生成[/gold]2个[gold]冰霜[/gold]充能球。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_GLIMMER",
+    "title": "微光",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "alyce",
+    "melee": false,
+    "prototype": "Glimmer",
+    "portrait": "res://images/atlases/card_atlas.sprites/regent/glimmer.tres",
+    "baseVars": {
+      "Cards": 3,
+      "PutBack": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Cards": 4,
+      "PutBack": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "抽3张牌。\n将你[gold]手牌[/gold]中的1张牌放到[gold]抽牌堆[/gold]顶部。",
+    "upgradedText": "抽[green]4[/green]张牌。\n将你[gold]手牌[/gold]中的1张牌放到[gold]抽牌堆[/gold]顶部。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_GLITTERSTREAM",
+    "title": "流光溢彩",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "zappa",
+    "melee": false,
+    "prototype": "Glitterstream",
+    "portrait": "res://images/atlases/card_atlas.sprites/regent/glitterstream.tres",
+    "baseVars": {
+      "Block": 11,
+      "BlockNextTurn": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 13,
+      "BlockNextTurn": 7,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得11点[gold]格挡[/gold]。\n在下一回合获得5点[gold]格挡[/gold]。",
+    "upgradedText": "获得[green]13[/green]点[gold]格挡[/gold]。\n在下一回合获得[green]7[/green]点[gold]格挡[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_GO_FOR_THE_EYES",
+    "title": "眼部攻击",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Attack",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "GoForTheEyes",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/go_for_the_eyes.tres",
+    "baseVars": {
+      "Damage": 3,
+      "WeakPower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 4,
+      "WeakPower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成3点伤害。\n如果敌人的意图是攻击，则给予1层[gold]虚弱[/gold]。",
+    "upgradedText": "造成[green]4[/green]点伤害。\n如果敌人的意图是攻击，则给予[green]2[/green]层[gold]虚弱[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_GRAND_FINALE",
+    "title": "华丽收场",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "joker",
+    "melee": true,
+    "prototype": "GrandFinale",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/grand_finale.tres",
+    "baseVars": {
+      "Damage": 60,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 75,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "只有当你的[gold]抽牌堆[/gold]中没有牌时才能打出。对所有敌人造成60点伤害。",
+    "upgradedText": "只有当你的[gold]抽牌堆[/gold]中没有牌时才能打出。对所有敌人造成[green]75[/green]点伤害。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_GUIDING_STAR",
+    "title": "引导之星",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "GuidingStar",
+    "portrait": "res://images/atlases/card_atlas.sprites/regent/guiding_star.tres",
+    "baseVars": {
+      "Damage": 12,
+      "Cards": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 13,
+      "Cards": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成12点伤害。\n在下个回合抽2张牌。",
+    "upgradedText": "造成[green]13[/green]点伤害。\n在下个回合抽[green]3[/green]张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_HAILSTORM",
+    "title": "冰雹风暴",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Uncommon",
+    "role": "antena",
+    "melee": false,
+    "prototype": "Hailstorm",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/hailstorm.tres",
+    "baseVars": {
+      "HailstormPower": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "HailstormPower": 8,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在你的回合结束时，如果你有[gold]冰霜[/gold]充能球，则对所有敌人造成6点伤害。",
+    "upgradedText": "在你的回合结束时，如果你有[gold]冰霜[/gold]充能球，则对所有敌人造成[green]8[/green]点伤害。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_HAND_OF_GREED",
+    "title": "贪婪之手",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "kikuchiyo",
+    "melee": true,
+    "prototype": "HandOfGreed",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/hand_of_greed.tres",
+    "baseVars": {
+      "Damage": 20,
+      "Gold": 20,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 25,
+      "Gold": 25,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成20点伤害。\n[gold]斩杀[/gold]时，获得20[gold]金币[/gold]。",
+    "upgradedText": "造成[green]25[/green]点伤害。\n[gold]斩杀[/gold]时，获得[green]25[/green][gold]金币[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_HANG",
+    "title": "吊杀",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "alyce",
+    "melee": false,
+    "prototype": "Hang",
+    "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/hang.tres",
+    "baseVars": {
+      "Damage": 10,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 13,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成10点伤害。\n让所有“吊杀”牌对这名敌人造成的伤害翻倍。",
+    "upgradedText": "造成[green]13[/green]点伤害。\n让所有“吊杀”牌对这名敌人造成的伤害翻倍。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_HAZE",
+    "title": "迷雾",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "kirakira",
+    "melee": false,
+    "prototype": "Haze",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/haze.tres",
+    "baseVars": {
+      "PoisonPower": 4,
+      "WeakPower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "PoisonPower": 6,
+      "WeakPower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "给予所有敌人4层[gold]中毒[/gold]和1层[gold]虚弱[/gold]。",
+    "upgradedText": "给予所有敌人[green]6[/green]层[gold]中毒[/gold]和[green]2[/green]层[gold]虚弱[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_HEADBUTT",
+    "title": "头槌",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "Headbutt",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/headbutt.tres",
+    "baseVars": {
+      "Damage": 9,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 12,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成9点伤害。\n将你[gold]弃牌堆[/gold]中的一张牌放到[gold]抽牌堆[/gold]顶部。",
+    "upgradedText": "造成[green]12[/green]点伤害。\n将你[gold]弃牌堆[/gold]中的一张牌放到[gold]抽牌堆[/gold]顶部。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_HELIX_DRILL",
+    "title": "螺旋钻击",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "tora",
+    "melee": false,
+    "prototype": "HelixDrill",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/helix_drill.tres",
+    "baseVars": {
+      "Damage": 3,
+      "CalculationBase": 0,
+      "CalculationExtra": 1,
+      "CalculatedHits": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 5,
+      "CalculationBase": 0,
+      "CalculationExtra": 1,
+      "CalculatedHits": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在本回合中，这张牌以外使用的每个[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]，都会使此牌造成3点伤害一次。",
+    "upgradedText": "在本回合中，这张牌以外使用的每个[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]，都会使此牌造成[green]5[/green]点伤害一次。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_HOLOGRAM",
+    "title": "全息影像",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "medhico",
+    "melee": false,
+    "prototype": "Hologram",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/hologram.tres",
+    "baseVars": {
+      "Block": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得3点[gold]格挡[/gold]。\n将[gold]弃牌堆[/gold]中的一张牌放入你的[gold]手牌[/gold]。\n[gold]消耗[/gold]。",
+    "upgradedText": "获得[green]5[/green]点[gold]格挡[/gold]。\n将[gold]弃牌堆[/gold]中的一张牌放入你的[gold]手牌[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_IMPERVIOUS",
+    "title": "岿然不动",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "zappa",
+    "melee": false,
+    "prototype": "Impervious",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/impervious.tres",
+    "baseVars": {
+      "Block": 30,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 40,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得30点[gold]格挡[/gold]。\n[gold]消耗[/gold]。",
+    "upgradedText": "获得[green]40[/green]点[gold]格挡[/gold]。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_INFLAME",
+    "title": "燃烧",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Uncommon",
+    "role": "kuma",
+    "melee": false,
+    "prototype": "Inflame",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/inflame.tres",
+    "baseVars": {
+      "StrengthPower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "StrengthPower": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得2点[gold]力量[/gold]。",
+    "upgradedText": "获得[green]3[/green]点[gold]力量[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_IRON_WAVE",
+    "title": "铁斩波",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "IronWave",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/iron_wave.tres",
+    "baseVars": {
+      "Damage": 5,
+      "Block": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 7,
+      "Block": 7,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得5点[gold]格挡[/gold]。\n造成5点伤害。",
+    "upgradedText": "获得[green]7[/green]点[gold]格挡[/gold]。\n造成[green]7[/green]点伤害。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_JUGGERNAUT",
+    "title": "势不可当",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "zappa",
+    "melee": false,
+    "prototype": "Juggernaut",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/juggernaut.tres",
+    "baseVars": {
+      "JuggernautPower": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "JuggernautPower": 8,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "每当你获得[gold]格挡[/gold]时，对随机敌人造成6点伤害。",
+    "upgradedText": "每当你获得[gold]格挡[/gold]时，对随机敌人造成[green]8[/green]点伤害。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_KNOCKDOWN",
+    "title": "击倒",
+    "cost": 3,
+    "upgradedCost": 3,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "kuma",
+    "melee": true,
+    "prototype": "Knockdown",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/knockdown.tres",
+    "baseVars": {
+      "Damage": 10,
+      "KnockdownPower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 14,
+      "KnockdownPower": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成10点伤害。\n该敌人在本回合受到的来自其他队员的伤害变为两倍。",
+    "upgradedText": "造成[green]14[/green]点伤害。\n该敌人在本回合受到的来自其他队员的伤害变为三倍。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_LEAP",
+    "title": "飞跃",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "Leap",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/leap.tres",
+    "baseVars": {
+      "Block": 9,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 12,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得9点[gold]格挡[/gold]。",
+    "upgradedText": "获得[green]12[/green]点[gold]格挡[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_LEG_SWEEP",
+    "title": "扫腿",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "porno",
+    "melee": true,
+    "prototype": "LegSweep",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/leg_sweep.tres",
+    "baseVars": {
+      "Block": 11,
+      "WeakPower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 14,
+      "WeakPower": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "给予2层[gold]虚弱[/gold]。\n获得11点[gold]格挡[/gold]。",
+    "upgradedText": "给予[green]3[/green]层[gold]虚弱[/gold]。\n获得[green]14[/green]点[gold]格挡[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_LETHALITY",
+    "title": "致死性",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Uncommon",
+    "role": "kikuchiyo",
+    "melee": false,
+    "prototype": "Lethality",
+    "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/lethality.tres",
+    "baseVars": {
+      "LethalityPower": 50,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "LethalityPower": 75,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]虚无[/gold]。\n每回合的第一张攻击牌会造成50%额外伤害。",
+    "upgradedText": "[gold]虚无[/gold]。\n每回合的第一张攻击牌会造成[green]75[/green]%额外伤害。",
+    "baseKeywords": [
+      "Ethereal"
+    ],
+    "upgradedKeywords": [
+      "Ethereal"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_LIFT",
+    "title": "托举",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "medhico",
+    "melee": false,
+    "prototype": "Lift",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/lift.tres",
+    "baseVars": {
+      "Block": 11,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 16,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "给另一名队员11点[gold]格挡[/gold]。",
+    "upgradedText": "给另一名队员[green]16[/green]点[gold]格挡[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_LOOP",
+    "title": "循环",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Uncommon",
+    "role": "antena",
+    "melee": false,
+    "prototype": "Loop",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/loop.tres",
+    "baseVars": {
+      "Loop": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Loop": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在你的回合开始时，触发你最右侧的一个充能球的被动能力。",
+    "upgradedText": "在你的回合开始时，触发你最右侧的一个充能球的被动能力2次。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_MACHINE_LEARNING",
+    "title": "机器学习",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "alyce",
+    "melee": false,
+    "prototype": "MachineLearning",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/machine_learning.tres",
+    "baseVars": {
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在你的回合开始时，额外抽1张牌。",
+    "upgradedText": "[gold]固有[/gold]。\n在你的回合开始时，额外抽1张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": [
+      "Innate"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_MALAISE",
+    "title": "萎靡",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "porno",
+    "melee": false,
+    "prototype": "Malaise",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/malaise.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "敌人失去X点[gold]力量[/gold]。给予X层[gold]虚弱[/gold]。\n[gold]消耗[/gold]。",
+    "upgradedText": "敌人失去X+1点[gold]力量[/gold]。给予X+1层[gold]虚弱[/gold]。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_MANIFEST_AUTHORITY",
+    "title": "君权自授",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "kuma",
+    "melee": false,
+    "prototype": "ManifestAuthority",
+    "portrait": "res://images/atlases/card_atlas.sprites/regent/manifest_authority.tres",
+    "baseVars": {
+      "Block": 7,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 8,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得7点[gold]格挡[/gold]。\n将一张随机无色牌加入你的[gold]手牌[/gold]。",
+    "upgradedText": "获得[green]8[/green]点[gold]格挡[/gold]。\n将一张随机[gold]升级过的[/gold]无色牌加入你的[gold]手牌[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_MASTER_OF_STRATEGY",
+    "title": "战略大师",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "medhico",
+    "melee": false,
+    "prototype": "MasterOfStrategy",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/master_of_strategy.tres",
+    "baseVars": {
+      "Cards": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Cards": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "抽3张牌。\n[gold]消耗[/gold]。",
+    "upgradedText": "抽[green]4[/green]张牌。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_MIMIC",
+    "title": "拟态",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "zappa",
+    "melee": false,
+    "prototype": "Mimic",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/mimic.tres",
+    "baseVars": {
+      "CalculationBase": 0,
+      "CalculationExtra": 1,
+      "CalculatedBlock": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "CalculationBase": 0,
+      "CalculationExtra": 1,
+      "CalculatedBlock": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得等同于另一位玩家[gold]格挡[/gold]值的[gold]格挡[/gold]。\n[gold]消耗[/gold]。",
+    "upgradedText": "获得等同于另一位玩家[gold]格挡[/gold]值的[gold]格挡[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_MIND_BLAST",
+    "title": "心灵震慑",
+    "cost": 1,
+    "upgradedCost": 0,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "alyce",
+    "melee": false,
+    "prototype": "MindBlast",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/mind_blast.tres",
+    "baseVars": {
+      "CalculationBase": 0,
+      "ExtraDamage": 1,
+      "CalculatedDamage": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "CalculationBase": 0,
+      "ExtraDamage": 1,
+      "CalculatedDamage": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]固有[/gold]。\n造成你[gold]抽牌堆[/gold]中剩余牌数的伤害。",
+    "upgradedText": "[gold]固有[/gold]。\n造成你[gold]抽牌堆[/gold]中剩余牌数的伤害。",
+    "baseKeywords": [
+      "Innate"
+    ],
+    "upgradedKeywords": [
+      "Innate"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_MIRAGE",
+    "title": "蜃景",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "kirakira",
+    "melee": false,
+    "prototype": "Mirage",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/mirage.tres",
+    "baseVars": {
+      "CalculationBase": 0,
+      "CalculationExtra": 1,
+      "CalculatedBlock": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "CalculationBase": 0,
+      "CalculationExtra": 1,
+      "CalculatedBlock": 0,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得等量于所有敌人[gold]中毒[/gold]层数总和的[gold]格挡[/gold]。\n[gold]消耗[/gold]。",
+    "upgradedText": "获得等量于所有敌人[gold]中毒[/gold]层数总和的[gold]格挡[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_MOMENTUM_STRIKE",
+    "title": "趁势打击",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "MomentumStrike",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/momentum_strike.tres",
+    "baseVars": {
+      "Damage": 11,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 15,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成11点伤害。\n这张牌的耗能降为0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "upgradedText": "造成[green]15[/green]点伤害。\n这张牌的耗能降为0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_MONARCHS_GAZE",
+    "title": "王之凝视",
+    "cost": 2,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "porno",
+    "melee": false,
+    "prototype": "MonarchsGaze",
+    "portrait": "res://images/atlases/card_atlas.sprites/regent/monarchs_gaze.tres",
+    "baseVars": {
+      "StrengthLoss": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "StrengthLoss": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "每当你攻击敌人的时候，这名敌人在本回合失去1点[gold]力量[/gold]。",
+    "upgradedText": "每当你攻击敌人的时候，这名敌人在本回合失去1点[gold]力量[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_MURDER",
+    "title": "谋杀",
+    "cost": 3,
+    "upgradedCost": 2,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "alyce",
+    "melee": false,
+    "prototype": "Murder",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/murder.tres",
+    "baseVars": {
+      "CalculationBase": 1,
+      "ExtraDamage": 1,
+      "CalculatedDamage": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "CalculationBase": 1,
+      "ExtraDamage": 1,
+      "CalculatedDamage": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成1点伤害。\n你在本场战斗中每抽过一张牌，此牌就额外造成1点伤害。",
+    "upgradedText": "造成1点伤害。\n你在本场战斗中每抽过一张牌，此牌就额外造成1点伤害。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_NOSTALGIA",
+    "title": "怀旧",
+    "cost": 1,
+    "upgradedCost": 0,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "kuma",
+    "melee": false,
+    "prototype": "Nostalgia",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/nostalgia.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "每回合首次打出攻击或技能牌时，将其置于你的[gold]抽牌堆[/gold]顶端。",
+    "upgradedText": "每回合首次打出攻击或技能牌时，将其置于你的[gold]抽牌堆[/gold]顶端。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_NOT_YET",
+    "title": "时候未到",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "medhico",
+    "melee": false,
+    "prototype": "NotYet",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/not_yet.tres",
+    "baseVars": {
+      "Heal": 10,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Heal": 13,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "回复一名存活队员10点生命。\n[gold]消耗[/gold]。",
+    "upgradedText": "回复一名存活队员[green]13[/green]点生命。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_NOXIOUS_FUMES",
+    "title": "毒雾",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "kirakira",
+    "melee": false,
+    "prototype": "NoxiousFumes",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/noxious_fumes.tres",
+    "baseVars": {
+      "PoisonPerTurn": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "PoisonPerTurn": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在你的回合开始时，给予所有敌人2层[gold]中毒[/gold]。",
+    "upgradedText": "在你的回合开始时，给予所有敌人[green]3[/green]层[gold]中毒[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_OFFERING",
+    "title": "祭品",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "kuma",
+    "melee": false,
+    "prototype": "Offering",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/offering.tres",
+    "baseVars": {
+      "HpLoss": 6,
+      "Energy": 2,
+      "Cards": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "HpLoss": 6,
+      "Energy": 2,
+      "Cards": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "失去6点生命。\n获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。\n抽3张牌。\n[gold]消耗[/gold]。",
+    "upgradedText": "失去6点生命。\n获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。\n抽[green]5[/green]张牌。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ONE_TWO_PUNCH",
+    "title": "连环拳",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "tora",
+    "melee": false,
+    "prototype": "OneTwoPunch",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/one_two_punch.tres",
+    "baseVars": {
+      "Attacks": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Attacks": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在这个回合，你打出的下1张攻击牌会被额外打出一次。",
+    "upgradedText": "在这个回合，你打出的下[green]2[/green]张攻击牌会被额外打出一次。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_OUTBREAK",
+    "title": "毒性爆发",
+    "cost": 3,
+    "upgradedCost": 3,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "kirakira",
+    "melee": false,
+    "prototype": "Outbreak",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/outbreak.tres",
+    "baseVars": {
+      "PoisonPower": 9,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "PoisonPower": 12,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "给予所有敌人9层[gold]中毒[/gold]。\n立即触发[gold]中毒[/gold]。",
+    "upgradedText": "给予所有敌人[green]12[/green]层[gold]中毒[/gold]。\n立即触发[gold]中毒[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PANACHE",
+    "title": "神气制胜",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "joker",
+    "melee": false,
+    "prototype": "Panache",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/panache.tres",
+    "baseVars": {
+      "PanacheDamage": 10,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "PanacheDamage": 14,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "每当你在一回合内打出五张牌时，对所有敌人造成10点伤害。",
+    "upgradedText": "每当你在一回合内打出五张牌时，对所有敌人造成[green]14[/green]点伤害。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PATTER",
+    "title": "星星点点",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "joker",
+    "melee": false,
+    "prototype": "Patter",
+    "portrait": "res://images/atlases/card_atlas.sprites/regent/patter.tres",
+    "baseVars": {
+      "Block": 8,
+      "VigorPower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 10,
+      "VigorPower": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得8点[gold]格挡[/gold]。\n获得2点[gold]活力[/gold]。",
+    "upgradedText": "获得[green]10[/green]点[gold]格挡[/gold]。\n获得[green]3[/green]点[gold]活力[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PERFECTED_STRIKE",
+    "title": "完美打击",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Attack",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "PerfectedStrike",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/perfected_strike.tres",
+    "baseVars": {
+      "CalculationBase": 6,
+      "ExtraDamage": 2,
+      "CalculatedDamage": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "CalculationBase": 6,
+      "ExtraDamage": 3,
+      "CalculatedDamage": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成6点伤害。\n你每有一张名字中含有“打击”的牌，伤害+2。",
+    "upgradedText": "造成6点伤害。\n你每有一张名字中含有“打击”的牌，伤害+[green]3[/green]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PIERCING_WAIL",
+    "title": "尖啸",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "porno",
+    "melee": false,
+    "prototype": "PiercingWail",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/piercing_wail.tres",
+    "baseVars": {
+      "StrengthLoss": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "StrengthLoss": 8,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "所有敌人在本回合失去6点[gold]力量[/gold]。\n[gold]消耗[/gold]。",
+    "upgradedText": "所有敌人在本回合失去[green]8[/green]点[gold]力量[/gold]。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PILLAGE",
+    "title": "劫掠",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "kikuchiyo",
+    "melee": true,
+    "prototype": "Pillage",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/pillage.tres",
+    "baseVars": {
+      "Damage": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 9,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成6点伤害。\n抽牌直到你抽到一张非攻击牌。",
+    "upgradedText": "造成[green]9[/green]点伤害。\n抽牌直到你抽到一张非攻击牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PINPOINT",
+    "title": "精密瞄准",
+    "cost": 3,
+    "upgradedCost": 3,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "alyce",
+    "melee": false,
+    "prototype": "Pinpoint",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/pinpoint.tres",
+    "baseVars": {
+      "Damage": 15,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 19,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成15点伤害。\n你在本回合中每打出过一张技能牌，其耗能减少1[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "upgradedText": "造成[green]19[/green]点伤害。\n你在本回合中每打出过一张技能牌，其耗能减少1[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_POISONED_STAB",
+    "title": "带毒刺击",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "kirakira",
+    "melee": true,
+    "prototype": "PoisonedStab",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/poisoned_stab.tres",
+    "baseVars": {
+      "Damage": 6,
+      "PoisonPower": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 8,
+      "PoisonPower": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成6点伤害。\n给予3层[gold]中毒[/gold]。",
+    "upgradedText": "造成[green]8[/green]点伤害。\n给予[green]4[/green]层[gold]中毒[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_POMMEL_STRIKE",
+    "title": "剑柄打击",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "kikuchiyo",
+    "melee": true,
+    "prototype": "PommelStrike",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/pommel_strike.tres",
+    "baseVars": {
+      "Damage": 9,
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 10,
+      "Cards": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成9点伤害。\n抽1张牌。",
+    "upgradedText": "造成[green]10[/green]点伤害。\n抽[green]2[/green]张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_POUNCE",
+    "title": "猛扑",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "kikuchiyo",
+    "melee": true,
+    "prototype": "Pounce",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/pounce.tres",
+    "baseVars": {
+      "Damage": 14,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 20,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成14点伤害。\n你的下一张技能牌耗能变为0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "upgradedText": "造成[green]20[/green]点伤害。\n你的下一张技能牌耗能变为0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PRECISE_CUT",
+    "title": "精确切击",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "joker",
+    "melee": true,
+    "prototype": "PreciseCut",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/precise_cut.tres",
+    "baseVars": {
+      "CalculationBase": 13,
+      "ExtraDamage": 2,
+      "CalculatedDamage": 13,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "CalculationBase": 16,
+      "ExtraDamage": 2,
+      "CalculatedDamage": 16,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成13点伤害。\n你的[gold]手牌[/gold]中每有一张牌，此牌的伤害就降低2点。",
+    "upgradedText": "造成[green]16[/green]点伤害。\n你的[gold]手牌[/gold]中每有一张牌，此牌的伤害就降低2点。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PREDATOR",
+    "title": "猎杀者",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "alyce",
+    "melee": false,
+    "prototype": "Predator",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/predator.tres",
+    "baseVars": {
+      "Damage": 15,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 20,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成15点伤害。\n在下个回合抽2张牌。",
+    "upgradedText": "造成[green]20[/green]点伤害。\n在下个回合抽2张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PREP_TIME",
+    "title": "准备时间",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Uncommon",
+    "role": "joker",
+    "melee": false,
+    "prototype": "PrepTime",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/prep_time.tres",
+    "baseVars": {
+      "PrepTimePower": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "PrepTimePower": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在你的回合开始时，获得4点[gold]活力[/gold]。",
+    "upgradedText": "在你的回合开始时，获得[green]6[/green]点[gold]活力[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PREPARED",
+    "title": "早有准备",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "Prepared",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/prepared.tres",
+    "baseVars": {
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Cards": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "抽1张牌。\n丢弃1张牌。",
+    "upgradedText": "抽[green]2[/green]张牌。\n丢弃[green]2[/green]张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PROLONG",
+    "title": "延伸",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "zappa",
+    "melee": false,
+    "prototype": "Prolong",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/prolong.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在下个回合获得等量于你当前[gold]格挡[/gold]值的[gold]格挡[/gold]。\n[gold]消耗[/gold]。",
+    "upgradedText": "在下个回合获得等量于你当前[gold]格挡[/gold]值的[gold]格挡[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PROWESS",
+    "title": "非凡技艺",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Uncommon",
+    "role": "kuma",
+    "melee": false,
+    "prototype": "Prowess",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/prowess.tres",
+    "baseVars": {
+      "StrengthPower": 1,
+      "DexterityPower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "StrengthPower": 2,
+      "DexterityPower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得1点[gold]力量[/gold]。\n获得1点[gold]敏捷[/gold]。",
+    "upgradedText": "获得[green]2[/green]点[gold]力量[/gold]。\n获得[green]2[/green]点[gold]敏捷[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PURITY",
+    "title": "净化",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "medhico",
+    "melee": false,
+    "prototype": "Purity",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/purity.tres",
+    "baseVars": {
+      "Cards": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Cards": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]保留[/gold]。\n从[gold]手牌[/gold]中选择最多3张牌消耗。\n[gold]消耗[/gold]。",
+    "upgradedText": "[gold]保留[/gold]。\n从[gold]手牌[/gold]中选择最多[green]5[/green]张牌消耗。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Retain",
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Retain",
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PUTREFY",
+    "title": "腐败",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "porno",
+    "melee": false,
+    "prototype": "Putrefy",
+    "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/putrefy.tres",
+    "baseVars": {
+      "Power": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Power": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "给予2层[gold]虚弱[/gold]。\n给予2层[gold]易伤[/gold]。\n[gold]消耗[/gold]。",
+    "upgradedText": "给予[green]3[/green]层[gold]虚弱[/gold]。\n给予[green]3[/green]层[gold]易伤[/gold]。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PYRE",
+    "title": "薪火之源",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "kuma",
+    "melee": false,
+    "prototype": "Pyre",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/pyre.tres",
+    "baseVars": {
+      "Energy": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Energy": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在回合开始时，获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "upgradedText": "在回合开始时，获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_RAINBOW",
+    "title": "彩虹",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "antena",
+    "melee": false,
+    "prototype": "Rainbow",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/rainbow.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]生成[/gold]1个[gold]闪电[/gold]充能球。\n[gold]生成[/gold]1个[gold]冰霜[/gold]充能球。\n[gold]生成[/gold]1个[gold]黑暗[/gold]充能球。\n[gold]消耗[/gold]。",
+    "upgradedText": "[gold]生成[/gold]1个[gold]闪电[/gold]充能球。\n[gold]生成[/gold]1个[gold]冰霜[/gold]充能球。\n[gold]生成[/gold]1个[gold]黑暗[/gold]充能球。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_RALLY",
+    "title": "集结",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "antena",
+    "melee": false,
+    "prototype": "Rally",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/rally.tres",
+    "baseVars": {
+      "Block": 12,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 17,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "所有队员获得12点[gold]格挡[/gold]。",
+    "upgradedText": "所有队员获得[green]17[/green]点[gold]格挡[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_REBOOT",
+    "title": "重启",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "medhico",
+    "melee": false,
+    "prototype": "Reboot",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/reboot.tres",
+    "baseVars": {
+      "Cards": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Cards": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "将你的所有未消耗的卡牌重新洗牌放入[gold]抽牌堆[/gold]。\n抽4张牌。\n[gold]消耗[/gold]。",
+    "upgradedText": "将你的所有未消耗的卡牌重新洗牌放入[gold]抽牌堆[/gold]。\n抽[green]6[/green]张牌。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_REFLECT",
+    "title": "倒映",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "zappa",
+    "melee": false,
+    "prototype": "Reflect",
+    "portrait": "res://images/atlases/card_atlas.sprites/regent/reflect.tres",
+    "baseVars": {
+      "Block": 15,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 20,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得15点[gold]格挡[/gold]。\n在本回合将你格挡掉的攻击伤害反弹给攻击者。",
+    "upgradedText": "获得[green]20[/green]点[gold]格挡[/gold]。\n在本回合将你格挡掉的攻击伤害反弹给攻击者。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_REND",
+    "title": "撕碎",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "porno",
+    "melee": true,
+    "prototype": "Rend",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/rend.tres",
+    "baseVars": {
+      "CalculationBase": 10,
+      "ExtraDamage": 5,
+      "CalculatedDamage": 10,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "CalculationBase": 12,
+      "ExtraDamage": 8,
+      "CalculatedDamage": 12,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成10点伤害。\n该名敌人身上每有一种负面效果，就额外造成5点伤害。",
+    "upgradedText": "造成[green]12[/green]点伤害。\n该名敌人身上每有一种负面效果，就额外造成[green]8[/green]点伤害。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_RESONANCE",
+    "title": "共鸣",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "kuma",
+    "melee": false,
+    "prototype": "Resonance",
+    "portrait": "res://images/atlases/card_atlas.sprites/regent/resonance.tres",
+    "baseVars": {
+      "StrengthPower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "StrengthPower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得1点[gold]力量[/gold]。所有敌人失去1点[gold]力量[/gold]。",
+    "upgradedText": "获得[green]2[/green]点[gold]力量[/gold]。所有敌人失去1点[gold]力量[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_RICOCHET",
+    "title": "连续反弹",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "tora",
+    "melee": false,
+    "prototype": "Ricochet",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/ricochet.tres",
+    "baseVars": {
+      "Damage": 3,
+      "Repeat": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 3,
+      "Repeat": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]奇巧[/gold]。\n随机对敌人造成3点伤害4次。",
+    "upgradedText": "[gold]奇巧[/gold]。\n随机对敌人造成3点伤害[green]5[/green]次。",
+    "baseKeywords": [
+      "Sly"
+    ],
+    "upgradedKeywords": [
+      "Sly"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SALVO",
+    "title": "箭雨",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "alyce",
+    "melee": false,
+    "prototype": "Salvo",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/salvo.tres",
+    "baseVars": {
+      "Damage": 12,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 16,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成12点伤害。\n在本回合[gold]保留[/gold]你的[gold]手牌[/gold]。",
+    "upgradedText": "造成[green]16[/green]点伤害。\n在本回合[gold]保留[/gold]你的[gold]手牌[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SECRET_TECHNIQUE",
+    "title": "秘密技法",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "medhico",
+    "melee": false,
+    "prototype": "SecretTechnique",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/secret_technique.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "从[gold]抽牌堆[/gold]中选择一张技能牌放入你的[gold]手牌[/gold]。\n[gold]消耗[/gold]。",
+    "upgradedText": "从[gold]抽牌堆[/gold]中选择一张技能牌放入你的[gold]手牌[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SECRET_WEAPON",
+    "title": "秘密武器",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "alyce",
+    "melee": false,
+    "prototype": "SecretWeapon",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/secret_weapon.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "从[gold]抽牌堆[/gold]中选择一张攻击牌放入你的[gold]手牌[/gold]。\n[gold]消耗[/gold]。",
+    "upgradedText": "从[gold]抽牌堆[/gold]中选择一张攻击牌放入你的[gold]手牌[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SEEKER_STRIKE",
+    "title": "探寻打击",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "kikuchiyo",
+    "melee": true,
+    "prototype": "SeekerStrike",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/seeker_strike.tres",
+    "baseVars": {
+      "Damage": 9,
+      "Cards": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 12,
+      "Cards": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成9点伤害。\n从[gold]抽牌堆[/gold]的随机3张牌中选择一张加入你的[gold]手牌[/gold]。",
+    "upgradedText": "造成[green]12[/green]点伤害。\n从[gold]抽牌堆[/gold]的随机3张牌中选择一张加入你的[gold]手牌[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SETUP_STRIKE",
+    "title": "预备打击",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "joker",
+    "melee": false,
+    "prototype": "SetupStrike",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/setup_strike.tres",
+    "baseVars": {
+      "Damage": 7,
+      "StrengthPower": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 9,
+      "StrengthPower": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成7点伤害。\n在本回合内获得3点[gold]力量[/gold]。",
+    "upgradedText": "造成[green]9[/green]点伤害。\n在本回合内获得[green]4[/green]点[gold]力量[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SHADOW_STEP",
+    "title": "暗影步",
+    "cost": 1,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "joker",
+    "melee": false,
+    "prototype": "ShadowStep",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/shadow_step.tres",
+    "baseVars": {
+      "Cards": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Cards": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "丢弃所有[gold]手牌[/gold]。\n在下个回合，你所有的攻击伤害翻倍。",
+    "upgradedText": "丢弃所有[gold]手牌[/gold]。\n在下个回合，你所有的攻击伤害翻倍。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SHATTER",
+    "title": "打碎",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "antena",
+    "melee": false,
+    "prototype": "Shatter",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/shatter.tres",
+    "baseVars": {
+      "Damage": 7,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 11,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "对所有敌人造成7点伤害。\n[gold]激发[/gold]你的所有充能球两次。\n[gold]消耗[/gold]。",
+    "upgradedText": "对所有敌人造成[green]11[/green]点伤害。\n[gold]激发[/gold]你的所有充能球两次。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SHRUG_IT_OFF",
+    "title": "耸肩无视",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "ShrugItOff",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/shrug_it_off.tres",
+    "baseVars": {
+      "Block": 8,
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 11,
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得8点[gold]格挡[/gold]。\n抽1张牌。",
+    "upgradedText": "获得[green]11[/green]点[gold]格挡[/gold]。\n抽1张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SKEWER",
+    "title": "串刺",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "tora",
+    "melee": true,
+    "prototype": "Skewer",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/skewer.tres",
+    "baseVars": {
+      "Damage": 8,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 11,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成8点伤害X次。",
+    "upgradedText": "造成[green]11[/green]点伤害X次。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SLEIGHT_OF_FLESH",
+    "title": "血肉戏法",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "porno",
+    "melee": false,
+    "prototype": "SleightOfFlesh",
+    "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/sleight_of_flesh.tres",
+    "baseVars": {
+      "SleightOfFleshPower": 9,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "SleightOfFleshPower": 13,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "每当你给予一个敌人负面状态时，使其受到9点伤害。",
+    "upgradedText": "每当你给予一个敌人负面状态时，使其受到[green]13[/green]点伤害。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SNAKEBITE",
+    "title": "蛇咬",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "kirakira",
+    "melee": false,
+    "prototype": "Snakebite",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/snakebite.tres",
+    "baseVars": {
+      "PoisonPower": 7,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "PoisonPower": 10,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]保留[/gold]。\n给予7层[gold]中毒[/gold]。",
+    "upgradedText": "[gold]保留[/gold]。\n给予[green]10[/green]层[gold]中毒[/gold]。",
+    "baseKeywords": [
+      "Retain"
+    ],
+    "upgradedKeywords": [
+      "Retain"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_STONE_ARMOR",
+    "title": "岩石铠甲",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Uncommon",
+    "role": "zappa",
+    "melee": false,
+    "prototype": "StoneArmor",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/stone_armor.tres",
+    "baseVars": {
+      "PlatingPower": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "PlatingPower": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得4层[gold]覆甲[/gold]。",
+    "upgradedText": "获得[green]6[/green]层[gold]覆甲[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SUCKER_PUNCH",
+    "title": "突然一拳",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "SuckerPunch",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/sucker_punch.tres",
+    "baseVars": {
+      "Damage": 8,
+      "WeakPower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 10,
+      "WeakPower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成8点伤害。\n给予1层[gold]虚弱[/gold]。",
+    "upgradedText": "造成[green]10[/green]点伤害。\n给予[green]2[/green]层[gold]虚弱[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SUNDER",
+    "title": "分离",
+    "cost": 3,
+    "upgradedCost": 3,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "kikuchiyo",
+    "melee": true,
+    "prototype": "Sunder",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/sunder.tres",
+    "baseVars": {
+      "Damage": 26,
+      "Energy": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 34,
+      "Energy": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成26点伤害。\n如果这张牌击杀了敌人，则获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "upgradedText": "造成[green]34[/green]点伤害。\n如果这张牌击杀了敌人，则获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SWEEPING_BEAM",
+    "title": "扫荡射线",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "antena",
+    "melee": false,
+    "prototype": "SweepingBeam",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/sweeping_beam.tres",
+    "baseVars": {
+      "Damage": 6,
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 9,
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "对所有敌人造成6点伤害。\n抽1张牌。",
+    "upgradedText": "对所有敌人造成[green]9[/green]点伤害。\n抽1张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SWORD_BOOMERANG",
+    "title": "飞剑回旋镖",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "tora",
+    "melee": false,
+    "prototype": "SwordBoomerang",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/sword_boomerang.tres",
+    "baseVars": {
+      "Damage": 3,
+      "Repeat": 3,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 3,
+      "Repeat": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "随机对敌人造成3点伤害3次。",
+    "upgradedText": "随机对敌人造成3点伤害[green]4[/green]次。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_TAG_TEAM",
+    "title": "双打组合",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "kuma",
+    "melee": true,
+    "prototype": "TagTeam",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/tag_team.tres",
+    "baseVars": {
+      "Damage": 11,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 15,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成11点伤害。\n其他队员的下一张攻击牌将在该名敌人身上额外生效一次。",
+    "upgradedText": "造成[green]15[/green]点伤害。\n其他队员的下一张攻击牌将在该名敌人身上额外生效一次。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_TANK",
+    "title": "肉盾",
+    "cost": 1,
+    "upgradedCost": 0,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "zappa",
+    "melee": false,
+    "prototype": "Tank",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/tank.tres",
+    "baseVars": {
+      "DamageIncrease": 1.5,
+      "DamageDecrease": 0.5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "DamageIncrease": 1.5,
+      "DamageDecrease": 0.5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "受到敌人的伤害增加50%。\n盟友受到敌人的伤害减少50%。",
+    "upgradedText": "受到敌人的伤害增加50%。\n盟友受到敌人的伤害减少50%。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_TAUNT",
+    "title": "挑衅",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "kuma",
+    "melee": false,
+    "prototype": "Taunt",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/taunt.tres",
+    "baseVars": {
+      "Block": 6,
+      "VulnerablePower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 7,
+      "VulnerablePower": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得6点[gold]格挡[/gold]。\n给予1层[gold]易伤[/gold]。",
+    "upgradedText": "获得[green]7[/green]点[gold]格挡[/gold]。\n给予[green]2[/green]层[gold]易伤[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_TEMPEST",
+    "title": "暴风雨",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "antena",
+    "melee": false,
+    "prototype": "Tempest",
+    "portrait": "res://images/atlases/card_atlas.sprites/defect/tempest.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "[gold]生成[/gold]X个[gold]闪电[/gold]充能球。",
+    "upgradedText": "[gold]生成[/gold]X+1个[gold]闪电[/gold]充能球。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_TERRAFORMING",
+    "title": "地形改造",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "joker",
+    "melee": false,
+    "prototype": "Terraforming",
+    "portrait": "res://images/atlases/card_atlas.sprites/regent/terraforming.tres",
+    "baseVars": {
+      "VigorPower": 7,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "VigorPower": 10,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得7点[gold]活力[/gold]。",
+    "upgradedText": "获得[green]10[/green]点[gold]活力[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_THE_HUNT",
+    "title": "狩猎",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "kikuchiyo",
+    "melee": true,
+    "prototype": "TheHunt",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/the_hunt.tres",
+    "baseVars": {
+      "Damage": 10,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 15,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成10点伤害。\n[gold]斩杀[/gold]时，额外获得一次卡牌奖励。\n[gold]消耗[/gold]。",
+    "upgradedText": "造成[green]15[/green]点伤害。\n[gold]斩杀[/gold]时，额外获得一次卡牌奖励。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_THE_SCYTHE",
+    "title": "巨镰",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "kirakira",
+    "melee": true,
+    "prototype": "TheScythe",
+    "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/the_scythe.tres",
+    "baseVars": {
+      "Damage": 13,
+      "Increase": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 13,
+      "Increase": 7,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成13点伤害。\n这张牌在本局游戏中的伤害永久性增加5。\n[gold]消耗[/gold]。",
+    "upgradedText": "造成13点伤害。\n这张牌在本局游戏中的伤害永久性增加[green]7[/green]。\n[gold]消耗[/gold]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": [
+      "Exhaust"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_THINKING_AHEAD",
+    "title": "深谋远虑",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Uncommon",
+    "role": "medhico",
+    "melee": false,
+    "prototype": "ThinkingAhead",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/thinking_ahead.tres",
+    "baseVars": {
+      "Cards": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Cards": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "抽2张牌。\n将[gold]手牌[/gold]中的一张牌放到你的[gold]抽牌堆[/gold]的顶端。\n[gold]消耗[/gold]。",
+    "upgradedText": "抽2张牌。\n将[gold]手牌[/gold]中的一张牌放到你的[gold]抽牌堆[/gold]的顶端。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_THRASH",
+    "title": "痛殴",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Rare",
+    "role": "tora",
+    "melee": true,
+    "prototype": "Thrash",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/thrash.tres",
+    "baseVars": {
+      "Damage": 4,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成4点伤害两次。\n[gold]消耗[/gold]你的[gold]手牌[/gold]中随机一张攻击牌，并将它的伤害添加给这张牌。",
+    "upgradedText": "造成[green]6[/green]点伤害两次。\n[gold]消耗[/gold]你的[gold]手牌[/gold]中随机一张攻击牌，并将它的伤害添加给这张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_THRUMMING_HATCHET",
+    "title": "无休手斧",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "alyce",
+    "melee": false,
+    "prototype": "ThrummingHatchet",
+    "portrait": "res://images/atlases/card_atlas.sprites/colorless/thrumming_hatchet.tres",
+    "baseVars": {
+      "Damage": 11,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 14,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成11点伤害。\n在你的下个回合开始时，将此卡返回你的[gold]手牌[/gold]。",
+    "upgradedText": "造成[green]14[/green]点伤害。\n在你的下个回合开始时，将此卡返回你的[gold]手牌[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_THUNDERCLAP",
+    "title": "闪电霹雳",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "Thunderclap",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/thunderclap.tres",
+    "baseVars": {
+      "Damage": 4,
+      "VulnerablePower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 7,
+      "VulnerablePower": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "对所有敌人造成4点伤害，给予1层[gold]易伤[/gold]。",
+    "upgradedText": "对所有敌人造成[green]7[/green]点伤害，给予1层[gold]易伤[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_TOOLS_OF_THE_TRADE",
+    "title": "必备工具",
+    "cost": 1,
+    "upgradedCost": 0,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "joker",
+    "melee": false,
+    "prototype": "ToolsOfTheTrade",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/tools_of_the_trade.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "在你的回合开始时，抽1张牌，丢弃1张牌。",
+    "upgradedText": "在你的回合开始时，抽1张牌，丢弃1张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_TRACKING",
+    "title": "跟踪",
+    "cost": 2,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "porno",
+    "melee": false,
+    "prototype": "Tracking",
+    "portrait": "res://images/atlases/card_atlas.sprites/silent/tracking.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "处于[gold]虚弱[/gold]状态的敌人受到的攻击伤害增加50%。",
+    "upgradedText": "处于[gold]虚弱[/gold]状态的敌人受到的攻击伤害增加50%。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_TRANSFIGURE",
+    "title": "重构",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Rare",
+    "role": "tora",
+    "melee": false,
+    "prototype": "Transfigure",
+    "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/transfigure.tres",
+    "baseVars": {
+      "Energy": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Energy": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "给一张[gold]手牌[/gold]添加[gold]重放[/gold]。\n其耗能增加1[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。\n[gold]消耗[/gold]。",
+    "upgradedText": "给一张[gold]手牌[/gold]添加[gold]重放[/gold]。\n其耗能增加1[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "baseKeywords": [
+      "Exhaust"
+    ],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_TRUE_GRIT",
+    "title": "坚毅",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Common",
+    "role": null,
+    "melee": false,
+    "prototype": "TrueGrit",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/true_grit.tres",
+    "baseVars": {
+      "Block": 7,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Block": 9,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "获得7点[gold]格挡[/gold]。\n 随机[gold]消耗[/gold]1张牌。",
+    "upgradedText": "获得[green]9[/green]点[gold]格挡[/gold]。\n[gold]消耗[/gold]1张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_TWIN_STRIKE",
+    "title": "双重打击",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "tora",
+    "melee": true,
+    "prototype": "TwinStrike",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/twin_strike.tres",
+    "baseVars": {
+      "Damage": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 7,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成5点伤害两次。",
+    "upgradedText": "造成[green]7[/green]点伤害两次。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_UNMOVABLE",
+    "title": "坚定不移",
+    "cost": 2,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Rare",
+    "role": "zappa",
+    "melee": false,
+    "prototype": "Unmovable",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/unmovable.tres",
+    "baseVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "翻倍你每回合第一次从卡牌中获得的[gold]格挡[/gold]。",
+    "upgradedText": "翻倍你每回合第一次从卡牌中获得的[gold]格挡[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_UNRELENTING",
+    "title": "无情猛攻",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "kikuchiyo",
+    "melee": true,
+    "prototype": "Unrelenting",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/unrelenting.tres",
+    "baseVars": {
+      "Damage": 14,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 20,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成14点伤害。\n你打出的下一张攻击牌耗能变为0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "upgradedText": "造成[green]20[/green]点伤害。\n你打出的下一张攻击牌耗能变为0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_UPPERCUT",
+    "title": "上勾拳",
+    "cost": 2,
+    "upgradedCost": 2,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "porno",
+    "melee": true,
+    "prototype": "Uppercut",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/uppercut.tres",
+    "baseVars": {
+      "Damage": 13,
+      "Power": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 13,
+      "Power": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成13点伤害。\n给予1层[gold]虚弱[/gold]。\n给予1层[gold]易伤[/gold]。",
+    "upgradedText": "造成13点伤害。\n给予[green]2[/green]层[gold]虚弱[/gold]。\n给予[green]2[/green]层[gold]易伤[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_VICIOUS",
+    "title": "凶恶",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Power",
+    "rarity": "Uncommon",
+    "role": "porno",
+    "melee": false,
+    "prototype": "Vicious",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/vicious.tres",
+    "baseVars": {
+      "Cards": 1,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Cards": 2,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "每当你给予[gold]易伤[/gold]时，抽1张牌。",
+    "upgradedText": "每当你给予[gold]易伤[/gold]时，抽[green]2[/green]张牌。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_WHIRLWIND",
+    "title": "旋风斩",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Attack",
+    "rarity": "Uncommon",
+    "role": "tora",
+    "melee": true,
+    "prototype": "Whirlwind",
+    "portrait": "res://images/atlases/card_atlas.sprites/ironclad/whirlwind.tres",
+    "baseVars": {
+      "Damage": 5,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 8,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "对所有敌人造成5点伤害X次。",
+    "upgradedText": "对所有敌人造成[green]8[/green]点伤害X次。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DEFEND",
+    "title": "防御",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Skill",
+    "rarity": "Basic",
+    "role": null,
+    "melee": false,
+    "prototype": null,
+    "portrait": "res://DohnaDohna/images/cards/squad.png",
+    "baseVars": {
+      "Block": 5
+    },
+    "upgradedVars": {
+      "Block": 8
+    },
+    "baseText": "获得5点[gold]格挡[/gold]。",
+    "upgradedText": "获得[green]8[/green]点[gold]格挡[/gold]。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SPECIAL",
+    "title": "协同攻击",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Basic",
+    "role": null,
+    "melee": false,
+    "prototype": null,
+    "portrait": "res://DohnaDohna/images/cards/squad.png",
+    "baseVars": {
+      "Damage": 7,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 10,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成7点伤害。\n附加效果取决于当前前排队员。",
+    "upgradedText": "造成[green]10[/green]点伤害。\n附加效果取决于当前前排队员。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_STRIKE",
+    "title": "打击",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Basic",
+    "role": null,
+    "melee": false,
+    "prototype": null,
+    "portrait": "res://DohnaDohna/images/cards/squad.png",
+    "baseVars": {
+      "Damage": 6,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 9,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成6点伤害。",
+    "upgradedText": "造成[green]9[/green]点伤害。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SWAP",
+    "title": "换位",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "Skill",
+    "rarity": "Basic",
+    "role": null,
+    "melee": false,
+    "prototype": null,
+    "portrait": "res://DohnaDohna/images/cards/squad.png",
+    "baseVars": {},
+    "upgradedVars": {},
+    "baseText": "最右侧队员与另一名存活队员交换位置。",
+    "upgradedText": "[gold]保留[/gold]。\n最右侧队员与另一名存活队员交换位置。",
+    "baseKeywords": [],
+    "upgradedKeywords": [
+      "Retain"
+    ]
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_TRANSCENDENT_SPECIAL",
+    "title": "超越协同",
+    "cost": 1,
+    "upgradedCost": 1,
+    "type": "Attack",
+    "rarity": "Ancient",
+    "role": null,
+    "melee": false,
+    "prototype": null,
+    "portrait": "res://DohnaDohna/images/cards/squad.png",
+    "baseVars": {
+      "Damage": 14,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "upgradedVars": {
+      "Damage": 20,
+      "FallbackDamage": 6,
+      "FallbackBlock": 5,
+      "FallbackCards": 2
+    },
+    "baseText": "造成14点伤害。\n附加效果取决于当前前排队员。",
+    "upgradedText": "造成[green]20[/green]点伤害。\n附加效果取决于当前前排队员。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  },
+  {
+    "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_REVIVE_CHOICE",
+    "title": "复活队员",
+    "cost": -1,
+    "upgradedCost": -1,
+    "type": "Skill",
+    "rarity": "Token",
+    "role": null,
+    "melee": false,
+    "prototype": null,
+    "portrait": "res://DohnaDohna/images/cards/squad.png",
+    "baseVars": {
+      "Heal": 0,
+      "MaxHp": 25
+    },
+    "upgradedVars": {
+      "Heal": 0,
+      "MaxHp": 25
+    },
+    "baseText": "以0血复活，在后排接受本次休息治疗。\n基础休息治疗：0。生命上限：25。",
+    "upgradedText": "以0血复活，在后排接受本次休息治疗。\n基础休息治疗：0。生命上限：25。",
+    "baseKeywords": [],
+    "upgradedKeywords": []
+  }
+]

@@ -1,0 +1,4 @@
+interface:
+  display_name: "多娜多娜·STS2 模组开发"
+  short_description: "Build DohnaDohna STS2 features with actual RitsuLib APIs"
+  default_prompt: "使用 $dohnadohna-modding 在现有 DohnaDohna 工程实现或修复功能，按真实 RitsuLib API 与工程约定验证。"

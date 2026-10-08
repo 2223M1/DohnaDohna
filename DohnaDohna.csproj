@@ -1,0 +1,30 @@
+<Project Sdk="Godot.NET.Sdk/4.5.1">
+  <Import Project="eng/DohnaDohna.Hosts.props" />
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <AssemblyName>DohnaDohna</AssemblyName>
+    <RootNamespace>DohnaDohna</RootNamespace>
+    <Version>0.1.0-dev</Version>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>13.0</LangVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <DebugType>none</DebugType>
+    <OutputPath>$(MSBuildProjectDirectory)/build/bin/$(DohnaDohnaHostChannel)/$(Configuration)/net9.0/</OutputPath>
+    <IntermediateOutputPath>$(MSBuildProjectDirectory)/build/obj/$(DohnaDohnaHostChannel)/DohnaDohna/$(Configuration)/net9.0/</IntermediateOutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Scripts/**/*.cs;Content/**/*.cs;Cards/**/*.cs;Powers/**/*.cs;Relics/**/*.cs;Code/**/*.cs;Events/**/*.cs;Monsters/**/*.cs;Orbs/**/*.cs;Potions/**/*.cs;Encounters/**/*.cs;Ancients/**/*.cs;Enchantments/**/*.cs" />
+    <Reference Include="sts2" HintPath="$(Sts2DataDir)/sts2.dll" Private="false" />
+    <Reference Include="0Harmony" HintPath="$(Sts2DataDir)/0Harmony.dll" Private="false" />
+    <PackageReference Include="$(DohnaDohnaRitsuPackage)" Version="$(DohnaDohnaRitsuVersion)" PrivateAssets="all" IncludeAssets="compile;build;analyzers;buildtransitive" />
+    <AssemblyMetadata Include="DohnaDohnaHostChannel" Value="$(DohnaDohnaHostChannel)" />
+    <AssemblyMetadata Include="DohnaDohnaGameApiVersion" Value="$(DohnaDohnaGameApiVersion)" />
+  </ItemGroup>
+  <Target Name="ValidateHostInputs" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="'$(DohnaDohnaHostChannel)' != 'stable' and '$(DohnaDohnaHostChannel)' != 'preview'" Text="DohnaDohnaHostChannel must be stable or preview." />
+    <Error Condition="!Exists('$(Sts2DataDir)/sts2.dll') or !Exists('$(Sts2DataDir)/0Harmony.dll')" Text="Set Sts2DataDir to the selected host's real data directory. See eng/hosts.example.json and tools/Build.ps1." />
+  </Target>
+</Project>

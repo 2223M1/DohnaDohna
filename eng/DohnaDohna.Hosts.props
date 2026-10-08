@@ -1,0 +1,16 @@
+<Project>
+  <!-- Snapshot of the source project's supported hosts, not a future compatibility promise. -->
+  <PropertyGroup>
+    <DohnaDohnaRitsuVersion>0.5.12</DohnaDohnaRitsuVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(DohnaDohnaHostChannel)' == 'stable'">
+    <DohnaDohnaGameApiVersion>0.107.1</DohnaDohnaGameApiVersion>
+    <DohnaDohnaRitsuPackage>STS2.RitsuLib.Compat.0.107.1</DohnaDohnaRitsuPackage>
+    <DefineConstants>$(DefineConstants);DOHNADOHNA_STABLE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(DohnaDohnaHostChannel)' == 'preview'">
+    <DohnaDohnaGameApiVersion>0.111.0</DohnaDohnaGameApiVersion>
+    <DohnaDohnaRitsuPackage>STS2.RitsuLib</DohnaDohnaRitsuPackage>
+    <DefineConstants>$(DefineConstants);DOHNADOHNA_PREVIEW</DefineConstants>
+  </PropertyGroup>
+</Project>

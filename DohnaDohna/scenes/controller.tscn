@@ -1,0 +1,17 @@
+[gd_scene format=3]
+[node name="SquadController" type="Node2D"]
+[node name="Visuals" type="Node2D" parent="."]
+unique_name_in_owner = true
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+mouse_filter = 2
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+[node name="TalkPos" type="Marker2D" parent="."]
+unique_name_in_owner = true

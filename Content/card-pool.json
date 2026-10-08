@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "hostBaseline": "0.111.0",
+  "common": "Anger IronWave ShrugItOff TrueGrit Headbutt Thunderclap PerfectedStrike SuckerPunch DaggerThrow Prepared Deflect Backflip GoForTheEyes ChargeBattery Leap MomentumStrike DrainPower Defy CosmicIndifference GuidingStar",
+  "roles": {
+    "kuma": {
+      "uncommon": "Armaments Inflame Coordinate Prowess Taunt Resonance Fisticuffs TagTeam ManifestAuthority",
+      "rare": "Offering Pyre Flanking Knockdown Nostalgia EchoForm",
+      "melee": "Fisticuffs TagTeam Knockdown"
+    },
+    "porno": {
+      "uncommon": "LegSweep Uppercut Putrefy Debilitate DarkShackles PiercingWail FlameBarrier Vicious Colossus",
+      "rare": "Abrasive Malaise Rend Tracking SleightOfFlesh MonarchsGaze",
+      "melee": "LegSweep Uppercut Debilitate Rend"
+    },
+    "tora": {
+      "uncommon": "TwinStrike SwordBoomerang Ricochet Flechettes Skewer FightMe Dismantle Whirlwind Anticipate",
+      "rare": "OneTwoPunch DemonForm Thrash FiendFire HelixDrill Transfigure",
+      "melee": "TwinStrike Skewer FightMe Dismantle Whirlwind Thrash"
+    },
+    "medhico": {
+      "uncommon": "Finesse Lift Purity Hologram Delay Equilibrium EnergySurge Expertise ThinkingAhead",
+      "rare": "NotYet Buffer Alchemize MasterOfStrategy SecretTechnique Reboot",
+      "melee": ""
+    },
+    "kirakira": {
+      "uncommon": "DeadlyPoison Snakebite PoisonedStab BouncingFlask Haze Mirage Blur EscapePlan Footwork",
+      "rare": "NoxiousFumes Accelerant Envenom Outbreak CorrosiveWave TheScythe",
+      "melee": "PoisonedStab TheScythe"
+    },
+    "antena": {
+      "uncommon": "BallLightning ColdSnap Coolheaded SweepingBeam Capacitor Loop Chill Hailstorm Rally",
+      "rare": "Glacier Defragment Shatter Tempest Rainbow CreativeAi",
+      "melee": ""
+    },
+    "kikuchiyo": {
+      "uncommon": "PommelStrike Pillage Unrelenting Pounce FlashOfSteel Ftl DeathMarch Lethality SeekerStrike",
+      "rare": "Sunder Feed HandOfGreed TheHunt Aggression EchoingSlash",
+      "melee": "PommelStrike Pillage Unrelenting Pounce FlashOfSteel Ftl DeathMarch SeekerStrike Sunder Feed HandOfGreed TheHunt EchoingSlash"
+    },
+    "alyce": {
+      "uncommon": "BeamCell Expose Pinpoint Predator GangUp Salvo ThrummingHatchet MindBlast Glimmer",
+      "rare": "Assassinate Murder Hang Bombardment SecretWeapon MachineLearning",
+      "melee": ""
+    },
+    "zappa": {
+      "uncommon": "BodySlam DemonicShield Mimic Prolong StoneArmor ExpectAFight Glitterstream Reflect FightThrough",
+      "rare": "Barricade Impervious Juggernaut Unmovable BeaconOfHope Tank",
+      "melee": "BodySlam"
+    },
+    "joker": {
+      "uncommon": "SetupStrike Patter Terraforming PrepTime Backstab PreciseCut Finisher CalculatedGamble Acrobatics",
+      "rare": "ShadowStep AllForOne GrandFinale Adrenaline Panache ToolsOfTheTrade",
+      "melee": "Backstab PreciseCut Finisher GrandFinale"
+    }
+  },
+  "memberTarget": ["NotYet", "Buffer", "FlameBarrier", "Abrasive"]
+}

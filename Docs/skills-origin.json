@@ -1,0 +1,133 @@
+{
+  "sourceRepository": "https://github.com/2223M1/NinjaSlayer",
+  "sourceRevision": "20d73608d4e851b95d4af5550b287041a42f69e3",
+  "mode": "Byte-for-byte copy requested by the user; no name, prose or internal path changes.",
+  "files": [
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.agents\\skills\\ninjaslayer-code-quality\\SKILL.md",
+      "destination": ".agents/skills/ninjaslayer-code-quality/SKILL.md",
+      "group": "original-project-skills",
+      "bytes": 9117,
+      "sha256": "6daa81b488ab6f1aff2451268fe022d548b1e8eaa15b48aa1e1bb6936a72230d"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.agents\\skills\\ninjaslayer-code-quality\\agents\\openai.yaml",
+      "destination": ".agents/skills/ninjaslayer-code-quality/agents/openai.yaml",
+      "group": "original-project-skills",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.agents\\skills\\ninjaslayer-lore\\SKILL.md",
+      "destination": ".agents/skills/ninjaslayer-lore/SKILL.md",
+      "group": "original-project-skills",
+      "bytes": 9564,
+      "sha256": "d5484b101b1bf80d1675afa0f5fa7a1cd72143d222c59cc5740dd6cbe6409b2e"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.agents\\skills\\ninjaslayer-lore\\agents\\openai.yaml",
+      "destination": ".agents/skills/ninjaslayer-lore/agents/openai.yaml",
+      "group": "original-project-skills",
+      "bytes": 280,
+      "sha256": "daf01acd2bbeed815f680557099d4ea3f364477c132709c0e322a80387bf2fc3"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.agents\\skills\\ninjaslayer-lore\\references\\creative-writing-and-naming.md",
+      "destination": ".agents/skills/ninjaslayer-lore/references/creative-writing-and-naming.md",
+      "group": "original-project-skills",
+      "bytes": 8796,
+      "sha256": "76caffcf71e8a2cf82e0a60f21b5a356533da24439e542213d8da0bc179fb64f"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.agents\\skills\\ninjaslayer-lore\\references\\knowledge-layout.md",
+      "destination": ".agents/skills/ninjaslayer-lore/references/knowledge-layout.md",
+      "group": "original-project-skills",
+      "bytes": 2401,
+      "sha256": "024b7d2e0e3535a77f42e3bc5fee23ba7455937a5bdfc00b6e4ba3f9984e337d"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.agents\\skills\\ninjaslayer-lore\\scripts\\build_corpus.py",
+      "destination": ".agents/skills/ninjaslayer-lore/scripts/build_corpus.py",
+      "group": "original-project-skills",
+      "bytes": 21693,
+      "sha256": "c1c0205bd0cf1cec9a7e75e31b6dd8985d830cc485e56a490db1709b4b85234d"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.agents\\skills\\ninjaslayer-lore\\scripts\\search_lore.py",
+      "destination": ".agents/skills/ninjaslayer-lore/scripts/search_lore.py",
+      "group": "original-project-skills",
+      "bytes": 8080,
+      "sha256": "3de9eb52ae080170c71344fb6018c42489613c417f9b0855f4b3eb16501a462e"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.agents\\skills\\sts2-original-code-reference\\SKILL.md",
+      "destination": ".agents/skills/sts2-original-code-reference/SKILL.md",
+      "group": "original-project-skills",
+      "bytes": 4604,
+      "sha256": "c3ee2e54a2d2fc62d46d5b54e61949cdea52a0dfb4e2294aa3b3dc759b4c0e21"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.agents\\skills\\sts2-original-code-reference\\agents\\openai.yaml",
+      "destination": ".agents/skills/sts2-original-code-reference/agents/openai.yaml",
+      "group": "original-project-skills",
+      "bytes": 385,
+      "sha256": "ebbbdaf3b7e1f1498c2b78c2beef06880bb8f19af72e215add841c812b3973d7"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.agents\\skills\\sts2-original-code-reference\\references\\original-code-map.md",
+      "destination": ".agents/skills/sts2-original-code-reference/references/original-code-map.md",
+      "group": "original-project-skills",
+      "bytes": 3036,
+      "sha256": "ae0e66626294be1e51d3ddd195ab971136fcb1d66245432235904bb887745bc7"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.agents\\skills\\sts2-ritsulib-modding\\SKILL.md",
+      "destination": ".agents/skills/sts2-ritsulib-modding/SKILL.md",
+      "group": "original-project-skills",
+      "bytes": 7264,
+      "sha256": "1023447f9bda5da6ca03c4eecee6933a6c278a7017fa75b8b15500c64a23c726"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.agents\\skills\\sts2-ritsulib-modding\\agents\\openai.yaml",
+      "destination": ".agents/skills/sts2-ritsulib-modding/agents/openai.yaml",
+      "group": "original-project-skills",
+      "bytes": 288,
+      "sha256": "7ff91c60a0d8f62089844375e7a3176389760ee6e68b47605234aeddb8b315f8"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.agents\\skills\\sts2-ritsulib-modding\\references\\ninjaslayer-doc-map.md",
+      "destination": ".agents/skills/sts2-ritsulib-modding/references/ninjaslayer-doc-map.md",
+      "group": "original-project-skills",
+      "bytes": 3858,
+      "sha256": "0876bb00198ed40ae8fde3677857e698983b38eaa12bab07ee2fdc390c0cae7c"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.claude\\skills\\ninjaslayer-code-quality\\SKILL.md",
+      "destination": ".claude/skills/ninjaslayer-code-quality/SKILL.md",
+      "group": "original-project-skills",
+      "bytes": 360,
+      "sha256": "d706e5e93fa85b320abd20ebec7ab95b2b48d7be2190af89ce34afe44318ad29"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.claude\\skills\\ninjaslayer-lore\\SKILL.md",
+      "destination": ".claude/skills/ninjaslayer-lore/SKILL.md",
+      "group": "original-project-skills",
+      "bytes": 397,
+      "sha256": "862daa9da569c7facd7650bb863c8b74bfcac7a80549508c5306256dad2aa064"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.claude\\skills\\sts2-original-code-reference\\SKILL.md",
+      "destination": ".claude/skills/sts2-original-code-reference/SKILL.md",
+      "group": "original-project-skills",
+      "bytes": 429,
+      "sha256": "7177eb7e2c2b7121963163abc8abcb1ad026578e2e4e8ac29822ae27e21e372d"
+    },
+    {
+      "source": "C:\\Users\\theon\\.codex\\worktrees\\cfc-singleplayer-seeds\\NinjaSlayer\\.claude\\skills\\sts2-ritsulib-modding\\SKILL.md",
+      "destination": ".claude/skills/sts2-ritsulib-modding/SKILL.md",
+      "group": "original-project-skills",
+      "bytes": 434,
+      "sha256": "641180cff422671a49be3ba1105fd057b59fb76d6292a15c1b20a8473875bfae"
+    }
+  ]
+}

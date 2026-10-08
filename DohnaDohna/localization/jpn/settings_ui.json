@@ -1,0 +1,5 @@
+{
+  "DOHNA_PRESENTATION.title": "演出",
+  "DOHNA_FEMALE_DEATH_CUT_IN.title": "女性キャラクターの特殊戦闘不能演出",
+  "DOHNA_FEMALE_DEATH_CUT_IN.description": "初期設定はオフです。オフの場合、男性と同様に倒れる動作と戦闘不能ボイスのみを再生し、敗北カットインは表示しません。変更は次の戦闘不能時から反映されます。"
+}

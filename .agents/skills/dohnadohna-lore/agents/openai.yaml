@@ -1,0 +1,4 @@
+interface:
+  display_name: "多娜多娜·原作查证"
+  short_description: "Evidence-backed DohnaDohna canon and asset research"
+  default_prompt: "使用 $dohnadohna-lore 查证多娜多娜原作人物、语音用途或玩法依据，并区分原作事实与模组适配。"

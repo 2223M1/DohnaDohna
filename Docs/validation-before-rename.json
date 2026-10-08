@@ -1,0 +1,152 @@
+{
+  "machine": "ninja5080",
+  "target": "C:\\Users\\theon\\Documents\\DNDN",
+  "sourceRevision": "20d73608d4e851b95d4af5550b287041a42f69e3",
+  "timeUtc": "2026-10-04T18:14:26.4416937Z",
+  "referenceFiles": 1739,
+  "projectChecks": "PASS",
+  "referenceChecks": "PASS",
+  "previewBuild": "PASS: 0 warnings, 0 errors",
+  "packageBoundary": "PASS",
+  "compileFiles": [
+    "Scripts\\Entry.cs"
+  ],
+  "compileProperties": {
+    "OutputPath": "C:\\Users\\theon\\Documents\\DNDN/build/bin/preview/Debug/net9.0/",
+    "IntermediateOutputPath": "C:\\Users\\theon\\Documents\\DNDN/build/obj/preview/Debug/net9.0/",
+    "MSBuildProjectExtensionsPath": "C:\\Users\\theon\\Documents\\DNDN\\build/obj/preview/"
+  },
+  "missingStableInput": "PASS: explicit failure, no fallback",
+  "host": {
+    "channel": "preview",
+    "gameApiVersion": "0.111.0",
+    "versionEvidence": "SHA256 matches the verified NinjaSlayer preview reference",
+    "path": "C:\\Program Files\\Steam\\steamapps\\common\\Slay the Spire 2\\data_sts2_windows_x86_64\\sts2.dll",
+    "sha256": "0861bfa1df347538d932f22d580e75420f08082792eb914e53b4882764acdbe9",
+    "mvid": "73b63ee0-6c0a-47bb-b0d1-b21f6d94222e"
+  },
+  "ritsu": {
+    "installedRuntimeVersion": "0.6.5",
+    "compileVersion": "0.5.12",
+    "files": [
+      {
+        "name": "STS2-RitsuLib.dll",
+        "sha256": "b82ce613a2811b169f9dd05669c1503d7928a209eab22ba85222abddb05ce9ec"
+      },
+      {
+        "name": "compat\\0.107.1\\STS2-RitsuLib.dll",
+        "sha256": "21dc9f75a6a45f86cb0257a46cca036cf45b5637e59cc292e8c406bc6ba04ca5"
+      },
+      {
+        "name": "compat\\0.107.1\\STS2-RitsuLib.Runtime.dll",
+        "sha256": "8cee87e31b53d4215b4bf8f6c3e8475450746cc2b276f37dbdacd62b805c7503"
+      },
+      {
+        "name": "compat\\0.109.0\\STS2-RitsuLib.dll",
+        "sha256": "735816d40cd1bc909178aa0ca348b3fc837c879a99467255e423c92cb192dd8f"
+      },
+      {
+        "name": "compat\\0.109.0\\STS2-RitsuLib.Runtime.dll",
+        "sha256": "913b7e9266566388083efbe6d7166827ec8f1f591f9b362a09c0fa32ba9efd84"
+      },
+      {
+        "name": "compat\\0.110.0\\STS2-RitsuLib.dll",
+        "sha256": "c83bf8b2218c91bec52a93a316c3d41099d99b662e90827e4f8fe30ce8aeb82a"
+      },
+      {
+        "name": "compat\\0.110.0\\STS2-RitsuLib.Runtime.dll",
+        "sha256": "c3015ce0baac3fa8d1b00f066de95238b284fcf6c844d8492cb8552350c558f4"
+      },
+      {
+        "name": "compat\\0.111.0\\STS2-RitsuLib.dll",
+        "sha256": "e6b66b6306bf53b64e81653bf5b2de92338bac8518977fdecf6560c5bfebb8d6"
+      },
+      {
+        "name": "compat\\0.111.0\\STS2-RitsuLib.Runtime.dll",
+        "sha256": "383f86873509c76579ea3c6881ff0e021c25b82269b83a80cc918ee51b224594"
+      },
+      {
+        "name": "shared\\STS2-RitsuLib.Settings.dll",
+        "sha256": "c2071db0ef6964e7c458dfc5277d8fe69856ec836e4a929b647e7422170bf25a"
+      },
+      {
+        "name": "shared\\STS2-RitsuLib.Shared.dll",
+        "sha256": "c1e610be16ecfeb91dbe3b1757baa824e3dfb10d7c3b0532d8689d9ecd34b874"
+      },
+      {
+        "name": "shared\\STS2-RitsuLib.Ui.dll",
+        "sha256": "63780ed92d3d5600e0ec53d016e024fd55a85a0e5870a5e2a203a57f7c6e23ee"
+      }
+    ]
+  },
+  "dotnetSdk": "9.0.317",
+  "node": "v24.19.0",
+  "powershell": "7.6.4",
+  "packageFiles": [
+    {
+      "name": "DNDN.dll",
+      "bytes": 5632,
+      "sha256": "b1294ae8211056c0f0231507cca3cbbf4d565df78af4b174983beb06958625f2"
+    },
+    {
+      "name": "DNDN.json",
+      "bytes": 343,
+      "sha256": "4362ca69351c3cb4e14bd9f8ddccdbd2545c2020a49cfe86d3f192591e88b7b0"
+    },
+    {
+      "name": "SHA256SUMS",
+      "bytes": 153,
+      "sha256": "3cdd8c446ac1677ed48df0c1316e9904bef8fbe865fd3a50d358f504abc8f9ca"
+    }
+  ],
+  "notRun": [
+    "Godot editor import/PCK export",
+    "DNDN game runtime",
+    "multiplayer",
+    "macOS/Linux runtime",
+    "Workshop publication",
+    "backend or website deployment",
+    "historical reference tools/tests"
+  ],
+  "stableBuild": {
+    "machine": "source workstation",
+    "result": "PASS: 0 warnings, 0 errors",
+    "gameApiVersion": "0.107.1",
+    "hostMvid": "97f10687-c306-4798-ab75-8b9f23f34dfb",
+    "hostSha256": "a1f9e653f1e28e4076558fee1e60d218619cb7e057b887c6417f62c62c6d7a52",
+    "dllSha256": "167b5e21dcd48aa748303308f96d724844da6ab816beb7d253631410a49b91be",
+    "remoteStableInput": "Not configured; missing input explicitly rejected",
+    "packageFiles": [
+      "DNDN.dll",
+      "DNDN.json",
+      "SHA256SUMS"
+    ]
+  },
+  "starterSourceHashes": {
+    "DNDN.csproj": "ed0f49b93c43b42d477e62b6ba1f7c7657a5e9f783924f81d63570fc35f4ba03",
+    "Directory.Build.props": "c6c69f37339e02ccb7662e7cab5292348fb652491d22f23c1ce3a1c82ee1f485",
+    "Scripts/Entry.cs": "6b6589a22fad16318dc7ca01e9e95e4c2643361843ddfde8a4aa40e66b45cb6d",
+    "DNDN.json": "0ad84bfd60eefc326f31923e3d3695e2371145e0bc520253f5239276324a36d5",
+    "eng/DNDN.Hosts.props": "548d70a8bb76457bce15683f637ca85a1acfd27a0f2272fc7e6e1fb151e1b422",
+    "tools/Build.ps1": "0b27c506ecad2843fc4e9ace6de5f8eeca14b66aa7dc3a1fc95196d7686614c2",
+    "tools/New-Package.ps1": "d448576e7d91f5502b0e27c6f6d791603df6956901bd558ebf79051266b41e3d",
+    "tools/verify-project.mjs": "2e58cf5d983b30ed8a10e20ada888be67c972d0d05a61add6719feb8b347e158",
+    "tools/verify-migration.py": "c17f2cc1aab9f2b800eb35d67c41113e5321212eeb0029470bc19bd0ad24dc51"
+  },
+  "cardBoardAdaptation": "PASS: only embedded art removed; all other source data and saved state preserved; JavaScript syntax valid. Browser interaction NOT RUN.",
+  "credentialPatternScan": "PASS: no private-key blocks or common literal token/password patterns found in migrated textual files; personal config/cache excluded by tracked-file selection.",
+  "publication": "No remote configured; no commit/push/upload/install. Empty local Git repository initialized.",
+  "gitReferenceBytePreservation": "PASS: original reference configs inert; Reference/** -text; filtered/raw object hashes equal; all reference files visible to Git",
+  "finalSourceFiles": 1788,
+  "finalSourceMiB": 17.99,
+  "cleanup": {
+    "retained": "Source/reference files, compact evidence, one current preview development package",
+    "sourceStaging": "NOT REMOVED: automatic approval policy rejected recursive deletion (blocked by policy). Retained on source workstation at C:\\Users\\theon\\AppData\\Local\\Temp\\dndn-engineering-20261005. No bypass attempted.",
+    "remoteTransferFilesRemoved": [
+      "dndn-engineering-20261005.zip",
+      "update-index.json",
+      "dndn-finalize-20261005.ps1",
+      "update.zip"
+    ]
+  }
+}

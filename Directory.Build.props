@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <DohnaDohnaHostChannel Condition="'$(DohnaDohnaHostChannel)' == ''">preview</DohnaDohnaHostChannel>
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)build/obj/$(DohnaDohnaHostChannel)/$(MSBuildProjectName)/</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)build/bin/$(DohnaDohnaHostChannel)/$(MSBuildProjectName)/</BaseOutputPath>
+  </PropertyGroup>
+</Project>
