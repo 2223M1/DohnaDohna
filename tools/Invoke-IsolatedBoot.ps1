@@ -2,10 +2,16 @@
 [CmdletBinding()]
 param([ValidateRange(1,1800)][int]$Seconds = 20, [switch]$Probe, [switch]$Rendered, [switch]$Interactive, [switch]$FreshProfile,
     [string]$InteractiveProfile,
-    [string]$ModPackageDirectory, [switch]$MenuFlow, [string[]]$AdditionalModDirectory = @(),
-    [string[]]$MenuRoster = @('kuma','alyce','antena','tora'), [switch]$CaptureAudio, [switch]$CaptureMovie,
-    [ValidateSet('Full','Boundaries','Presentation','Recovery','Lifecycle','Motion','Feedback','Finisher','Routing','Alignment','Shadows','Impacts','Scaling','Display','Pacing','Catalog','CatalogCards','Relics','CatalogRules','Costs','Core')][string]$CommandScenario = 'Full')
+    [string]$ModPackageDirectory, [ValidatePattern('^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$')][string]$SessionName,
+    [switch]$MenuFlow, [string[]]$AdditionalModDirectory = @(),
+    [ValidateSet('Fast','Normal','Instant')][string]$TestSpeed = 'Fast',
+    [string[]]$MenuRoster = @('kuma','alyce','antena','tora'), [switch]$CaptureAudio, [switch]$CaptureMovie, [switch]$CaptureRealtime,
+    [ValidateSet('Full','Boundaries','Presentation','Recovery','Lifecycle','Motion','Selection','Feedback','Finisher','Routing','PowerBaseline','PowerOwnership','NativeFlow','Hextech','Alignment','Shadows','Impacts','Scaling','Display','Pacing','PacingFocus','Preparation','PreparationEdges','MotionFlow','Theater','Emission','Catalog','CatalogCards','Relics','CatalogRules','Costs','Core')][string]$CommandScenario = 'Full')
 $ErrorActionPreference = 'Stop'
+if ($CommandScenario -in @('Theater','Emission') -or $CaptureRealtime) {
+    if ($CaptureMovie) { throw 'Wall-clock theater must not use MovieWriter fixed simulation time.' }
+    $CaptureAudio = $true
+}
 if ($MenuFlow) { $Probe = $true; $Rendered = $true }
 if ($CaptureAudio) { $Probe = $true; $Rendered = $true }
 if ($CaptureMovie) { $Probe = $true; $Rendered = $true }
@@ -18,6 +24,7 @@ if ($Interactive -and ($Probe -or $Rendered)) { throw 'Interactive play must not
 if ($FreshProfile -and -not $Interactive) { throw 'FreshProfile is only for manual isolated acceptance.' }
 $projectRoot = Split-Path $PSScriptRoot -Parent
 $sessionRoot = Join-Path $projectRoot 'build/smoke/preview'
+if ($SessionName) { $sessionRoot = Join-Path $sessionRoot $SessionName }
 if ($InteractiveProfile) {
     if (-not $Interactive -or $FreshProfile) { throw 'InteractiveProfile only resumes an existing manual isolated profile.' }
     $manualProfile = Get-Item -LiteralPath $InteractiveProfile
@@ -99,7 +106,10 @@ $savedMenuRoster = $env:DOHNA_MENU_ROSTER
 $savedCaptureDir = $env:DOHNA_CAPTURE_DIR
 $savedAudioTrace = $env:DOHNA_AUDIO_TRACE
 $savedCommandScenario = $env:DOHNA_COMMAND_SCENARIO
+$savedTestSpeed = $env:DOHNA_TEST_SPEED
 $savedCaptureMovie = $env:DOHNA_CAPTURE_MOVIE
+$savedFfmpeg = $env:DOHNA_FFMPEG
+$savedRealtime = $env:DOHNA_CAPTURE_REALTIME
 $capture = $null
 try {
     $profileRoot = if ($MenuFlow) { Join-Path $sessionRoot ('menu-flow-' + (Get-Date -Format 'yyyyMMdd-HHmmss-fff')) }
@@ -114,7 +124,12 @@ try {
     $env:DOHNA_CAPTURE_DIR = if ($CaptureAudio) { Join-Path $env:LOCALAPPDATA 'audio' } else { $null }
     $env:DOHNA_AUDIO_TRACE = if ($CaptureAudio) { '1' } else { $null }
     $env:DOHNA_COMMAND_SCENARIO = $CommandScenario
+    $env:DOHNA_TEST_SPEED = $TestSpeed
     $env:DOHNA_CAPTURE_MOVIE = if ($CaptureMovie) { '1' } else { $null }
+    $env:DOHNA_CAPTURE_REALTIME = if ($CaptureRealtime) { '1' } else { $null }
+    if ($CommandScenario -in @('Theater','Emission') -or $CaptureRealtime) {
+        $env:DOHNA_FFMPEG = (Get-Content -LiteralPath (Join-Path $projectRoot '../Tools/STS2/toolchain.json') -Raw | ConvertFrom-Json).ffmpeg
+    }
     New-Item -ItemType Directory -Path $env:APPDATA, $env:LOCALAPPDATA -Force | Out-Null
     $settingsDirectory = Join-Path $env:APPDATA 'SlayTheSpire2/default/1'
     New-Item -ItemType Directory -Path $settingsDirectory -Force | Out-Null
@@ -142,13 +157,26 @@ try {
         $settings.volume_ambience = 0.0
     }
     $settings | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $settingsFile -Encoding utf8NoBOM
-    if ($FreshProfile -and @($additionalMods | Where-Object id -eq 'NinjaSlayer').Count) {
+    if (($FreshProfile -or $Probe) -and @($additionalMods | Where-Object id -eq 'NinjaSlayer').Count) {
         # The confirmed current RitsuLib test-profile schema. No daily settings,
         # applicant permissions, or uploads are touched by a manual smoke run.
         $consentDirectory = Join-Path $settingsDirectory 'mod_data/com.ritsukage.sts2-RitsuLib/telemetry'
         New-Item -ItemType Directory -Path $consentDirectory -Force | Out-Null
         '{"schema_version":1,"applicants":{"NinjaSlayer":{"consent":"Denied","granted_requests":[],"shared_contribution_sources":{}}}}' |
             Set-Content -LiteralPath (Join-Path $consentDirectory 'consent.json') -Encoding utf8NoBOM
+    }
+    if (($FreshProfile -or $Probe) -and @($additionalMods | Where-Object id -eq 'HextechRunes').Count) {
+        # Hextech 0.9.7 uses user://HextechRunes, outside the profile slot.
+        # Opt out before loading it; this is still the isolated APPDATA root.
+        $hextechData = Join-Path $env:APPDATA 'SlayTheSpire2/HextechRunes'
+        New-Item -ItemType Directory -Path $hextechData -Force | Out-Null
+        '{"enabled":false}' | Set-Content -LiteralPath (Join-Path $hextechData 'telemetry_config.json') -Encoding utf8NoBOM
+        if ($CommandScenario -eq 'Hextech') {
+            # Deterministic combat fixture: leave Hextech enabled, but grant
+            # the exact tested runes through its registered native models.
+            '{"config_version":40,"player_hex_counts_by_act":[0,0,0],"enemy_hex_counts_by_act":[0,0,0],"mod_enabled":true}' |
+                Set-Content -LiteralPath (Join-Path $hextechData 'rune_config.json') -Encoding utf8NoBOM
+        }
     }
     if ($CaptureAudio) {
         New-Item -ItemType Directory -Path $env:DOHNA_CAPTURE_DIR | Out-Null
@@ -171,6 +199,11 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'Background desktop helper build failed.' }
         $executable = Join-Path $projectRoot 'build/background-game/DohnaDohna.BackgroundGame.exe'
         $arguments = @('"' + (Join-Path $gameRoot 'SlayTheSpire2.exe') + '"', "$Seconds", '--force-steam=off', '--verbose') + $windowArguments
+        if ($CommandScenario -in @('Theater','Emission') -or $CaptureRealtime -or $CaptureMovie) {
+            # Forward+ alone still selects D3D12 on this Windows host. The
+            # async readback recorder requires the tested Vulkan backend.
+            $arguments += @('--rendering-method', 'forward_plus', '--rendering-driver', 'vulkan')
+        }
         if ($CaptureMovie) {
             # Godot's actual rendered viewport on the inactive desktop, not a
             # recreation of the animation. Fixed 60 fps is visual evidence only;
@@ -202,7 +235,7 @@ try {
         $errors = Get-Content -LiteralPath (Join-Path $profileRoot 'stderr.log') -Raw
         $passed = $boot.ExitCode -eq 0 -and $output.Contains('DOHNA_MENU_FLOW_PASS') -and -not $errors.Contains('DOHNA_MENU_FLOW_FAIL')
         $proof = @{host=(Get-Content -LiteralPath (Join-Path $gameRoot 'release_info.json') -Raw | ConvertFrom-Json).version;
-            roster=$MenuRoster; mods=$allowedModFolders; exitCode=$boot.ExitCode; passed=$passed;
+            roster=$MenuRoster; testSpeed=$TestSpeed; mods=$allowedModFolders; exitCode=$boot.ExitCode; passed=$passed;
             dllSha256=(Get-FileHash -LiteralPath (Join-Path $ownMod 'DohnaDohna.dll')).Hash.ToLowerInvariant();
             driverSha256=(Get-FileHash -LiteralPath (Join-Path $probeRoot 'DohnaDohna-SmokeDriver.dll')).Hash.ToLowerInvariant();
             pckSha256=(Get-FileHash -LiteralPath (Join-Path $ownMod 'DohnaDohna.pck')).Hash.ToLowerInvariant();
@@ -220,6 +253,18 @@ try {
             throw "Native command acceptance failed; see $profileRoot"
         }
     }
+    if ($Probe -and -not $MenuFlow) {
+        # Evidence about THIS staged candidate, not the current compilation
+        # output or a historical test run. Does not change the daily install.
+        $loadedRitsu = Get-Content -LiteralPath (Join-Path $ritsuMod 'mod_manifest.json') -Raw | ConvertFrom-Json
+        $proof = @{scenario=$CommandScenario; host=(Get-Content -LiteralPath (Join-Path $gameRoot 'release_info.json') -Raw | ConvertFrom-Json);
+            ritsuRuntime=$loadedRitsu.version;testSpeed=$TestSpeed;mods=$allowedModFolders;exitCode=$boot.ExitCode;
+            dllSha256=(Get-FileHash -LiteralPath (Join-Path $ownMod 'DohnaDohna.dll')).Hash.ToLowerInvariant();
+            pckSha256=(Get-FileHash -LiteralPath (Join-Path $ownMod 'DohnaDohna.pck')).Hash.ToLowerInvariant();
+            driverSha256=(Get-FileHash -LiteralPath (Join-Path $probeRoot 'DohnaDohna-SmokeDriver.dll')).Hash.ToLowerInvariant();
+            passMarker=$commandPassMarker;timestamp=[DateTimeOffset]::Now.ToString('o')}
+        $proof | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $profileRoot 'command-proof.json') -Encoding utf8NoBOM
+    }
     Write-Output "Isolated boot output: $sessionRoot; rendered=$Rendered"
     Write-Output 'Only explicit driver PASS assertions count; booting alone is not playability or manual UI acceptance.'
 } finally {
@@ -234,5 +279,8 @@ try {
     $env:DOHNA_CAPTURE_DIR = $savedCaptureDir
     $env:DOHNA_AUDIO_TRACE = $savedAudioTrace
     $env:DOHNA_COMMAND_SCENARIO = $savedCommandScenario
+    $env:DOHNA_TEST_SPEED = $savedTestSpeed
     $env:DOHNA_CAPTURE_MOVIE = $savedCaptureMovie
+    $env:DOHNA_FFMPEG = $savedFfmpeg
+    $env:DOHNA_CAPTURE_REALTIME = $savedRealtime
 }

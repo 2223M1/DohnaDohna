@@ -47,7 +47,10 @@ public sealed partial class SquadSharedDisplay : Node2D
         var members = _squad.Living.Select(c => _room.GetCreatureNode(c)
             ?? throw new InvalidOperationException("Squad member node is missing.")).ToArray();
         var left = members.Min(c => c.Position.X);
-        _powers.Position = new Vector2(left - 70, 330);
+        // Above the squad, below the relic row. The old ground+130 placement
+        // was covered by the native energy orb/hand (verified at 1600x900), so
+        // correctly-owned shared powers appeared to be missing.
+        _powers.Position = new Vector2(left - 70, -320);
         _caption.Position = _powers.Position + new Vector2(0, -23);
         _caption.Visible = _squad.Owner.Creature.Powers.Any(p => p.IsVisible);
         var orbActor = _squad.IsAlive("antena") ? _squad.GetActor("antena") : _squad.Front;

@@ -32,10 +32,12 @@ public static class Entry
         patcher.RegisterPatch<SquadEmbarkPatch>();
         patcher.RegisterPatch<SquadSelectBackPatch>();
         patcher.RegisterPatch<SquadSelectClosePatch>();
+        patcher.RegisterPatch<SquadPreparePatch>();
         patcher.RegisterPatch<SquadStartPatch>();
         patcher.RegisterPatch<SquadFormationPatch>();
         patcher.RegisterPatch<SquadFormationChangedPatch>();
         patcher.RegisterPatch<SquadDamageTargetPatch>();
+        patcher.RegisterPatch<SquadCannonImpactPatch>();
         patcher.RegisterPatch<SquadEnemyAttackTargetsPatch>();
         patcher.RegisterPatch<SquadNativeVfxTargetPatch>();
         patcher.RegisterPatch<SquadSlimeSpitTargetPatch>();
@@ -43,6 +45,7 @@ public static class Entry
         patcher.RegisterPatch<SquadBlockReceiverPatch>();
         patcher.RegisterPatch<SquadTurnParticipantsPatch>();
         patcher.RegisterPatch<SquadGainBlockPatch>();
+        patcher.RegisterPatch<SquadOpeningBlockPatch>();
         patcher.RegisterPatch<SquadDexterityPatch>();
         patcher.RegisterPatch<SquadDamagePreviewPatch>();
         patcher.RegisterPatch<SquadBlockPreviewPatch>();
@@ -55,6 +58,9 @@ public static class Entry
         patcher.RegisterPatch<SquadGeneratedPoolPatch>();
         patcher.RegisterPatch<SquadTransformPoolPatch>();
         patcher.RegisterPatch<SquadCardChoicePatch>();
+        patcher.RegisterPatch<SquadPreparationStartPatch>();
+        patcher.RegisterPatch<SquadPreparationFinishPatch>();
+        patcher.RegisterPatch<SquadPreparationQueueCancelPatch>();
         patcher.RegisterPatch<SquadPlaySeriesPatch>();
         patcher.RegisterPatch<SquadQueuedPlayCancelPatch>();
         patcher.RegisterPatch<SquadSubstitutionCostPatch>();
@@ -77,6 +83,7 @@ public static class Entry
         patcher.RegisterPatch<SquadSharedHoverPatch>();
         patcher.RegisterPatch<SquadSharedUnhoverPatch>();
         patcher.RegisterPatch<SquadSharedSourcePatch>();
+        patcher.RegisterPatch<SquadDialoguePatch>();
         patcher.RegisterPatch<SquadRefinementPreviewPatch>();
         patcher.RegisterPatch<SquadRefinementChoicePatch>();
         patcher.RegisterPatch<SquadFairyEligibilityPatch>();
@@ -86,6 +93,9 @@ public static class Entry
         patcher.RegisterPatch<SquadRoomExitPatch>();
         patcher.RegisterPatch<SquadHealTargetPatch>();
         patcher.RegisterPatch<SquadPowerTargetPatch>();
+        patcher.RegisterPatch<SquadPowerStackTargetPatch>();
+        patcher.RegisterPatch<SquadGodModeEnablePatch>();
+        patcher.RegisterPatch<SquadGodModeDisablePatch>();
         patcher.RegisterPatch<SquadRestPatch>();
         patcher.RegisterPatch<SquadAncientRecoveryPatch>();
         patcher.RegisterPatch<SquadMaxHpGainPatch>();

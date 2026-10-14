@@ -8,7 +8,7 @@ internal sealed class MotionTimeline
     public JsonElement[] Frames { get; }
     public double[] Starts { get; }
     public double Duration { get; }
-    public MotionTimeline(JsonElement frames)
+    public MotionTimeline(JsonElement frames, int releaseIndex = -1, double releaseSeconds = 0)
     {
         Frames = frames.EnumerateArray().ToArray();
         if (Frames.Length == 0) throw new InvalidDataException("Empty original motion.");
@@ -23,6 +23,16 @@ internal sealed class MotionTimeline
         }
         if (ticks == 0) throw new InvalidDataException("Zero-duration original motion.");
         Duration = ticks / 60d;
+        if (releaseIndex >= 0)
+        {
+            if (releaseIndex <= 0 || releaseIndex >= Frames.Length || releaseSeconds < 0 || !double.IsFinite(releaseSeconds))
+                throw new InvalidDataException("Invalid visual release boundary.");
+            double before = Starts[releaseIndex];
+            if (before <= 0) throw new InvalidDataException("Release has no authored anticipation.");
+            for (int i = 0; i < Starts.Length; i++)
+                Starts[i] = i <= releaseIndex ? Starts[i] / before * releaseSeconds : Starts[i] + releaseSeconds - before;
+            Duration += releaseSeconds - before;
+        }
     }
 
     public static float Number(JsonElement value, string key, float fallback = 0) =>

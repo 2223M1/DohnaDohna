@@ -38,7 +38,7 @@ public partial class LoadProbe
         int moved = 0, hits = 0;
         var action = visuals.Play("special", () => { hits++; return Task.CompletedTask; }, squad.Cancellation.Token,
             owner.Creature.CombatState!.Enemies.ToArray(), cinematic: true);
-        while (!action.IsCompleted)
+        while (!action.IsCompleted || RoleFinisher.Current != null)
         {
             await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
             var camera = room.GetNodeOrNull<CanvasLayer>("DohnaMotionCamera");

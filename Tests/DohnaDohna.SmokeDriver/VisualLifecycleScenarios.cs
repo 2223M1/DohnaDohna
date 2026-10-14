@@ -46,20 +46,34 @@ public partial class LoadProbe
         int hits = 0;
         Task Hit() { hits++; return Task.CompletedTask; }
         async Task Frame() => await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-        async Task Clean()
+        int cleanupStep = 0;
+        async Task Clean(bool finishEmittedTail = false)
         {
+            cleanupStep++;
             await Frame(); await Frame();
+            if (finishEmittedTail)
+            {
+                // Canceling body recovery must reset the body immediately,
+                // but an already-fired scene effect may finish under its role.
+                // Keep a bounded expiry assertion; do not simply ignore it.
+                if (visuals.IsPlaying || (Vector2)offsetField.GetValue(visuals)! != Vector2.Zero
+                    || visuals.Transform != external || node.GetTransform() != root || layers.Transform != layerTransform)
+                    throw new Exception("Canceled recovery did not release the body immediately");
+                for (int i = 0; i < 120 && GetTree().Root.GetChildrenRecursive<RoleMotionEffects>().Any(); i++) await Frame();
+            }
             if (visuals.IsPlaying || (Vector2)offsetField.GetValue(visuals)! != Vector2.Zero
                 || visuals.Transform != external || node.GetTransform() != root || layers.Transform != layerTransform || art.ZIndex != depth
                 || GetTree().Root.GetChildrenRecursive<RoleMotionEffects>().Any()
                 || GetTree().Root.GetChildrenRecursive<CanvasLayer>().Any(n => n.Name == "DohnaMotionCamera")
-                || GetTree().Root.GetChildrenRecursive<ColorRect>().Any(n => n.Name == "DohnaActionLighting"))
-                throw new Exception("Owned presentation cleanup/external scale failed");
+                || GetTree().Root.GetChildrenRecursive<ColorRect>().Any(n => n.Name == "DohnaFinisherBackdrop"))
+                throw new Exception($"Owned presentation cleanup/external scale failed step={cleanupStep} playing={visuals.IsPlaying} offset={offsetField.GetValue(visuals)}"
+                    + $" visual={visuals.Transform == external} root={node.GetTransform() == root} layer={layers.Transform == layerTransform} depth={art.ZIndex}/{depth}"
+                    + $" effects={GetTree().Root.GetChildrenRecursive<RoleMotionEffects>().Count()}");
         }
         double Clock() { var c = cutField.GetValue(visuals)!; return (double)c.GetType().GetField("Time")!.GetValue(c)!; }
         try
         {
-            foreach (var mode in new[] { FastModeType.Normal, FastModeType.Fast })
+            foreach (var mode in new[] { FastModeType.Fast, FastModeType.Normal })
             {
                 SaveManager.Instance.PrefsSave.FastMode = mode;
                 hits = 0;
@@ -87,7 +101,7 @@ public partial class LoadProbe
             await visuals.Play("special", Hit, squad.Cancellation.Token, targets, cinematic: true);
             if (hits != 1) throw new Exception("Instant damage count");
             await Clean();
-            SaveManager.Instance.PrefsSave.FastMode = FastModeType.Normal;
+            SaveManager.Instance.PrefsSave.FastMode = Entry.TestSpeed;
 
             using (var cancel = new CancellationTokenSource())
             {
@@ -100,7 +114,9 @@ public partial class LoadProbe
                 try { await action; throw new Exception("Canceled lead completed"); }
                 catch (OperationCanceledException) { }
                 await Clean();
-                if (hits != 0 || sounds.Any(h => h.IsValid && !h.IsReleased)) throw new Exception("Canceled lead hit or kept sounds");
+                if (hits != 0) throw new Exception("Canceled lead hit");
+                // Already emitted one-shots may finish naturally. Room exit,
+                // not replacing the body pose, is their lifetime boundary.
             }
             using (var cancel = new CancellationTokenSource())
             {
@@ -114,7 +130,7 @@ public partial class LoadProbe
                 if (Clock() != stopped) throw new Exception("Paused tail advanced");
                 cancel.Cancel();
                 CombatManager.Instance.Unpause();
-                await Clean();
+                await Clean(finishEmittedTail: true);
                 if (hits != 1) throw new Exception("Tail cancel replayed damage");
             }
             hits = 0;

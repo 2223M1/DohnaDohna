@@ -70,6 +70,7 @@ public sealed class SquadDefend() : ModCardTemplate(1, CardType.Skill, CardRarit
 [RegisterCharacterStarterCard(typeof(DohnaSquad), 1, Order = 20)]
 public sealed class SquadSwap() : ModCardTemplate(0, CardType.Skill, CardRarity.Basic, SquadTargeting.Swap)
 {
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate];
     public override CardAssetProfile AssetProfile => SquadCardAssets.Shared;
     protected override bool IsPlayable => SquadCombatState.TryGet(Owner)?.Living.Count() > 1;
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)

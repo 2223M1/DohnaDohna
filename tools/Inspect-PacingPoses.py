@@ -7,6 +7,7 @@ from motion_images import compose
 
 parser = argparse.ArgumentParser()
 parser.add_argument("roles", nargs="*")
+parser.add_argument("--cues", nargs="+", default=["strike", "special", "hit"])
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
 out = root / "build/pacing-poses"
@@ -15,7 +16,7 @@ for folder in sorted((root / "DohnaDohna/roles").iterdir()):
     if args.roles and folder.name not in args.roles:
         continue
     data = json.loads((folder / "motions.json").read_text(encoding="utf-8"))
-    for cue in ("strike", "special", "hit"):
+    for cue in args.cues:
         motion = data["motions"][cue]
         frames = motion["frames"]
         sheet = Image.new("RGB", (8*180, ((len(frames)+7)//8)*160), "#343740")

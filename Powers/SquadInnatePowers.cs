@@ -72,19 +72,25 @@ public abstract class SquadInnatePower : ModPowerTemplate
 
 public abstract class SquadAuraPower : SquadInnatePower
 {
-    private HashSet<Creature> _recipients = [];
+    private Dictionary<Creature, PowerModel> _recipients = [];
     protected override void DeepCloneFields() { base.DeepCloneFields(); _recipients = new(_recipients); }
     protected abstract IEnumerable<Creature> Desired();
-    protected abstract Task Change(Creature target, int sign);
+    protected abstract Task<PowerModel?> Change(Creature target, int sign);
     public async Task Refresh()
     {
         var desired = Enabled ? Desired().ToHashSet() : [];
-        var remove = _recipients.Except(desired).ToArray();
-        var add = desired.Except(_recipients).ToArray();
-        _recipients.Clear();
-        _recipients.UnionWith(desired);
-        foreach (var target in remove) if (target.IsAlive) await Change(target, -1);
-        foreach (var target in add) await Change(target, 1);
+        // Native dispel/debug commands can remove the entire stack. A removed
+        // instance no longer contains our contribution: never subtract it from
+        // a replacement stack or create negative Strength on the next reorder.
+        foreach (var (target, power) in _recipients.ToArray())
+            if (!target.Powers.Contains(power)) _recipients.Remove(target);
+        foreach (var target in _recipients.Keys.Except(desired).ToArray())
+        {
+            _recipients.Remove(target);
+            if (target.IsAlive) await Change(target, -1);
+        }
+        foreach (var target in desired.Except(_recipients.Keys).ToArray())
+            if (await Change(target, 1) is { } power) _recipients.Add(target, power);
     }
 }
 
@@ -92,13 +98,13 @@ public abstract class SquadAuraPower : SquadInnatePower
 {
     public override string Role => "kuma";
     protected override IEnumerable<Creature> Desired() => Squad.Living.TakeWhile(c => c != Owner).Append(Owner);
-    protected override Task Change(Creature target, int sign) => PowerCmd.Apply<StrengthPower>(new BlockingPlayerChoiceContext(), target, sign * Amount, Owner, null);
+    protected override async Task<PowerModel?> Change(Creature target, int sign) => await PowerCmd.Apply<StrengthPower>(new BlockingPlayerChoiceContext(), target, sign * Amount, Owner, null);
 }
 [RegisterPower] public sealed class PornoInnate : SquadAuraPower
 {
     public override string Role => "porno";
     protected override IEnumerable<Creature> Desired() => Squad.Living.SkipWhile(c => c != Owner).Take(2);
-    protected override Task Change(Creature target, int sign) => PowerCmd.Apply<ThornsPower>(new BlockingPlayerChoiceContext(), target, 2 * sign * Amount, Owner, null);
+    protected override async Task<PowerModel?> Change(Creature target, int sign) => await PowerCmd.Apply<ThornsPower>(new BlockingPlayerChoiceContext(), target, 2 * sign * Amount, Owner, null);
 }
 [RegisterPower] public sealed class ToraInnate : SquadInnatePower
 {
@@ -122,7 +128,7 @@ public abstract class SquadAuraPower : SquadInnatePower
     {
         if (!_turnReady || _awarding || !Qualifies(power) || !_seen.Add(power.GetType())) return;
         _awarding = true;
-        try { await PowerCmd.Apply<SquadTemporaryStrength>(context, Owner, Amount, Owner, null); }
+        try { await PowerCmd.Apply<ToraSupportStrength>(context, Owner, Amount, Owner, null); }
         finally { _awarding = false; }
     }
 }

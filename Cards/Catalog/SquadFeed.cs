@@ -35,7 +35,7 @@ public sealed class SquadFeed : SquadCatalogCard
 		new MaxHpVar(3m)
 	};
 
-	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+	public override IEnumerable<CardKeyword> CanonicalKeywords => [.. base.CanonicalKeywords, CardKeyword.Exhaust];
 
 	protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.Static(StaticHoverTip.Fatal)];
 

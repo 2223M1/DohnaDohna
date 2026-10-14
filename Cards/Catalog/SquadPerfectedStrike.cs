@@ -51,7 +51,7 @@ public sealed class SquadPerfectedStrike : SquadCatalogCard
 			.WithHitVfxNode((Creature t) => NBigSlashImpactVfx.Create(t));
 		if (base.DynamicVars.CalculatedDamage.Calculate(cardPlay.Target) > 12m)
 		{
-			attackCommand.WithAttackerAnim(Ironclad.GetHeavyAnimIfApplicable(base.Owner.Character), Ironclad.GetHeavyAttackDelayIfApplicable(base.Owner.Character));
+			attackCommand.WithAttackerAnim("heavyAttack", DohnaDohna.Code.Visuals.SquadMotionTiming.Attack(this, .20f));
 		}
 		await attackCommand.ExecuteSquad(choiceContext);
 		if (Actor.IsDead) return;

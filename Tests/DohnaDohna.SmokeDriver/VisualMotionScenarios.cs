@@ -2,6 +2,7 @@ using System.Text.Json;
 using DohnaDohna.Code.Squad;
 using DohnaDohna.Code.Visuals;
 using DohnaDohna.Code.UI;
+using DohnaDohna.Content;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -30,18 +31,44 @@ public partial class LoadProbe
                 GetWindow().Size = size;
                 panel.ReturnToPrimary();
                 await ToSignal(GetTree().CreateTimer(1.2), SceneTreeTimer.SignalName.Timeout);
+                GD.Print($"SELECT_SIZE requested={size} actualWindow={GetWindow().Size} viewport={GetViewport().GetVisibleRect().Size} screen={screen.Size}");
                 await Screenshot($"select-primary-{size.X}x{size.Y}.png");
                 AssertPosterBounds(screen);
                 SquadSelectPanel.Open(screen);
                 await ToSignal(GetTree().CreateTimer(.3), SceneTreeTimer.SignalName.Timeout);
                 await Screenshot($"select-secondary-{size.X}x{size.Y}.png");
                 AssertPosterBounds(screen);
+                string[][] groups = [["kuma", "alyce", "antena", "tora"],
+                    ["kikuchiyo", "medhico", "joker", "zappa"], ["kirakira", "porno", "antena", "alyce"]];
+                foreach (var group in groups)
+                {
+                    SquadSelectPanel.Open(screen);
+                    for (int i = 0; i < group.Length; i++)
+                    {
+                        var button = panel.GetChildrenRecursive<SquadRoleButton>().Single(b => b.Slot < 0 && b.Role!.Id == group[i]);
+                        button.Activated!(button); // Layout fixture; MenuFlow separately exercises native input.
+                        await ToSignal(GetTree().CreateTimer(.30), SceneTreeTimer.SignalName.Timeout);
+                        var portraits = panel.GetNode<Control>("BattlePortraits");
+                        var drawn = portraits.GetChildrenRecursive<TextureRect>().Where(p => p.Texture != null).ToArray();
+                        if (drawn.Length != i + 1 || !drawn.Select(p => p.Texture.ResourcePath)
+                            .SequenceEqual(group.Take(i + 1).Select(r => RoleDefinition.Get(r).AssetRoot + "/selection_bust.png")))
+                            throw new Exception("Battle poster does not match selected order");
+                        foreach (var lane in portraits.GetChildren().Cast<Control>())
+                            if (!screen.GetGlobalRect().Encloses(lane.GetGlobalRect())) throw new Exception("Battle bust lane outside screen");
+                        if (group == groups[0]) await Screenshot($"select-{size.X}x{size.Y}-{i + 1}-members.png");
+                    }
+                    await Screenshot($"select-{size.X}x{size.Y}-{group[0]}-quartet.png");
+                }
+                panel.ReturnToPrimary();
+                SquadSelectPanel.Open(screen);
+                if (panel.GetNode<Control>("BattlePortraits").GetChildrenRecursive<TextureRect>().Any(p => p.Texture != null))
+                    throw new Exception("Returning to primary left a stale battle poster");
                 var bar = panel.GetChildrenRecursive<HBoxContainer>().Single(n => n.Name == "DohnaRoleBar");
                 if (!screen.GetGlobalRect().Encloses(bar.GetGlobalRect())) throw new Exception("Role bar outside select screen: " + size);
                 if (screen.DefaultFocusedControl is not SquadRoleButton { Slot: -1 })
                     throw new Exception("Native screen focus points at hidden primary buttons.");
             }
-            GD.Print("DOHNA_SMOKE_SELECT_LAYOUT_CAPTURED ratios=16:9,4:3,64:27 (render fixture, not physical input)");
+            GD.Print("DOHNA_SMOKE_SELECT_LAYOUT_CAPTURED requested=1600x900,1280x960,1920x810; actual sizes logged (render fixture, not physical input)");
         }
         finally { GetWindow().Size = original; }
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
@@ -53,14 +80,13 @@ public partial class LoadProbe
         var background = screen.GetChildrenRecursive<SelectBackground>().Single();
         var figures = background.GetNode<Node2D>("Figures");
         if (figures.TopLevel) throw new Exception("Poster must retain native popup draw order.");
-        foreach (var sprite in figures.GetChildrenRecursive<Sprite2D>())
-        {
-            var opaque = sprite.Texture.GetImage().GetUsedRect();
-            var transform = screen.GetGlobalTransform().AffineInverse() * sprite.GetGlobalTransform();
-            var bounds = transform * new Rect2(opaque.Position, opaque.Size);
-            if (!new Rect2(Vector2.Zero, screen.Size).Encloses(bounds))
-                throw new Exception($"Poster opaque art clipped: {bounds}, screen={screen.Size}");
-        }
+        var transform = screen.GetGlobalTransform().AffineInverse() * figures.GetGlobalTransform();
+        float scale = Math.Max(screen.Size.X / 1280, screen.Size.Y / 720);
+        if (!transform.Scale.IsEqualApprox(Vector2.One * scale)
+            || !transform.Origin.IsEqualApprox((screen.Size - new Vector2(1280, 720) * scale) * .5f))
+            throw new Exception("Title must use original canvas crop, not opaque-art fit");
+        bool secondary = SquadSelectPanel.Get(screen)?.IsSecondary == true;
+        if (figures.Visible == secondary) throw new Exception("Homepage figures leaked into secondary poster");
     }
 
     private async Task VerifyUsedMotions(Player owner, RunState run)
@@ -209,5 +235,6 @@ public partial class LoadProbe
 
     private static void MotionMarker(string role, string cue, string phase) => GD.Print("DOHNA_MOVIE_MARK " +
         JsonSerializer.Serialize(new { role, cue, phase, drawnFrame = Engine.GetFramesDrawn(),
-            processFrame = Engine.GetProcessFrames(), wallMs = Time.GetTicksMsec() }));
+            processFrame = Engine.GetProcessFrames(), wallMs = Time.GetTicksMsec(),
+            qpc = System.Diagnostics.Stopwatch.GetTimestamp(), frequency = System.Diagnostics.Stopwatch.Frequency }));
 }

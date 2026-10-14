@@ -49,7 +49,7 @@ public sealed class SquadUppercut : SquadCatalogCard
 	{
 		ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 		await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromSquadCard(this, cardPlay).Targeting(cardPlay.Target)
-			.WithAttackerAnim(Ironclad.GetHeavyAnimIfApplicable(base.Owner.Character), Ironclad.GetHeavyAttackDelayIfApplicable(base.Owner.Character))
+			.WithAttackerAnim("heavyAttack", DohnaDohna.Code.Visuals.SquadMotionTiming.Attack(this, .20f))
 			.WithHitFx("vfx/vfx_heavy_blunt", null, "heavy_attack.mp3")
 			.WithHitVfxSpawnedAtBase()
 			.ExecuteSquad(choiceContext);

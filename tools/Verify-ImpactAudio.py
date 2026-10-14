@@ -27,10 +27,11 @@ def segment(begin, end):
         raise ValueError('Incomplete contact audio window')
     return samples[a:b]
 
-references = ['blunt_attack.mp3','slash_attack.mp3','heavy_attack.mp3','event:/sfx/characters/attack_fire']
+references = ['blunt_attack.mp3','slash_attack.mp3','heavy_attack.mp3','event:/sfx/characters/attack_fire',
+              'event:/sfx/enemy/enemy_attacks/living_fog/living_fog_explode']
 templates = {}
 for ref in references:
-    label = 'impact-baseline-' + ('fire' if ref.startswith('event:') else ref)
+    label = 'impact-baseline-' + ('cannon' if ref.endswith('living_fog_explode') else 'fire' if ref.startswith('event:') else ref)
     data = segment(markers[label+'-begin'],markers[label+'-end']-.1)
     active = np.flatnonzero(np.abs(data) > .001)
     if not len(active) or np.sqrt(np.mean(data*data)) < 1e-4:
@@ -46,7 +47,7 @@ for label in sorted(k[:-6] for k in markers if k.startswith('impact-') and k.end
     if label.endswith('-cinematic'):
         # This is the visual-only cinematic probe; genuine finishers use the
         # native command and are separately checked by the Finisher scenario.
-        results.append(dict(label=label,passed=not native and not voices,nativeContactCount=len(native),voiceCount=len(voices)))
+        results.append(dict(label=label,passed=not native and len(voices)==1,nativeContactCount=len(native),voiceCount=len(voices)))
         continue
     if voices:
         raise ValueError('Ordinary attack called character voice: '+label)

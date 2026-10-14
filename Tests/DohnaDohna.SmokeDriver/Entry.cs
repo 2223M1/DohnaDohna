@@ -35,6 +35,8 @@ namespace DohnaDohna.SmokeDriver;
 [ModInitializer(nameof(Initialize))]
 public static class Entry
 {
+    internal static MegaCrit.Sts2.Core.Settings.FastModeType TestSpeed =>
+        Enum.Parse<MegaCrit.Sts2.Core.Settings.FastModeType>(System.Environment.GetEnvironmentVariable("DOHNA_TEST_SPEED") ?? "Fast");
     public static void Initialize()
     {
         var tree = (SceneTree)Engine.GetMainLoop();
@@ -43,6 +45,7 @@ public static class Entry
         // Private, throwaway acceptance profile only, for command AND GUI fixtures.
         // No compatibility run may upload data or obscure evidence with consent UI.
         RitsuLibFramework.SetTelemetryApplicantConsent("NinjaSlayer", STS2RitsuLib.Telemetry.TelemetryConsentState.Denied, []);
+        RitsuLibFramework.SetTelemetryApplicantConsent("com.ritsukage.sts2-RitsuLib", STS2RitsuLib.Telemetry.TelemetryConsentState.Denied, []);
         Node node = System.Environment.GetEnvironmentVariable("DOHNA_MENU_FLOW") == "1" ? new MenuFlowProbe() : new LoadProbe();
         tree.Root.CallDeferred(Node.MethodName.AddChild, node);
     }
@@ -73,6 +76,8 @@ public partial class LoadProbe : Node
     {
         try
         {
+            SaveManager.Instance.PrefsSave.FastMode = Entry.TestSpeed;
+            GD.Print("DOHNA_SMOKE_SPEED=" + SaveManager.Instance.PrefsSave.FastMode);
             if (System.Environment.GetEnvironmentVariable("DOHNA_COMMAND_SCENARIO") == "Display")
             {
                 await VerifyDisplayModes();
@@ -113,8 +118,13 @@ public partial class LoadProbe : Node
             selection.SelectCharacter(selection.GetChildrenRecursive<NCharacterSelectButton>().Single(b => b.Character == character), character);
             SquadSelectPanel.Open(selection); // Command fixture; native input is tested separately by MenuFlowProbe.
             var panel = SquadSelectPanel.Get(selection)!;
-            if (System.Environment.GetEnvironmentVariable("DOHNA_COMMAND_SCENARIO") == "Motion")
+            if (System.Environment.GetEnvironmentVariable("DOHNA_COMMAND_SCENARIO") is "Motion" or "Selection")
                 await VerifySelectionSizes(selection, panel);
+            if (System.Environment.GetEnvironmentVariable("DOHNA_COMMAND_SCENARIO") == "Selection")
+            {
+                GD.Print("DOHNA_SMOKE_SELECTION_PASS");
+                return;
+            }
             foreach (var role in RoleDefinition.All)
             {
                 var button = panel.GetChildrenRecursive<SquadRoleButton>().Single(b => b.Name == role.Id);
@@ -138,6 +148,14 @@ public partial class LoadProbe : Node
             {
                 var testOwner = run.Players.Single();
                 await RunManager.Instance.EnterRoomDebug(RoomType.RestSite, showTransition: false);
+                TheaterRecording? recording = null;
+                if (System.Environment.GetEnvironmentVariable("DOHNA_CAPTURE_REALTIME") == "1" && scenario is not ("Theater" or "Emission"))
+                {
+                    recording = new TheaterRecording(GetViewport(), System.Environment.GetEnvironmentVariable("DOHNA_CAPTURE_DIR")!);
+                    await recording.Start();
+                }
+                try
+                {
                 if (scenario == "Boundaries") await VerifyBoundaryCases(testOwner, run);
                 else if (scenario == "Presentation")
                 {
@@ -150,10 +168,20 @@ public partial class LoadProbe : Node
                 else if (scenario == "Feedback") await VerifyVisualFeedback(testOwner);
                 else if (scenario == "Finisher") await VerifyFinishers(testOwner);
                 else if (scenario == "Routing") await VerifyHitRouting(testOwner);
+                else if (scenario == "PowerBaseline") await VerifyPowerBaseline(testOwner);
+                else if (scenario == "PowerOwnership") await VerifyPowerOwnership(testOwner, run);
+                else if (scenario == "NativeFlow") await VerifyNativeFlow(testOwner, run);
+                else if (scenario == "Hextech") await VerifyHextech(testOwner, run);
                 else if (scenario == "Alignment") await VerifyEmitterMatrix(testOwner);
                 else if (scenario == "Shadows") await VerifyShadowPixels(testOwner);
                 else if (scenario == "Impacts") await VerifyImpacts(testOwner, run);
                 else if (scenario == "Pacing") await VerifyPacing(testOwner, run);
+                else if (scenario == "PacingFocus") await VerifyPacing(testOwner, run, "porno");
+                else if (scenario == "Preparation") await VerifyPreparation(testOwner, run);
+                else if (scenario == "PreparationEdges") await VerifyPreparationEdges(testOwner);
+                else if (scenario == "MotionFlow") await VerifyMotionFlow(testOwner, run);
+                else if (scenario == "Theater") await RecordTheater(testOwner, run);
+                else if (scenario == "Emission") await VerifyEmissions(testOwner, run);
                 else if (scenario == "Scaling") await VerifyScaling(testOwner, run);
                 else if (scenario == "Catalog") await VerifyCatalog(testOwner, run);
                 else if (scenario == "CatalogCards") await VerifyAllPrototypes(testOwner, run);
@@ -162,6 +190,8 @@ public partial class LoadProbe : Node
                 else if (scenario == "Costs") await VerifyNativeSubstitutionCosts(testOwner, run);
                 else if (scenario == "Core") await VerifyCoreSquadRules(testOwner, run);
                 else throw new Exception("Unknown command scenario: " + scenario);
+                }
+                finally { if (recording != null) await recording.Stop(); }
                 GD.Print("DOHNA_SMOKE_" + scenario.ToUpperInvariant() + "_PASS");
                 await NGame.Instance.ReturnToMainMenu();
                 return;
@@ -214,6 +244,7 @@ public partial class LoadProbe : Node
                 else await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
             }
             await movement;
+            await SquadFormation.Ensure(MegaCrit.Sts2.Core.Nodes.Rooms.NCombatRoom.Instance!).FinishMovement(squad.Cancellation.Token);
             if (squad.Front != target || squad.Front == previous) throw new Exception("Repeated swap did not exchange actors");
             MenuFlowProbe.AssertAlignment(squad, "repeat-" + iteration);
             var roots = squad.Living.Select(c => c.GetCreatureNode()!.Position.X).ToArray();

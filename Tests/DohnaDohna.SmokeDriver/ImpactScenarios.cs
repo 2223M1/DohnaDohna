@@ -40,23 +40,22 @@ public partial class LoadProbe
     {
         if (!_impactObserving || !frame.TryGetProperty("Effects", out var effects)) return;
         const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
-        bool cinematic = (bool)typeof(RoleMotionEffects).GetField("_cinematic", flags)!.GetValue(__instance)!;
-        bool recut = (bool)typeof(RoleMotionEffects).GetField("_recut", flags)!.GetValue(__instance)!;
         var targets = (Array)typeof(RoleMotionEffects).GetField("_targets", flags)!.GetValue(__instance)!;
         var sequences = (System.Collections.IEnumerable)typeof(RoleMotionEffects).GetField("_sequences", flags)!.GetValue(__instance)!;
         var actual = sequences.Cast<object>().Where(s => Math.Abs((double)s.GetType().GetField("Start")!.GetValue(s)! - time) < 1e-8)
             .Select(s => ((Texture2D[])s.GetType().GetField("Frames")!.GetValue(s)!)[0].ResourcePath).Order().ToArray();
-        var expected = effects.EnumerateObject().Where(p => (cinematic && !recut) || !p.Value.GetProperty("impact").GetBoolean())
+        var expected = effects.EnumerateObject().Where(p => !p.Value.GetProperty("impact").GetBoolean())
+            .Where(p => p.Value.GetProperty("FirstCgName").GetString() != "res://DohnaDohna/images/original/375b92627e7c234e3c22.png")
             .SelectMany(p => Enumerable.Repeat(p.Value.GetProperty("images")[0].GetString()!,
                 p.Value.GetProperty("AssignToTarget").GetInt32() != 0 ? targets.Length : 1)).Order().ToArray();
         if (!actual.SequenceEqual(expected)) throw new Exception("Original impact emission policy differs from imported art classification");
-        if (cinematic && !recut) _originalImpactCount += effects.EnumerateObject().Count(p => p.Value.GetProperty("impact").GetBoolean());
     }
 
     private async Task VerifyImpacts(Player owner, RunState run)
     {
         var harmony = new Harmony("DohnaDohna.SmokeDriver.ImpactPolicy");
         harmony.Patch(AccessTools.Method(typeof(SquadAudio), nameof(SquadAudio.Play)), prefix: new HarmonyMethod(typeof(LoadProbe), nameof(TraceImpactAudio)));
+        harmony.Patch(AccessTools.Method(typeof(SquadAudio), "PlayInRoom"), prefix: new HarmonyMethod(typeof(LoadProbe), nameof(TraceImpactAudio)));
         harmony.Patch(AccessTools.Method(typeof(AttackCommand), nameof(AttackCommand.Execute)), prefix: new HarmonyMethod(typeof(LoadProbe), nameof(TraceImpactCommand)));
         harmony.Patch(AccessTools.Method(typeof(RoleMotionEffects), nameof(RoleMotionEffects.AddFrame)), postfix: new HarmonyMethod(typeof(LoadProbe), nameof(InspectImpactFrame)));
         try
@@ -66,6 +65,7 @@ public partial class LoadProbe
             foreach (var sound in new[] { "blunt_attack.mp3", "slash_attack.mp3", "heavy_attack.mp3" })
                 await NativeAudioWitness("impact-baseline-" + sound, () => { NDebugAudioManager.Instance!.Play(sound); return Task.CompletedTask; });
             await NativeAudioWitness("impact-baseline-fire", () => { SfxCmd.Play("event:/sfx/characters/attack_fire"); return Task.CompletedTask; });
+            await NativeAudioWitness("impact-baseline-cannon", () => { SfxCmd.Play(DohnaDohna.Code.Patches.SquadCannonImpactPatch.HitSound); return Task.CompletedTask; });
             string[][] groups = [["kuma", "alyce", "antena", "tora"], ["kikuchiyo", "medhico", "joker", "zappa"], ["kirakira", "porno", "kuma", "alyce"]];
             var covered = new HashSet<string>();
             foreach (var group in groups)
@@ -99,7 +99,7 @@ public partial class LoadProbe
                         // Both common cards resolve to this current front. Auxiliary
                         // choices are native autoplay choices, not custom test effects.
                         string nativeScene = role switch {
-                            "antena" => "vfx_sweeping_beam_impact", "tora" when cue == "strike" => "vfx_fire_burst",
+                            "antena" => "vfx_fire_smoke_puff", "tora" when cue == "strike" => "vfx_fire_burst",
                             "joker" when cue == "special" => "vfx_fire_burst", "kirakira" when cue == "special" => "vfx_poison_impact",
                             "medhico" or "zappa" => "vfx_heavy_blunt", "porno" when cue == "special" => "vfx_heavy_blunt",
                             "kikuchiyo" or "porno" => "vfx_attack_slash", _ => "vfx_attack_blunt" };
@@ -128,6 +128,7 @@ public partial class LoadProbe
                         if (_impactCommand == null || seen.Count != targets.Length || ImpactAudio.Intersect(originalSounds).Any())
                             throw new Exception($"Ordinary impact policy {label}: command={_impactCommand != null}, nodes={seen.Count}/{targets.Length}, originalAudio={string.Join(',', ImpactAudio.Intersect(originalSounds))}");
                         string expectedSound = nativeScene switch { "vfx_attack_slash" => "slash_attack.mp3", "vfx_heavy_blunt" => "heavy_attack.mp3",
+                            "vfx_fire_smoke_puff" => DohnaDohna.Code.Patches.SquadCannonImpactPatch.HitSound,
                             "vfx_fire_burst" => "event:/sfx/characters/attack_fire", _ => "blunt_attack.mp3" };
                         if ((_impactCommand.HitSfx ?? _impactCommand.TmpHitSfx) != expectedSound) throw new Exception("Wrong native contact sound");
                         // Card logic now ends before the contact sound. Capture
@@ -137,15 +138,23 @@ public partial class LoadProbe
                         _impactObserving = false;
                         await ToSignal(GetTree().CreateTimer(2.5), SceneTreeTimer.SignalName.Timeout);
 
-                        // Short cinematic player does not independently spawn
-                        // contact or voice; real native clear-all is tested by Finisher.
+                        // Pure cinematic owns one regular attack utterance but
+                        // no extra native impact. Real clear-all uses Finisher.
                         _impactObserving = true; _originalImpactCount = 0; ImpactAudio.Clear(); _impactCommand = null;
                         AudioProbe.Mark(label + "-cinematic-begin");
                         await visuals.Play(cue, null, squad.Cancellation.Token, targets, cinematic: true);
                         if (ImpactAudio.Intersect(originalSounds).Any() || _impactCommand != null || _originalImpactCount != 0)
                             throw new Exception("Compact cinematic doubled contact feedback: " + label);
-                        if (ImpactAudio.Intersect(voices).Any())
-                            throw new Exception("Compact cinematic retained a long attack voice: " + label);
+                        var regularVoices = json.RootElement.GetProperty("motions").GetProperty("strike").GetProperty("frames")
+                            .EnumerateArray().Where(f => MotionTimeline.Enabled(f, "Voice", out _))
+                            .SelectMany(f => f.GetProperty("Voice").EnumerateObject())
+                            .Where(p => p.Name.StartsWith("Voice") && p.Value.ValueKind == JsonValueKind.String)
+                            .Select(p => p.Value.GetString()).Where(s => !string.IsNullOrEmpty(s)).ToArray();
+                        if (ImpactAudio.Count(s => regularVoices.Contains(s)) != 1)
+                            throw new Exception("Cinematic must play one regular attack utterance: " + label);
+                        while (visuals.IsPlaying || RoleFinisher.Current != null)
+                            await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+                        await ToSignal(GetTree().CreateTimer(.6), SceneTreeTimer.SignalName.Timeout);
                         AudioProbe.Mark(label + "-cinematic-end");
                         _impactObserving = false;
                         GD.Print($"DOHNA_SMOKE_IMPACT_CASE_PASS {label} nativeTargets={seen.Count} originalCinematicEffects={_originalImpactCount} originalSounds={originalSounds.Length}");

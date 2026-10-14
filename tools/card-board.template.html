@@ -2,58 +2,232 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DohnaDohna · 小队设计编辑板</title>
+<title>DohnaDohna · 固定槽位编辑板</title>
 <style>
-:root{color-scheme:dark;font:15px/1.55 "Segoe UI","Microsoft YaHei",sans-serif;background:#11161e;color:#e5eaf3}*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit;color:inherit}button,select{cursor:pointer}button{background:#293747;border:1px solid #485e77;padding:8px 14px;border-radius:8px}button:hover{background:#3a5069}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #74c5ff;outline-offset:2px}header{position:sticky;top:0;z-index:5;background:#141c27f5;border-bottom:1px solid #344152;backdrop-filter:blur(12px);padding:18px 28px;display:flex;gap:24px;align-items:center;flex-wrap:wrap}h1{font-size:21px;margin:0;letter-spacing:1px}header p{font-size:12px;color:#9fadc0;margin:3px 0}nav{display:flex;gap:8px;align-items:center;margin-left:auto}#save{background:#31786b;border-color:#54bba6}main{display:grid;grid-template-columns:200px 1fr;max-width:1800px;margin:auto}aside{padding:22px 16px;position:sticky;top:104px;align-self:start;max-height:calc(100vh - 110px);overflow:auto}aside button{display:block;width:100%;margin:0 0 7px;text-align:left;background:#192430;border-left:4px solid var(--accent,#657f9a);font-size:14px}aside button[aria-pressed=true]{background:#35485b}section{padding:22px 26px 60px 14px;min-width:0}.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:22px}input,textarea,select{border:1px solid #3b4b5c;background:#131c27;border-radius:5px;padding:6px 9px;width:100%}#search{min-width:240px;max-width:440px}.toolbar select{width:auto}#count,#status{font-size:12px;color:#a4b8c9}#status[data-dirty=true]{color:#ffd077}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(335px,1fr));gap:18px}.entry{position:relative;border:1px solid #3a4859;border-top:5px solid var(--accent);border-radius:10px;background:#202b3a;padding:16px;box-shadow:0 4px 16px #0002;min-width:0}.entry[data-mark=edit]{box-shadow:0 0 0 2px #f4c14b}.entry[data-mark=done]{box-shadow:0 0 0 2px #48b99d}.entry[data-mark=question]{box-shadow:0 0 0 2px #da84d7}.title{font-size:19px;font-weight:650;background:transparent;border:0;padding:0 0 5px;border-bottom:1px solid #53637a;width:100%}.meta{color:#9cacbf;font-size:11px;overflow-wrap:anywhere;margin:8px 0}.row{display:flex;gap:10px;align-items:end;margin:12px 0}.row label{flex:1;min-width:0}.row label.check{flex:0 0 auto;display:flex;align-items:center;gap:6px;padding-bottom:6px}.check input{width:auto}label{display:block;color:#acbecf;font-size:12px}textarea{resize:vertical;min-height:90px;margin-top:4px;line-height:1.6;color:#e3ebf5}textarea.notes{min-height:58px;color:#f0d18c}footer{display:flex;gap:7px;align-items:center;justify-content:space-between;margin-top:12px}footer button{padding:2px 9px}footer select{width:104px;padding:3px}.readonly{font:10px/1.4 monospace;color:#8f9eb0;margin-top:13px;overflow-wrap:anywhere}.legend{font-size:12px;color:#a5b7c7;padding:14px 2px}.empty{grid-column:1/-1;color:#acbecf;padding:50px;text-align:center}dialog{background:#223042;border:1px solid #57718c;border-radius:12px;max-width:650px;color:#e5eaf3;padding:26px}dialog::backdrop{background:#0009}dialog h2{margin-top:0}dialog p{line-height:1.8}.ghost{opacity:.5}@media(max-width:750px){header{padding:14px}main{grid-template-columns:1fr}aside{position:static;display:flex;gap:5px;padding:10px;overflow:auto}aside button{min-width:100px;width:auto;white-space:nowrap;margin:0}section{padding:14px}nav{margin-left:0}.grid{grid-template-columns:1fr}}
+:root{--slot-width:168px;--slot-height:235px;color-scheme:light;font:13px/1.4 "Segoe UI","Microsoft YaHei",sans-serif;color:#202934;background:#e9eef3}
+*{box-sizing:border-box}body{margin:0}button,input,textarea,select{font:inherit;color:inherit}button,select{cursor:pointer}
+button{border:1px solid #becad5;border-radius:4px;padding:5px 9px;background:#fff}button:hover{background:#e5eef8}button:disabled{opacity:.45;cursor:default}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[contenteditable]:focus-visible{outline:2px solid #2384ca;outline-offset:1px}
+input,textarea,select{min-width:0;border:1px solid #c3ced8;border-radius:3px;padding:5px;background:#fff}textarea{resize:vertical;line-height:1.5}
+header{position:sticky;top:0;z-index:20;background:#253442;color:#f3f6fa;border-bottom:1px solid #17212b;padding:8px 16px;box-shadow:0 2px 6px #15283820}
+.heading,.toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.heading{margin-bottom:7px}h1{font-size:16px;margin:0 12px 0 0;letter-spacing:.3px}
+#baseline{font-size:11px;color:#bac9d7}nav{display:flex;align-items:center;gap:6px;margin-left:auto}#status{font-size:11px;color:#bac9d7}#status[data-dirty=true]{color:#ffdc80}#save{background:#d5f1e9;border-color:#80b9a8}
+header button,header input,header select{color:#243544}
+.toolbar input{width:225px}.toolbar select{max-width:160px}.toolbar button{padding:4px 7px}#count{font-size:11px;color:#bac9d7}.notice{padding:9px 18px;color:#53677a;font-size:12px;margin:0}
+main{padding-bottom:40px}details.group{background:#f9fbfd;border-bottom:1px solid #c6d2df;scroll-margin-top:110px}
+details.group>summary{padding:9px 18px;background:#edf3f8;border-left:5px solid var(--accent);font-weight:700;font-size:14px;cursor:pointer;user-select:none}
+summary .count{font-weight:400;color:#607183;font-size:12px;margin-left:12px}.group-body{padding:8px 16px 14px}
+.layout-row{display:grid;grid-template-columns:86px minmax(0,1fr);gap:10px;margin:8px 0 14px}.row-label{font-size:12px;color:#566a7e;padding-top:5px}.row-label strong{display:block;margin-bottom:8px}.row-label button{padding:3px 5px;font-size:11px;display:block;margin-top:6px}
+.slot-scroll{overflow:auto;padding:4px;scrollbar-width:thin}.slots{display:grid;grid-template-columns:repeat(8,var(--slot-width));gap:7px;width:max-content}
+.slot{position:relative;width:var(--slot-width);height:var(--slot-height);border:1px dashed #becbd7;border-radius:5px;background:#f0f4f7}
+.slot.empty:after{content:'＋';display:grid;place-items:center;position:absolute;inset:0;color:#b9c6d2;font-size:22px;pointer-events:none}
+.slot.filtered:after{content:'已占用 · 不符合筛选';position:absolute;inset:0;display:grid;place-items:center;font-size:11px;color:#8a98a7;pointer-events:none}
+.slot.selected{outline:2px solid #2384ca;outline-offset:1px}.slot.nearest{outline:3px solid #efb331;outline-offset:1px;background:#fff6d9}
+.entry{--accent:#657f9a;position:relative;width:var(--slot-width);height:var(--slot-height);background:#fff;border:2px solid var(--accent);border-radius:5px;padding:7px;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:5px;box-shadow:0 1px 3px #25364916;overflow:hidden}
+.slot>.entry{position:absolute;inset:-1px}.entry[data-mark=edit]{background:#fff5d5}.entry[data-mark=question]{background:#f8eafa}.entry[data-mark=done]{background:#e5f5ec}.entry.dragging{opacity:.4}
+.card-header{display:grid;grid-template-columns:minmax(0,1fr) 18px;gap:2px;align-items:start}.title{font-size:15px;line-height:1.15;font-weight:700;overflow-wrap:anywhere;white-space:pre-wrap;min-height:18px;max-height:36px;overflow:auto}
+.drag-handle{border:0;background:none;padding:0;width:18px;height:21px;cursor:grab;font-size:17px;color:#6c7d8d;touch-action:none}.drag-handle:active{cursor:grabbing}
+.meta{font-size:10px;color:#607183;line-height:1.25;display:flex;gap:3px;align-items:center;flex-wrap:wrap}.cost{width:44px;padding:1px 2px;font-size:12px;font-weight:700;border-color:#dbe2ea}.meta .owner{color:#30475b}.melee{display:inline-flex;align-items:center;gap:1px;white-space:nowrap}.melee input{margin:0;width:11px;height:11px}
+.card-type{font-size:11px;padding:1px 2px;max-width:58px}.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.description{font-size:13px;line-height:1.4;white-space:pre-wrap;overflow-wrap:anywhere;overflow-y:auto;min-height:0;scrollbar-width:thin}.description[contenteditable]:empty:before{content:'填写设计文案…';color:#9aa8b5}
+.card-footer{display:flex;gap:3px;align-items:center;justify-content:space-between;border-top:1px solid #e3e9ef;padding-top:4px}.card-footer button,.card-footer select{font-size:10px;padding:1px 3px}.card-footer select{width:69px}.card-footer .has-note{background:#ffe3a0}
+.support{margin:10px 0}.support>summary{font-size:12px;color:#61758b;cursor:pointer}.support-grid{display:flex;flex-wrap:wrap;gap:7px;padding:9px 4px}.role-fields{display:grid;gap:8px;align-content:start}.role-fields label{display:flex;gap:5px;align-items:center}.role-fields input{width:74px}
+dialog{width:min(700px,calc(100vw - 30px));max-height:85vh;overflow:auto;border:1px solid #90a9bf;border-radius:10px;padding:22px;background:#f8fbfe;color:#243544}dialog::backdrop{background:#15212e99}dialog h2{margin:0 0 12px;font-size:18px}dialog p{line-height:1.7}.dialog-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}.dialog-fields{display:grid;gap:10px}dialog label{display:grid;gap:4px;font-size:12px;color:#566b80}dialog input,dialog textarea,dialog select{width:100%;color:#202d39}dialog textarea{min-height:90px}#detail-description{min-height:175px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.5 monospace}.identity{font:11px/1.5 monospace;overflow-wrap:anywhere;color:#63758a}.primary{background:#d6e9fa}[hidden]{display:none!important}
+@media(max-width:1540px){:root{--slot-width:154px;--slot-height:216px}.title{font-size:14px}.description{font-size:12px}}
 </style>
 </head>
 <body>
-<header><div><h1>DOHNA DOHNA <span style="font-weight:300;color:#b8d0e3">/ 小队设计编辑板</span></h1><p id="baseline"></p></div><nav><span id="status">未修改</span><button id="help">使用说明</button><button id="add">＋ 新卡草案</button><button id="save">保存 HTML</button></nav></header>
-<main><aside id="groups" aria-label="角色分组"></aside><section><div class="toolbar"><input id="search" aria-label="搜索" placeholder="搜索名称、正文、原型或模型 ID"><select id="kind" aria-label="条目类型"><option value="">所有内容</option><option value="card">卡牌</option><option value="role">生命与配色</option><option value="relic">初始／强化遗物</option><option value="effect">协同攻击附效</option><option value="power">原生能力说明</option></select><select id="marked" aria-label="标记过滤"><option value="">全部标记</option><option value="edit">待修改</option><option value="question">待讨论</option><option value="done">已确认</option></select><span id="count"></span></div><div id="entries" class="grid"></div><p class="legend">黄色：待修改　紫色：待讨论　绿色：已确认。拖动卡片上沿或使用 ↑ ↓ 调整顺序；归属改动不会改变稳定 ID。</p></section></main>
-<dialog id="help-dialog"><h2>离线编辑 · 保存后交回</h2><p>直接修改名称、费用、基础／升级文案、归属、近战标记、生命、配色与备注。原生关键词标记可保留在文案中。数字与描述来自实际游戏模型导出，不是平衡建议。</p><p>“保存 HTML”将全部改动写入一个独立文件；重新打开即可继续编辑。此页面不联网，也不自动改游戏。离开前请保存，不依赖浏览器缓存。</p><p>交回时会按稳定 ID 和基线校验值逐字段比较，包括新增和删除，不执行返回文件中的脚本。文本改动只是设计要求，仍需落实源码、三语与测试。</p><p>公共、基础及先古卡请在“公共 / 基础”中查看。角色专属遗物各有基础和强化两条；触发次数不因数值翻倍而增加。</p><button id="close-help">知道了</button></dialog>
+<header><div class="heading"><h1>DOHNA DOHNA / 固定槽位编辑板</h1><span id="baseline"></span><nav><span id="status">未修改</span><button id="help">说明</button><button id="import">导入旧板</button><button id="save">保存 HTML</button></nav></div>
+<div class="toolbar"><input id="search" aria-label="搜索" placeholder="搜索名称、正文、备注、模型 ID"><select id="jump" aria-label="跳转角色"></select><select id="kind" aria-label="条目类型"><option value="">所有内容</option><option value="card">卡牌</option><option value="role">生命与配色</option><option value="relic">初始／强化遗物</option><option value="effect">协同攻击附效</option><option value="power">原生能力说明</option></select><select id="marked" aria-label="标记过滤"><option value="">全部标记</option><option value="edit">待修改</option><option value="question">待讨论</option><option value="done">已确认</option></select><button id="expand">展开分区</button><button id="collapse">折叠分区</button><button id="add">＋ 新卡</button><button id="add-row">＋ 分区</button><button id="delete-slot" disabled>删除空槽</button><span id="count"></span></div></header>
+<p class="notice">直接编辑卡面；费用旁可选攻击／技能／能力。⠿ 拖到空槽移动、已有卡互换。跨分区会改变归属／稀有度，不改类别。黄色待修改 · 紫色待讨论 · 绿色已确认。</p>
+<main id="board"></main><input id="import-file" type="file" accept=".html" hidden>
+<dialog id="help-dialog"><h2>紧凑卡面 · 离线编辑</h2><p>正文使用“6→9”合并基础／升级数值，非数字变化注明“升级后”。可直接修改名称、费用、正文；“详情”可展开正文、修改备注和归属，并核对原始两份文案。</p><p>拖动 ⠿ 到空槽即移动，到已有卡即互换。跨分区会同步修改归属和稀有度，不修改近战标记、类型、模型 ID 或原型来源。筛选隐藏的卡仍占用原槽，不可覆盖。选择空槽可新建草案或删除空槽。</p><p>保存 HTML 后可直接重开、继续编辑和交回。“导入旧板”只读取内嵌数据，不执行文件脚本；必须使用相同基线。页面不联网、不修改游戏、不依赖浏览器缓存，请离开前保存。</p><p>合并正文属于设计要求，不会自动反解析成游戏数值。回交工具分别报告卡牌字段与槽位布局变化。</p><button id="close-help">知道了</button></dialog>
+<dialog id="detail-dialog"><h2 id="detail-title"></h2><form id="detail-form"><div class="dialog-fields"><label>名称<input id="detail-name" required></label><div class="three" id="detail-card-fields"><label>归属<select id="detail-role"></select></label><label>稀有度<select id="detail-rarity"></select></label><label>卡牌类别<select id="detail-type"></select></label></div><label id="detail-description-label">合并设计文案<textarea id="detail-description"></textarea></label><label>设计备注<textarea id="detail-notes"></textarea></label><div id="detail-identity" class="identity"></div><details><summary>原始基础／升级文案（仅供核对，保留旧板修改）</summary><pre id="detail-original"></pre></details></div><div class="dialog-actions"><button type="button" id="delete-entry">删除条目</button><button type="button" id="cancel-detail">取消</button><button type="submit" class="primary">应用</button></div></form></dialog>
+<template id="timing-fields"><div class="two" id="detail-timing"><label>攻击前摇<select id="detail-attackWindup"></select></label><label>施放前摇<select id="detail-castWindup"></select></label><label title="仅在安缇娜实际执行攻击时生效，不改变伤害和结算等待">飞碟发射样式<select id="detail-saucerShot"></select></label></div></template>
+<dialog id="row-dialog"><h2>新增卡牌分区</h2><form id="row-form"><div class="two"><label>归属<select id="row-role"></select></label><label>稀有度<select id="row-rarity"></select></label></div><p>新增8个空槽。拖入的卡牌按本分区修改归属和稀有度。</p><div class="dialog-actions"><button type="button" id="cancel-row">取消</button><button type="submit" class="primary">新增</button></div></form></dialog>
 <script id="dohna-board-data" type="application/json">__DOHNA_DATA__</script>
 <script>
 'use strict';
-const dataNode=document.getElementById('dohna-board-data'), data=JSON.parse(dataNode.textContent);
-const $=id=>document.getElementById(id), kinds={card:'卡牌',role:'角色',relic:'初始遗物',effect:'附效',power:'能力说明'};
-const rarities={Basic:'基础',Common:'普通',Uncommon:'罕见',Rare:'稀有',Ancient:'先古',Token:'临时选项',Starter:'初始'};
-let active='all',dirty=false,dragged=null;
+__DOHNA_MODEL__
+const $=id=>document.getElementById(id);
+let data=normalizeBoard(JSON.parse($('dohna-board-data').textContent));
+const kinds={card:'卡牌',role:'角色',relic:'遗物',effect:'附效',power:'能力说明'};
+let dirty=false,selectedSlot=null,dragged=null,nearest=null,scrollFrame=null,pointer={x:0,y:0},detailId=null;
+if(!document.getElementById('detail-timing')) document.getElementById('detail-card-fields').after(document.getElementById('timing-fields').content.cloneNode(true));
+const closedGroups=new Set(),openSupport=new Set();
 const roles=()=>data.entries.filter(e=>e.kind==='role');
+const roleName=id=>roles().find(e=>e.role===id)?.name ?? '公共';
 const colorFor=e=>e.color || roles().find(r=>r.role===e.role)?.color || '#657F9A';
-function changed(){dirty=true;$('status').textContent='有未保存改动';$('status').dataset.dirty='true';}
-function el(tag,attrs={},text){const n=document.createElement(tag);for(const[k,v]of Object.entries(attrs)){if(k==='class')n.className=v;else n.setAttribute(k,String(v));}if(text!==undefined)n.textContent=text;return n;}
-function input(entry,key,label,type='text'){const l=el('label',{},label),i=el('input',{type,'data-field':key,'aria-label':label});i.value=entry[key]??'';i.addEventListener('input',()=>{entry[key]=type==='number'?Number(i.value):i.value;changed();if(key==='color')i.closest('.entry').style.setProperty('--accent',i.value);});l.append(i);return l;}
-function area(entry,key,label){const l=el('label',{},label),i=el('textarea',{'data-field':key,'aria-label':label,class:key==='notes'?'notes':''});i.value=entry[key]??'';i.addEventListener('input',()=>{entry[key]=i.value;changed();});l.append(i);return l;}
-function roleSelect(e){const l=el('label',{},'归属'),s=el('select',{'data-field':'role','aria-label':'归属'});s.append(el('option',{value:''},'公共 / 基础'));for(const r of roles())s.append(el('option',{value:r.role},r.name));s.value=e.role;s.addEventListener('change',()=>{e.role=s.value;changed();render();});l.append(s);return l;}
-function move(e,delta){const list=visible(),i=list.indexOf(e),next=list[i+delta];if(!next)return;[e.order,next.order]=[next.order,e.order];changed();render();}
-function visible(){const query=$('search').value.trim().toLowerCase();return data.entries.filter(e=>(active==='all'||(active==='common'?!e.role:e.role===active))&&(!$('kind').value||e.kind===$('kind').value)&&(!$('marked').value||e.mark===$('marked').value)&&(!query||[e.name,e.text,e.upgradedText,e.notes,e.id,e.source].join(' ').toLowerCase().includes(query))).sort((a,b)=>a.order-b.order);}
-function render(){
-  const groups=$('groups');groups.replaceChildren();
-  for(const r of [{role:'all',name:'全部内容',color:'#d3e1ee'},{role:'common',name:'公共 / 基础',color:'#657F9A'},...roles()]){const b=el('button',{'aria-pressed':active===r.role},r.name);b.style.setProperty('--accent',r.color);b.onclick=()=>{active=r.role;render();};groups.append(b);}
-  const container=$('entries');container.replaceChildren();const list=visible();$('count').textContent=list.length+' 条 / 共 '+data.entries.length+' 条';
-  for(const e of list){
-    const card=el('article',{class:'entry','data-id':e.id,'data-mark':e.mark,draggable:true});card.style.setProperty('--accent',colorFor(e));
-    const title=el('input',{class:'title','data-field':'name','aria-label':'名称'});title.value=e.name;title.oninput=()=>{e.name=title.value;changed();};card.append(title);
-    card.append(el('div',{class:'meta'},[kinds[e.kind],rarities[e.rarity]??'',e.type??'',e.source].filter(Boolean).join(' · ')));
-    const row=el('div',{class:'row'});
-    if(e.kind==='role'){row.append(input(e,'hp','初始生命','number'),input(e,'color','专属色','color'));}
-    else if(e.kind==='card'){row.append(input(e,'cost','费用'),input(e,'upgradedCost','升级费用'),roleSelect(e));const l=el('label',{class:'check'},'近战'),check=el('input',{type:'checkbox','data-field':'melee'});check.checked=e.melee;check.onchange=()=>{e.melee=check.checked;changed();};l.prepend(check);row.append(l);}
-    if(row.childNodes.length)card.append(row);
-    if(e.kind!=='role'){card.append(area(e,'text',e.kind==='card'||e.kind==='effect'?'基础文案':'效果说明'));if(e.kind==='card'||e.kind==='effect')card.append(area(e,'upgradedText','普通升级文案'));}
-    card.append(area(e,'notes','设计备注'));
-    const foot=el('footer'),mark=el('select',{'data-field':'mark','aria-label':'标记'});for(const[value,label]of [['','未标记'],['edit','待修改'],['question','待讨论'],['done','已确认']])mark.append(el('option',{value},label));mark.value=e.mark;mark.onchange=()=>{e.mark=mark.value;card.dataset.mark=e.mark;changed();};foot.append(mark);
-    const buttons=el('div');for(const [label,delta]of [['↑',-1],['↓',1]]){const b=el('button',{'aria-label':delta<0?'上移':'下移'},label);b.onclick=()=>move(e,delta);buttons.append(b);}const del=el('button',{'aria-label':'删除条目'},'删除');del.onclick=()=>{if(confirm('删除“'+e.name+'”？保存交回后会作为删除请求。')){data.entries=data.entries.filter(x=>x!==e);changed();render();}};buttons.append(del);foot.append(buttons);card.append(foot,el('div',{class:'readonly'},e.id));
-    card.ondragstart=event=>{if(event.target.closest('input,textarea,select,button')){event.preventDefault();return;}dragged=e;event.dataTransfer.setData('text/plain',e.id);card.classList.add('ghost');};card.ondragend=()=>card.classList.remove('ghost');card.ondragover=event=>event.preventDefault();card.ondrop=event=>{event.preventDefault();if(!dragged||dragged===e)return;const all=[...data.entries].sort((a,b)=>a.order-b.order).filter(x=>x!==dragged);all.splice(all.indexOf(e),0,dragged);all.forEach((x,i)=>x.order=i);dragged=null;changed();render();};container.append(card);
-  }
-  if(!list.length)container.append(el('div',{class:'empty'},'此分组没有符合条件的条目。'));
+const entryById=id=>data.entries.find(e=>e.id===id);
+const groups=()=>[{role:'',name:'公共 / 基础'},...roles()];
+const el=(tag,attrs={},text)=>{const n=document.createElement(tag);for(const[k,v]of Object.entries(attrs))n.setAttribute(k,String(v));if(text!==undefined)n.textContent=text;return n;};
+function changed(message='有未保存改动'){dirty=true;$('status').textContent=message;$('status').dataset.dirty='true';}
+function locateSlot(id){for(const row of data.layout){const slot=row.slots.find(s=>s.id===id);if(slot)return {row,slot};}return null;}
+function locateEntry(id){for(const row of data.layout){const slot=row.slots.find(s=>s.entryId===id);if(slot)return {row,slot};}return null;}
+function editable(tag,key,value,update,cls='') {
+  const n=el(tag,{class:cls,contenteditable:'plaintext-only','data-field':key,'aria-label':{name:'名称',designText:'合并设计文案'}[key]??key,role:'textbox',spellcheck:false},value);
+  n.oninput=()=>{update(n.innerText.replace(/\r/g,''));changed();};
+  if(key==='name')n.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();n.blur();}};
+  return n;
 }
-function buildEditedHtml(){const clone=document.documentElement.cloneNode(true);clone.querySelector('#dohna-board-data').textContent=JSON.stringify(data).replaceAll('<','\\u003c');clone.querySelector('#entries').replaceChildren();clone.querySelector('#groups').replaceChildren();clone.querySelector('#help-dialog').removeAttribute('open');return '<!doctype html>\n'+clone.outerHTML;}
-function download(html){const a=document.createElement('a'),url=URL.createObjectURL(new Blob([html],{type:'text/html;charset=utf-8'}));a.href=url;a.download='DohnaDohna-card-board-edited.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-$('save').onclick=async()=>{try{const html=buildEditedHtml();if(window.showSaveFilePicker){const h=await showSaveFilePicker({suggestedName:'DohnaDohna-card-board-edited.html',types:[{description:'HTML 编辑板',accept:{'text/html':['.html']}}]});const writable=await h.createWritable();await writable.write(html);await writable.close();}else download(html);dirty=false;$('status').textContent='已保存 HTML';$('status').dataset.dirty='false';}catch(e){if(e.name!=='AbortError')alert('保存失败：'+e.message);}};
-$('add').onclick=()=>{const role=['all','common'].includes(active)?'':active;data.entries.push({id:'DRAFT.'+crypto.randomUUID(),kind:'card',name:'新卡草案',cost:'1',upgradedCost:'1',role,melee:false,text:'',upgradedText:'',notes:'',mark:'edit',order:Math.max(...data.entries.map(e=>e.order))+1,rarity:'Uncommon',type:'Skill',source:'用户新建草案'});$('search').value='';$('kind').value='card';$('marked').value='';changed();render();};
+function makeCard(e) {
+  const card=el('article',{class:'entry','data-id':e.id,'data-mark':e.mark??''});card.style.setProperty('--accent',colorFor(e));
+  const head=el('div',{class:'card-header'});head.append(editable('div','name',e.name,v=>e.name=v,'title'));
+  if(e.kind==='card') {
+    const handle=el('button',{class:'drag-handle',draggable:true,title:'拖到空槽移动，已有卡互换','aria-label':'拖动卡牌'},'⠿');
+    handle.ondragstart=event=>{dragged=e.id;card.classList.add('dragging');event.dataTransfer.effectAllowed='move';event.dataTransfer.setData('text/plain',e.id);};
+    handle.ondragend=stopDrag;head.append(handle);
+  }
+  const meta=el('div',{class:'meta'});
+  if(e.kind==='card') {
+    const cost=el('input',{class:'cost','aria-label':'费用（基础→升级）','data-field':'cost',title:'基础→升级，例如 1→0'});cost.value=costFor(e);
+    cost.oninput=()=>{try{const next=readCost(cost.value);for(const k of ['cost','upgradedCost'])if(String(e[k])!==String(next[k]))e[k]=next[k];cost.setCustomValidity('');changed();}catch(error){cost.setCustomValidity(error.message);}};
+    cost.onblur=()=>{if(!cost.checkValidity()){cost.reportValidity();cost.value=costFor(e);cost.setCustomValidity('');}};
+    const type=el('select',{class:'card-type','data-field':'type','aria-label':'卡牌类别',title:'自主选择攻击／技能／能力'});fillTypeOptions(type);type.value=e.type;
+    type.onchange=()=>{e.type=type.value;changed();};
+    meta.append(cost,el('span',{},'费'),type,el('span',{class:'owner'},roleName(e.role)+' · '+boardRarities[e.rarity]));
+    const label=el('label',{class:'melee',title:'突前：打出时所属角色移至最前方；代打不触发。原近战标记，规则不变。'}),box=el('input',{type:'checkbox','data-field':'melee','aria-label':'突前'});box.checked=e.melee;box.onchange=()=>{e.melee=box.checked;changed();};label.append(box,'突前');meta.append(label);
+    if(e.attackWindup!=='Automatic'||e.castWindup!=='Automatic')meta.append(el('span',{title:'在详情中修改动作前摇'},`攻 ${attackWindups[e.attackWindup??'Automatic']} · 施 ${castWindups[e.castWindup??'Automatic']}`));
+  } else meta.append(el('span',{},roleName(e.role)+' · '+kinds[e.kind]));
+  let body;
+  if(e.kind==='role') {
+    body=el('div',{class:'role-fields'});
+    for(const [key,label,type]of [['hp','初始生命','number'],['color','专属色','color']]) {
+      const l=el('label',{},label),i=el('input',{type,'data-field':key,'aria-label':label});i.value=e[key];
+      i.oninput=()=>{e[key]=type==='number'?Number(i.value):i.value;changed();};if(key==='color')i.onchange=render;l.append(i);body.append(l);
+    }
+  } else body=editable('div','designText',descriptionFor(e),v=>e.designText=v,'description');
+  const foot=el('div',{class:'card-footer'}),mark=el('select',{'data-field':'mark','aria-label':'标记'});
+  for(const[value,label]of [['','未标记'],['edit','待修改'],['question','待讨论'],['done','已确认']])mark.append(el('option',{value},label));
+  mark.value=e.mark??'';mark.onchange=()=>{e.mark=mark.value;card.dataset.mark=e.mark;changed();};
+  const detail=el('button',{class:e.notes?'has-note':'','aria-label':'详情与备注'},e.notes?'详情 · 备注':'详情');detail.onclick=()=>openDetail(e.id);
+  foot.append(mark,detail);card.append(head,meta,body,foot);return card;
+}
+function matches(e) {
+  const q=$('search').value.trim().toLowerCase();
+  return (!$('kind').value || $('kind').value===e.kind) && (!$('marked').value || $('marked').value===e.mark)
+    && (!q || [e.name,e.text,e.upgradedText,descriptionFor(e),e.notes,e.id,e.source,roleName(e.role)].join(' ').toLowerCase().includes(q));
+}
+function selectSlot(id) {
+  selectedSlot=id;for(const n of document.querySelectorAll('.slot.selected'))n.classList.remove('selected');
+  document.querySelector(`[data-slot-id="${id}"]`)?.classList.add('selected');
+  const found=locateSlot(id);$('delete-slot').disabled=!found || found.slot.entryId!==null;
+}
+function render() {
+  stopDrag();const board=$('board');board.replaceChildren();let count=0;
+  $('jump').replaceChildren(el('option',{value:'-'},'跳转公共 / 角色…'));
+  const filtering=Boolean($('search').value.trim()||$('kind').value||$('marked').value);
+  for(const g of groups()) {
+    const key=g.role||'common',members=data.entries.filter(e=>e.role===g.role),matched=members.filter(matches);
+    $('jump').append(el('option',{value:key},g.name));
+    const group=el('details',{class:'group','data-group':key});group.style.setProperty('--accent',colorFor(g));group.open=!closedGroups.has(key);group.hidden=filtering && !matched.length;
+    group.ontoggle=()=>{if(group.open)closedGroups.delete(key);else closedGroups.add(key);};
+    const summary=el('summary',{},g.name);summary.append(el('span',{class:'count'},`${members.filter(e=>e.kind==='card').length} 张卡 · ${matched.length} 条匹配`));group.append(summary);
+    const body=el('div',{class:'group-body'});
+    for(const row of data.layout.filter(r=>r.role===g.role)) {
+      const line=el('div',{class:'layout-row','data-row-id':row.id}),label=el('div',{class:'row-label'});label.append(el('strong',{},boardRarities[row.rarity]));
+      const add=el('button',{'aria-label':'新增空槽'},'＋ 空槽');add.onclick=()=>{row.slots.push({id:'slot.'+crypto.randomUUID(),entryId:null});changed();render();};label.append(add);line.append(label);
+      const scroll=el('div',{class:'slot-scroll'}),grid=el('div',{class:'slots'});
+      for(const slot of row.slots) {
+        const e=slot.entryId===null?null:entryById(slot.entryId),filtered=e && !matches(e);
+        const n=el('div',{class:'slot'+(!e?' empty':'')+(filtered?' filtered':''),'data-slot-id':slot.id,tabindex:0,'aria-label':`${g.name} ${boardRarities[row.rarity]} ${e?filtered?'已占用（筛选隐藏）':e.name:'空槽'}`});
+        if(e){const card=makeCard(e);card.hidden=Boolean(filtered);n.append(card);if(!filtered)count++;}
+        n.onclick=()=>selectSlot(slot.id);n.onkeydown=event=>{if(event.target===n && event.key==='Enter')selectSlot(slot.id);};grid.append(n);
+      }
+      scroll.append(grid);line.append(scroll);body.append(line);
+    }
+    const supportEntries=members.filter(e=>e.kind!=='card');
+    if(supportEntries.length) {
+      const support=el('details',{class:'support'});support.open=openSupport.has(key)||Boolean(filtering&&matched.some(e=>e.kind!=='card'));
+      support.ontoggle=()=>{if(support.open)openSupport.add(key);else openSupport.delete(key);};
+      support.append(el('summary',{},`生命 · 遗物 · 附效 · 能力说明（${supportEntries.length}）`));const grid=el('div',{class:'support-grid'});
+      for(const e of supportEntries){const n=makeCard(e);n.hidden=!matches(e);grid.append(n);if(!n.hidden)count++;}support.append(grid);body.append(support);
+    }
+    group.append(body);board.append(group);
+  }
+  $('count').textContent=`${count} / ${data.entries.length} 条`;selectSlot(selectedSlot);$('baseline').textContent='基线 '+data.baselineHash.slice(0,12);
+}
+function newRow(role,rarity) {
+  const id='row.'+crypto.randomUUID(),row={id,role,rarity,slots:Array.from({length:8},(_,i)=>({id:`${id}.${i+1}`,entryId:null}))};data.layout.push(row);return row;
+}
+function putInGroup(e,role,rarity) {
+  if(e.role===role && e.rarity===rarity)return;const old=locateEntry(e.id);if(old)old.slot.entryId=null;
+  let row=data.layout.find(r=>r.role===role && r.rarity===rarity && r.slots.some(s=>s.entryId===null));
+  row??=newRow(role,rarity);row.slots.find(s=>s.entryId===null).entryId=e.id;e.role=role;e.rarity=rarity;
+}
+function swapOrMove(id,slotId) {
+  const source=locateEntry(id),target=locateSlot(slotId);if(!source||!target||source.slot===target.slot)return;
+  const e=entryById(id),other=target.slot.entryId?entryById(target.slot.entryId):null;if(other && !matches(other))return;
+  source.slot.entryId=other?.id??null;target.slot.entryId=e.id;e.role=target.row.role;e.rarity=target.row.rarity;
+  if(other){other.role=source.row.role;other.rarity=source.row.rarity;}
+  validateBoard(data);selectedSlot=slotId;changed('已移动 · 请保存');render();
+}
+function highlight(slot) {if(nearest===slot)return;nearest?.classList.remove('nearest');nearest=slot;nearest?.classList.add('nearest');}
+function nearestSlot(x,y) {
+  const hit=document.elementFromPoint(x,y),container=hit?.closest('.slot-scroll');if(!container)return null;
+  if(hit.closest('.slot')?.classList.contains('filtered'))return null;
+  let candidate=null,distance=Infinity;
+  for(const n of container.querySelectorAll('.slot:not(.filtered)')) {const r=n.getBoundingClientRect(),d=(x-r.left-r.width/2)**2+(y-r.top-r.height/2)**2;if(d<distance){candidate=n;distance=d;}}
+  return candidate;
+}
+function autoScroll() {
+  scrollFrame=null;if(!dragged)return;const top=document.querySelector('header').getBoundingClientRect().bottom,edge=65;
+  const dy=pointer.y<top+edge?-Math.min(22,(top+edge-pointer.y)/3):pointer.y>innerHeight-edge?Math.min(22,(pointer.y-innerHeight+edge)/3):0;if(dy)window.scrollBy(0,dy);
+  const scroll=document.elementFromPoint(pointer.x,pointer.y)?.closest('.slot-scroll');
+  if(scroll){const r=scroll.getBoundingClientRect(),dx=pointer.x<r.left+edge?-15:pointer.x>r.right-edge?15:0;if(dx)scroll.scrollLeft+=dx;}
+  highlight(nearestSlot(pointer.x,pointer.y));scrollFrame=requestAnimationFrame(autoScroll);
+}
+function stopDrag() {if(scrollFrame)cancelAnimationFrame(scrollFrame);scrollFrame=null;dragged=null;highlight(null);for(const n of document.querySelectorAll('.dragging'))n.classList.remove('dragging');}
+$('board').ondragover=event=>{if(!dragged)return;event.preventDefault();event.dataTransfer.dropEffect='move';pointer={x:event.clientX,y:event.clientY};highlight(nearestSlot(pointer.x,pointer.y));if(!scrollFrame)scrollFrame=requestAnimationFrame(autoScroll);};
+$('board').ondrop=event=>{if(!dragged)return;event.preventDefault();const id=dragged,slot=nearestSlot(event.clientX,event.clientY);stopDrag();if(slot)swapOrMove(id,slot.dataset.slotId);};
+window.addEventListener('dragend',stopDrag);window.addEventListener('blur',stopDrag);
+function fillRoleOptions(select) {select.replaceChildren();for(const g of groups())select.append(el('option',{value:g.role},g.name));}
+function fillRarityOptions(select) {select.replaceChildren();for(const[value,label]of Object.entries(boardRarities))select.append(el('option',{value},label));}
+function fillTypeOptions(select) {select.replaceChildren();for(const[value,label]of Object.entries(boardCardTypes))select.append(el('option',{value},label));}
+function openDetail(id) {
+  const e=entryById(id);detailId=id;$('detail-title').textContent=e.name;$('detail-name').value=e.name;
+  $('detail-description').value=descriptionFor(e);$('detail-description-label').hidden=e.kind==='role';$('detail-notes').value=e.notes??'';
+  $('detail-card-fields').hidden=e.kind!=='card';fillRoleOptions($('detail-role'));fillRarityOptions($('detail-rarity'));$('detail-role').value=e.role;$('detail-rarity').value=e.rarity;
+  fillTypeOptions($('detail-type'));$('detail-type').value=e.type??'';
+  $('detail-timing').hidden=e.kind!=='card';
+  for(const [key,options] of [['attackWindup',attackWindups],['castWindup',castWindups],['saucerShot',saucerShots]]) {
+    const select=$('detail-'+key);select.replaceChildren();for(const[value,label]of Object.entries(options))select.append(el('option',{value},label));select.value=e[key]??'Automatic';
+  }
+  $('detail-identity').textContent=e.id+'\n'+(e.source??'');$('detail-original').textContent=`费用：${costFor(e)}\n基础：\n${e.text??'—'}\n\n升级：\n${e.upgradedText??'—'}`;
+  $('delete-entry').disabled=e.kind==='role';$('delete-entry').title=e.kind==='role'?'角色身份被其他条目引用，不可在编辑板删除':'';$('detail-dialog').showModal();
+}
+$('detail-form').onsubmit=event=>{event.preventDefault();const e=entryById(detailId);e.name=$('detail-name').value;e.notes=$('detail-notes').value;
+  if(e.kind!=='role' && $('detail-description').value!==descriptionFor(e))e.designText=$('detail-description').value;
+  if(e.kind==='card'){putInGroup(e,$('detail-role').value,$('detail-rarity').value);e.type=$('detail-type').value;
+    for(const key of ['attackWindup','castWindup','saucerShot'])e[key]=$('detail-'+key).value;}
+  validateBoard(data);changed();$('detail-dialog').close();render();};
+$('cancel-detail').onclick=()=>$('detail-dialog').close();
+$('delete-entry').onclick=()=>{const e=entryById(detailId);if(!confirm(`删除“${e.name}”？回交时会列为删除请求。`))return;
+  const place=locateEntry(e.id);if(place)place.slot.entryId=null;data.entries=data.entries.filter(x=>x.id!==e.id);changed();$('detail-dialog').close();render();};
+$('add-row').onclick=()=>{fillRoleOptions($('row-role'));fillRarityOptions($('row-rarity'));const target=locateSlot(selectedSlot);$('row-role').value=target?.row.role??'';$('row-rarity').value=target?.row.rarity??'Common';$('row-dialog').showModal();};
+$('cancel-row').onclick=()=>$('row-dialog').close();
+$('row-form').onsubmit=event=>{event.preventDefault();const row=newRow($('row-role').value,$('row-rarity').value);closedGroups.delete(row.role||'common');selectedSlot=row.slots[0].id;changed();$('row-dialog').close();render();document.querySelector(`[data-row-id="${row.id}"]`).scrollIntoView({block:'center'});};
+$('delete-slot').onclick=()=>{const found=locateSlot(selectedSlot);if(!found||found.slot.entryId!==null)return;found.row.slots=found.row.slots.filter(s=>s!==found.slot);selectedSlot=null;changed();render();};
+$('add').onclick=()=>{let target=locateSlot(selectedSlot);if(!target || target.slot.entryId!==null){const row=newRow(target?.row.role??'',target?.row.rarity??'Common');target={row,slot:row.slots[0]};}
+  const e={id:'DRAFT.'+crypto.randomUUID(),kind:'card',name:'新卡草案',cost:1,upgradedCost:1,role:target.row.role,melee:false,text:'',upgradedText:'',notes:'',mark:'edit',order:Math.max(-1,...data.entries.map(e=>e.order))+1,rarity:target.row.rarity,type:'Skill',source:'用户新建草案'};
+  data.entries.push(e);target.slot.entryId=e.id;selectedSlot=target.slot.id;for(const id of ['search','kind','marked'])$(id).value='';closedGroups.delete(e.role||'common');changed();render();document.querySelector(`[data-id="${e.id}"]`).scrollIntoView({block:'center'});};
 for(const id of ['search','kind','marked'])$(id).addEventListener('input',render);
+$('jump').onchange=()=>{const n=document.querySelector(`[data-group="${$('jump').value}"]`);if(n){n.hidden=false;n.open=true;n.scrollIntoView({block:'start'});}};
+$('expand').onclick=()=>{closedGroups.clear();render();};$('collapse').onclick=()=>{for(const g of groups())closedGroups.add(g.role||'common');render();};
 $('help').onclick=()=>$('help-dialog').showModal();$('close-help').onclick=()=>$('help-dialog').close();
-$('baseline').textContent=data.label+' · 基线 '+data.baselineHash.slice(0,12);
+function buildEditedHtml() {
+  validateBoard(data);const clone=document.documentElement.cloneNode(true);clone.querySelector('#dohna-board-data').textContent=JSON.stringify(data).replaceAll('<','\\u003c');
+  clone.querySelector('#board').replaceChildren();for(const dialog of clone.querySelectorAll('dialog'))dialog.removeAttribute('open');return '<!doctype html>\n'+clone.outerHTML;
+}
+function download(html) {const a=document.createElement('a'),url=URL.createObjectURL(new Blob([html],{type:'text/html;charset=utf-8'}));a.href=url;a.download='DohnaDohna-card-board-edited.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+$('save').onclick=async()=>{try{const html=buildEditedHtml();if(window.showSaveFilePicker){const h=await showSaveFilePicker({suggestedName:'DohnaDohna-card-board-edited.html',types:[{description:'HTML 编辑板',accept:{'text/html':['.html']}}]});const writable=await h.createWritable();await writable.write(html);await writable.close();}else download(html);dirty=false;$('status').textContent='已保存 HTML';$('status').dataset.dirty='false';}catch(e){if(e.name!=='AbortError')alert('保存失败：'+e.message);}};
+$('import').onclick=()=>$('import-file').click();
+$('import-file').onchange=async()=>{try{const file=$('import-file').files[0];if(!file)return;if(file.size>=8000000)throw new Error('文件超过8MB。');
+  const html=await file.text(),blocks=[...html.matchAll(/<script\s+id="dohna-board-data"\s+type="application\/json"\s*>([\s\S]*?)<\/script\s*>/gi)];
+  if(blocks.length!==1)throw new Error('需要恰好一个 DohnaDohna 数据块。');const next=normalizeBoard(JSON.parse(blocks[0][1]));
+  if(next.baselineHash!==data.baselineHash)throw new Error('基线不一致，请使用与旧板配套的版本。');if(dirty&&!confirm('导入将替换当前未保存编辑。继续？'))return;
+  data=next;selectedSlot=null;closedGroups.clear();changed('已导入 · 请保存新版 HTML');render();
+}catch(error){alert('导入失败：'+error.message);}finally{$('import-file').value='';}};
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue='';}});render();
 </script>
 </body></html>

@@ -9,6 +9,9 @@
     "role": "porno",
     "melee": false,
     "prototype": "Abrasive",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/abrasive.tres",
     "baseVars": {
       "ThornsPower": 4,
@@ -24,8 +27,8 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "[gold]奇巧[/gold]。\n给予一名存活队员1点[gold]敏捷[/gold]和4点[gold]荆棘[/gold]。",
-    "upgradedText": "[gold]奇巧[/gold]。\n给予一名存活队员1点[gold]敏捷[/gold]和[green]6[/green]点[gold]荆棘[/gold]。",
+    "baseText": "[gold]奇巧[/gold]。\n给予一名存活同伴1点[gold]敏捷[/gold]和4点[gold]荆棘[/gold]。",
+    "upgradedText": "[gold]奇巧[/gold]。\n给予一名存活同伴1点[gold]敏捷[/gold]和[green]6[/green]点[gold]荆棘[/gold]。",
     "baseKeywords": [
       "Sly"
     ],
@@ -43,6 +46,9 @@
     "role": "kirakira",
     "melee": false,
     "prototype": "Accelerant",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/accelerant.tres",
     "baseVars": {
       "Accelerant": 1,
@@ -71,6 +77,9 @@
     "role": "joker",
     "melee": false,
     "prototype": "Acrobatics",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/acrobatics.tres",
     "baseVars": {
       "Cards": 3,
@@ -99,6 +108,9 @@
     "role": "joker",
     "melee": false,
     "prototype": "Adrenaline",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/adrenaline.tres",
     "baseVars": {
       "Energy": 1,
@@ -133,6 +145,9 @@
     "role": "kikuchiyo",
     "melee": false,
     "prototype": "Aggression",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/aggression.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -161,6 +176,9 @@
     "role": "medhico",
     "melee": false,
     "prototype": "Alchemize",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/alchemize.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -191,6 +209,9 @@
     "role": "joker",
     "melee": false,
     "prototype": "AllForOne",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/all_for_one.tres",
     "baseVars": {
       "Damage": 10,
@@ -219,6 +240,9 @@
     "role": null,
     "melee": false,
     "prototype": "Anger",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/anger.tres",
     "baseVars": {
       "Damage": 6,
@@ -247,6 +271,9 @@
     "role": "tora",
     "melee": false,
     "prototype": "Anticipate",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/anticipate.tres",
     "baseVars": {
       "DexterityPower": 2,
@@ -275,6 +302,9 @@
     "role": "kuma",
     "melee": false,
     "prototype": "Armaments",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/armaments.tres",
     "baseVars": {
       "Block": 5,
@@ -303,6 +333,9 @@
     "role": "alyce",
     "melee": false,
     "prototype": "Assassinate",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/assassinate.tres",
     "baseVars": {
       "Damage": 10,
@@ -339,6 +372,9 @@
     "role": null,
     "melee": false,
     "prototype": "Backflip",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/backflip.tres",
     "baseVars": {
       "Block": 5,
@@ -369,6 +405,9 @@
     "role": "joker",
     "melee": true,
     "prototype": "Backstab",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/backstab.tres",
     "baseVars": {
       "Damage": 11,
@@ -382,13 +421,15 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "[gold]固有[/gold]。\n造成11点伤害。\n[gold]消耗[/gold]。",
-    "upgradedText": "[gold]固有[/gold]。\n造成[green]15[/green]点伤害。\n[gold]消耗[/gold]。",
+    "baseText": "[gold]突前[/gold]。\n[gold]固有[/gold]。\n造成11点伤害。\n[gold]消耗[/gold]。",
+    "upgradedText": "[gold]突前[/gold]。\n[gold]固有[/gold]。\n造成[green]15[/green]点伤害。\n[gold]消耗[/gold]。",
     "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE",
       "Exhaust",
       "Innate"
     ],
     "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE",
       "Exhaust",
       "Innate"
     ]
@@ -403,6 +444,9 @@
     "role": "antena",
     "melee": false,
     "prototype": "BallLightning",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/ball_lightning.tres",
     "baseVars": {
       "Damage": 7,
@@ -431,6 +475,9 @@
     "role": "zappa",
     "melee": false,
     "prototype": "Barricade",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/barricade.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -457,6 +504,9 @@
     "role": "zappa",
     "melee": false,
     "prototype": "BeaconOfHope",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/beacon_of_hope.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -468,8 +518,8 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "每当你在你的回合获得[gold]格挡[/gold]时，其他队员获得相应一半的[gold]格挡[/gold]。",
-    "upgradedText": "[gold]固有[/gold]。\n每当你在你的回合获得[gold]格挡[/gold]时，其他队员获得相应一半的[gold]格挡[/gold]。",
+    "baseText": "每当你在你的回合获得[gold]格挡[/gold]时，其他同伴获得相应一半的[gold]格挡[/gold]。",
+    "upgradedText": "[gold]固有[/gold]。\n每当你在你的回合获得[gold]格挡[/gold]时，其他同伴获得相应一半的[gold]格挡[/gold]。",
     "baseKeywords": [],
     "upgradedKeywords": [
       "Innate"
@@ -485,6 +535,9 @@
     "role": "alyce",
     "melee": false,
     "prototype": "BeamCell",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/beam_cell.tres",
     "baseVars": {
       "Damage": 3,
@@ -515,6 +568,9 @@
     "role": "kirakira",
     "melee": false,
     "prototype": "Blur",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/blur.tres",
     "baseVars": {
       "Block": 5,
@@ -545,6 +601,9 @@
     "role": "zappa",
     "melee": true,
     "prototype": "BodySlam",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/body_slam.tres",
     "baseVars": {
       "CalculationBase": 0,
@@ -562,10 +621,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成你当前[gold]格挡[/gold]值的伤害。",
-    "upgradedText": "造成你当前[gold]格挡[/gold]值的伤害。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成你当前[gold]格挡[/gold]值的伤害。",
+    "upgradedText": "[gold]突前[/gold]。\n造成你当前[gold]格挡[/gold]值的伤害。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_BOMBARDMENT",
@@ -577,6 +640,9 @@
     "role": "alyce",
     "melee": false,
     "prototype": "Bombardment",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/regent/bombardment.tres",
     "baseVars": {
       "Damage": 18,
@@ -609,6 +675,9 @@
     "role": "kirakira",
     "melee": false,
     "prototype": "BouncingFlask",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/bouncing_flask.tres",
     "baseVars": {
       "PoisonPower": 3,
@@ -639,6 +708,9 @@
     "role": "medhico",
     "melee": false,
     "prototype": "Buffer",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/buffer.tres",
     "baseVars": {
       "BufferPower": 1,
@@ -652,8 +724,8 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "使一名存活队员接下来受到的1次生命损伤无效。",
-    "upgradedText": "使一名存活队员接下来受到的[green]2[/green]次生命损伤无效。",
+    "baseText": "使一名存活同伴接下来受到的1次生命损伤无效。",
+    "upgradedText": "使一名存活同伴接下来受到的[green]2[/green]次生命损伤无效。",
     "baseKeywords": [],
     "upgradedKeywords": []
   },
@@ -667,6 +739,9 @@
     "role": "joker",
     "melee": false,
     "prototype": "CalculatedGamble",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/calculated_gamble.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -698,6 +773,9 @@
     "role": "antena",
     "melee": false,
     "prototype": "Capacitor",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/capacitor.tres",
     "baseVars": {
       "Repeat": 2,
@@ -726,6 +804,9 @@
     "role": null,
     "melee": false,
     "prototype": "ChargeBattery",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/charge_battery.tres",
     "baseVars": {
       "Block": 7,
@@ -756,6 +837,9 @@
     "role": "antena",
     "melee": false,
     "prototype": "Chill",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/chill.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -784,6 +868,9 @@
     "role": "antena",
     "melee": false,
     "prototype": "ColdSnap",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/cold_snap.tres",
     "baseVars": {
       "Damage": 6,
@@ -812,6 +899,9 @@
     "role": "porno",
     "melee": false,
     "prototype": "Colossus",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/colossus.tres",
     "baseVars": {
       "Block": 4,
@@ -842,6 +932,9 @@
     "role": "antena",
     "melee": false,
     "prototype": "Coolheaded",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/coolheaded.tres",
     "baseVars": {
       "Cards": 1,
@@ -870,6 +963,9 @@
     "role": "kuma",
     "melee": false,
     "prototype": "Coordinate",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/coordinate.tres",
     "baseVars": {
       "StrengthPower": 5,
@@ -883,8 +979,8 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "在本回合给予其他队员5点[gold]力量[/gold]。",
-    "upgradedText": "在本回合给予其他队员[green]8[/green]点[gold]力量[/gold]。",
+    "baseText": "在本回合给予其他同伴5点[gold]力量[/gold]。",
+    "upgradedText": "在本回合给予其他同伴[green]8[/green]点[gold]力量[/gold]。",
     "baseKeywords": [],
     "upgradedKeywords": []
   },
@@ -898,6 +994,9 @@
     "role": "kirakira",
     "melee": false,
     "prototype": "CorrosiveWave",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/corrosive_wave.tres",
     "baseVars": {
       "CorrosiveWave": 2,
@@ -926,6 +1025,9 @@
     "role": null,
     "melee": false,
     "prototype": "CosmicIndifference",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/regent/cosmic_indifference.tres",
     "baseVars": {
       "Block": 6,
@@ -954,6 +1056,9 @@
     "role": "antena",
     "melee": false,
     "prototype": "CreativeAi",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/creative_ai.tres",
     "baseVars": {
       "CreativeAi": 1,
@@ -982,6 +1087,9 @@
     "role": null,
     "melee": false,
     "prototype": "DaggerThrow",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/dagger_throw.tres",
     "baseVars": {
       "Damage": 9,
@@ -1010,6 +1118,9 @@
     "role": "porno",
     "melee": false,
     "prototype": "DarkShackles",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/dark_shackles.tres",
     "baseVars": {
       "StrengthLoss": 9,
@@ -1042,6 +1153,9 @@
     "role": "kirakira",
     "melee": false,
     "prototype": "DeadlyPoison",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/deadly_poison.tres",
     "baseVars": {
       "PoisonPower": 5,
@@ -1070,6 +1184,9 @@
     "role": "kikuchiyo",
     "melee": true,
     "prototype": "DeathMarch",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/death_march.tres",
     "baseVars": {
       "CalculationBase": 8,
@@ -1087,10 +1204,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成8点伤害。\n你在回合进行中每抽到一张牌，都会使其额外造成4点伤害。",
-    "upgradedText": "造成[green]9[/green]点伤害。\n你在回合进行中每抽到一张牌，都会使其额外造成[green]6[/green]点伤害。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成8点伤害。\n你在回合进行中每抽到一张牌，都会使其额外造成4点伤害。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]9[/green]点伤害。\n你在回合进行中每抽到一张牌，都会使其额外造成[green]6[/green]点伤害。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DEBILITATE",
@@ -1102,6 +1223,9 @@
     "role": "porno",
     "melee": true,
     "prototype": "Debilitate",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/debilitate.tres",
     "baseVars": {
       "Damage": 10,
@@ -1117,10 +1241,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成10点伤害。\n在接下来的2回合内，该敌人身上的[gold]易伤[/gold]与[gold]虚弱[/gold]效果翻倍。",
-    "upgradedText": "造成[green]12[/green]点伤害。\n在接下来的[green]3[/green]回合内，该敌人身上的[gold]易伤[/gold]与[gold]虚弱[/gold]效果翻倍。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成10点伤害。\n在接下来的2回合内，该敌人身上的[gold]易伤[/gold]与[gold]虚弱[/gold]效果翻倍。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]12[/green]点伤害。\n在接下来的[green]3[/green]回合内，该敌人身上的[gold]易伤[/gold]与[gold]虚弱[/gold]效果翻倍。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DEFLECT",
@@ -1132,6 +1260,9 @@
     "role": null,
     "melee": false,
     "prototype": "Deflect",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/deflect.tres",
     "baseVars": {
       "Block": 4,
@@ -1160,6 +1291,9 @@
     "role": "antena",
     "melee": false,
     "prototype": "Defragment",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/defragment.tres",
     "baseVars": {
       "FocusPower": 1,
@@ -1188,6 +1322,9 @@
     "role": null,
     "melee": false,
     "prototype": "Defy",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/defy.tres",
     "baseVars": {
       "Block": 6,
@@ -1222,6 +1359,9 @@
     "role": "medhico",
     "melee": false,
     "prototype": "Delay",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/delay.tres",
     "baseVars": {
       "Block": 11,
@@ -1252,6 +1392,9 @@
     "role": "tora",
     "melee": false,
     "prototype": "DemonForm",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/demon_form.tres",
     "baseVars": {
       "StrengthPower": 3,
@@ -1280,6 +1423,9 @@
     "role": "zappa",
     "melee": false,
     "prototype": "DemonicShield",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/demonic_shield.tres",
     "baseVars": {
       "CalculationBase": 0,
@@ -1316,6 +1462,9 @@
     "role": "tora",
     "melee": true,
     "prototype": "Dismantle",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/dismantle.tres",
     "baseVars": {
       "Damage": 8,
@@ -1329,10 +1478,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成8点伤害。\n如果该敌人有[gold]易伤[/gold]状态，则攻击两次。",
-    "upgradedText": "造成[green]10[/green]点伤害。\n如果该敌人有[gold]易伤[/gold]状态，则攻击两次。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成8点伤害。\n如果该敌人有[gold]易伤[/gold]状态，则攻击两次。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]10[/green]点伤害。\n如果该敌人有[gold]易伤[/gold]状态，则攻击两次。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DRAIN_POWER",
@@ -1344,6 +1497,9 @@
     "role": null,
     "melee": false,
     "prototype": "DrainPower",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/drain_power.tres",
     "baseVars": {
       "Damage": 10,
@@ -1374,6 +1530,9 @@
     "role": "kuma",
     "melee": false,
     "prototype": "EchoForm",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/echo_form.tres",
     "baseVars": {
       "EchoForm": 1,
@@ -1404,6 +1563,9 @@
     "role": "kikuchiyo",
     "melee": true,
     "prototype": "EchoingSlash",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/echoing_slash.tres",
     "baseVars": {
       "Damage": 10,
@@ -1417,10 +1579,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "对所有敌人造成10点伤害。\n每有一名敌人被击杀，就重复此效果。",
-    "upgradedText": "对所有敌人造成[green]13[/green]点伤害。\n每有一名敌人被击杀，就重复此效果。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n对所有敌人造成10点伤害。\n每有一名敌人被击杀，就重复此效果。",
+    "upgradedText": "[gold]突前[/gold]。\n对所有敌人造成[green]13[/green]点伤害。\n每有一名敌人被击杀，就重复此效果。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_ENERGY_SURGE",
@@ -1432,6 +1598,9 @@
     "role": "medhico",
     "melee": false,
     "prototype": "EnergySurge",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/energy_surge.tres",
     "baseVars": {
       "Energy": 2,
@@ -1464,6 +1633,9 @@
     "role": "kirakira",
     "melee": false,
     "prototype": "Envenom",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/envenom.tres",
     "baseVars": {
       "EnvenomPower": 1,
@@ -1492,6 +1664,9 @@
     "role": "medhico",
     "melee": false,
     "prototype": "Equilibrium",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/equilibrium.tres",
     "baseVars": {
       "Block": 13,
@@ -1522,6 +1697,9 @@
     "role": "kirakira",
     "melee": false,
     "prototype": "EscapePlan",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/escape_plan.tres",
     "baseVars": {
       "Block": 3,
@@ -1550,6 +1728,9 @@
     "role": "zappa",
     "melee": false,
     "prototype": "ExpectAFight",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/expect_a_fight.tres",
     "baseVars": {
       "CalculationBase": 15,
@@ -1582,6 +1763,9 @@
     "role": "medhico",
     "melee": false,
     "prototype": "Expertise",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/expertise.tres",
     "baseVars": {
       "Cards": 2,
@@ -1610,6 +1794,9 @@
     "role": "alyce",
     "melee": false,
     "prototype": "Expose",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/expose.tres",
     "baseVars": {
       "Power": 2,
@@ -1642,6 +1829,9 @@
     "role": "kikuchiyo",
     "melee": true,
     "prototype": "Feed",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/feed.tres",
     "baseVars": {
       "Damage": 10,
@@ -1657,12 +1847,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成10点伤害。\n[gold]斩杀[/gold]时，永久获得3点最大生命值。\n[gold]消耗[/gold]。",
-    "upgradedText": "造成[green]12[/green]点伤害。\n[gold]斩杀[/gold]时，永久获得[green]4[/green]点最大生命值。\n[gold]消耗[/gold]。",
+    "baseText": "[gold]突前[/gold]。\n造成10点伤害。\n[gold]斩杀[/gold]时，永久获得3点最大生命值。\n[gold]消耗[/gold]。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]12[/green]点伤害。\n[gold]斩杀[/gold]时，永久获得[green]4[/green]点最大生命值。\n[gold]消耗[/gold]。",
     "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE",
       "Exhaust"
     ],
     "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE",
       "Exhaust"
     ]
   },
@@ -1676,6 +1868,9 @@
     "role": "tora",
     "melee": false,
     "prototype": "FiendFire",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/fiend_fire.tres",
     "baseVars": {
       "Damage": 7,
@@ -1708,6 +1903,9 @@
     "role": "tora",
     "melee": true,
     "prototype": "FightMe",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/fight_me.tres",
     "baseVars": {
       "Damage": 5,
@@ -1727,10 +1925,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成5点伤害两次。\n获得3点[gold]力量[/gold]。\n该敌人获得1点[gold]力量[/gold]。",
-    "upgradedText": "造成[green]6[/green]点伤害两次。\n获得[green]4[/green]点[gold]力量[/gold]。\n该敌人获得1点[gold]力量[/gold]。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成5点伤害两次。\n获得3点[gold]力量[/gold]。\n该敌人获得1点[gold]力量[/gold]。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]6[/green]点伤害两次。\n获得[green]4[/green]点[gold]力量[/gold]。\n该敌人获得1点[gold]力量[/gold]。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FIGHT_THROUGH",
@@ -1742,6 +1944,9 @@
     "role": "zappa",
     "melee": false,
     "prototype": "FightThrough",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/fight_through.tres",
     "baseVars": {
       "Block": 13,
@@ -1770,6 +1975,9 @@
     "role": "medhico",
     "melee": false,
     "prototype": "Finesse",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/finesse.tres",
     "baseVars": {
       "Block": 4,
@@ -1800,6 +2008,9 @@
     "role": "joker",
     "melee": true,
     "prototype": "Finisher",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/finisher.tres",
     "baseVars": {
       "Damage": 6,
@@ -1819,10 +2030,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "在这个回合内每打出过一张攻击牌，就造成6点伤害一次。",
-    "upgradedText": "在这个回合内每打出过一张攻击牌，就造成[green]8[/green]点伤害一次。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n在这个回合内每打出过一张攻击牌，就造成6点伤害一次。",
+    "upgradedText": "[gold]突前[/gold]。\n在这个回合内每打出过一张攻击牌，就造成[green]8[/green]点伤害一次。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FISTICUFFS",
@@ -1834,6 +2049,9 @@
     "role": "kuma",
     "melee": true,
     "prototype": "Fisticuffs",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/fisticuffs.tres",
     "baseVars": {
       "Damage": 7,
@@ -1847,10 +2065,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成7点伤害。\n获得等量于所造成伤害的[gold]格挡[/gold]。",
-    "upgradedText": "造成[green]9[/green]点伤害。\n获得等量于所造成伤害的[gold]格挡[/gold]。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成7点伤害。\n获得等量于所造成伤害的[gold]格挡[/gold]。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]9[/green]点伤害。\n获得等量于所造成伤害的[gold]格挡[/gold]。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FLAME_BARRIER",
@@ -1862,6 +2084,9 @@
     "role": "porno",
     "melee": false,
     "prototype": "FlameBarrier",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/flame_barrier.tres",
     "baseVars": {
       "Block": 12,
@@ -1877,8 +2102,8 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "给予一名存活队员12点[gold]格挡[/gold]。\n该队员在这个回合每受到一次攻击，对攻击者造成4点伤害。",
-    "upgradedText": "给予一名存活队员[green]16[/green]点[gold]格挡[/gold]。\n该队员在这个回合每受到一次攻击，对攻击者造成[green]6[/green]点伤害。",
+    "baseText": "给予一名存活同伴12点[gold]格挡[/gold]。\n该同伴在这个回合每受到一次攻击，对攻击者造成4点伤害。",
+    "upgradedText": "给予一名存活同伴[green]16[/green]点[gold]格挡[/gold]。\n该同伴在这个回合每受到一次攻击，对攻击者造成[green]6[/green]点伤害。",
     "baseKeywords": [],
     "upgradedKeywords": []
   },
@@ -1892,6 +2117,9 @@
     "role": "kuma",
     "melee": false,
     "prototype": "Flanking",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/flanking.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -1903,8 +2131,8 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "一名敌人在本回合受到的来自其他队员的攻击伤害翻倍。",
-    "upgradedText": "一名敌人在本回合受到的来自其他队员的攻击伤害翻倍。",
+    "baseText": "一名敌人在本回合受到的来自其他同伴的攻击伤害翻倍。",
+    "upgradedText": "一名敌人在本回合受到的来自其他同伴的攻击伤害翻倍。",
     "baseKeywords": [],
     "upgradedKeywords": []
   },
@@ -1918,6 +2146,9 @@
     "role": "kikuchiyo",
     "melee": true,
     "prototype": "FlashOfSteel",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/flash_of_steel.tres",
     "baseVars": {
       "Damage": 5,
@@ -1933,10 +2164,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成5点伤害。\n抽1张牌。",
-    "upgradedText": "造成[green]8[/green]点伤害。\n抽1张牌。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成5点伤害。\n抽1张牌。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]8[/green]点伤害。\n抽1张牌。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_FLECHETTES",
@@ -1948,6 +2183,9 @@
     "role": "tora",
     "melee": false,
     "prototype": "Flechettes",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/flechettes.tres",
     "baseVars": {
       "Damage": 5,
@@ -1982,6 +2220,9 @@
     "role": "kirakira",
     "melee": false,
     "prototype": "Footwork",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/footwork.tres",
     "baseVars": {
       "DexterityPower": 2,
@@ -2010,6 +2251,9 @@
     "role": "kikuchiyo",
     "melee": true,
     "prototype": "Ftl",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/ftl.tres",
     "baseVars": {
       "Damage": 5,
@@ -2027,10 +2271,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成5点伤害。\n如果你在这回合打出的牌数小于3张，抽1张牌。",
-    "upgradedText": "造成[green]6[/green]点伤害。\n如果你在这回合打出的牌数小于[green]4[/green]张，抽1张牌。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成5点伤害。\n如果你在这回合打出的牌数小于3张，抽1张牌。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]6[/green]点伤害。\n如果你在这回合打出的牌数小于[green]4[/green]张，抽1张牌。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_GANG_UP",
@@ -2042,6 +2290,9 @@
     "role": "alyce",
     "melee": false,
     "prototype": "GangUp",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/gang_up.tres",
     "baseVars": {
       "CalculationBase": 5,
@@ -2059,8 +2310,8 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成5点伤害。\n本回合其他队员每攻击过一次该敌人，该牌造成的伤害就额外增加5点。",
-    "upgradedText": "造成5点伤害。\n本回合其他队员每攻击过一次该敌人，该牌造成的伤害就额外增加[green]7[/green]点。",
+    "baseText": "造成5点伤害。\n本回合其他同伴每攻击过一次该敌人，该牌造成的伤害就额外增加5点。",
+    "upgradedText": "造成5点伤害。\n本回合其他同伴每攻击过一次该敌人，该牌造成的伤害就额外增加[green]7[/green]点。",
     "baseKeywords": [],
     "upgradedKeywords": []
   },
@@ -2074,6 +2325,9 @@
     "role": "antena",
     "melee": false,
     "prototype": "Glacier",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/glacier.tres",
     "baseVars": {
       "Block": 6,
@@ -2102,6 +2356,9 @@
     "role": "alyce",
     "melee": false,
     "prototype": "Glimmer",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/regent/glimmer.tres",
     "baseVars": {
       "Cards": 3,
@@ -2132,6 +2389,9 @@
     "role": "zappa",
     "melee": false,
     "prototype": "Glitterstream",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/regent/glitterstream.tres",
     "baseVars": {
       "Block": 11,
@@ -2162,6 +2422,9 @@
     "role": null,
     "melee": false,
     "prototype": "GoForTheEyes",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/go_for_the_eyes.tres",
     "baseVars": {
       "Damage": 3,
@@ -2192,6 +2455,9 @@
     "role": "joker",
     "melee": true,
     "prototype": "GrandFinale",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/grand_finale.tres",
     "baseVars": {
       "Damage": 60,
@@ -2205,10 +2471,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "只有当你的[gold]抽牌堆[/gold]中没有牌时才能打出。对所有敌人造成60点伤害。",
-    "upgradedText": "只有当你的[gold]抽牌堆[/gold]中没有牌时才能打出。对所有敌人造成[green]75[/green]点伤害。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n只有当你的[gold]抽牌堆[/gold]中没有牌时才能打出。对所有敌人造成60点伤害。",
+    "upgradedText": "[gold]突前[/gold]。\n只有当你的[gold]抽牌堆[/gold]中没有牌时才能打出。对所有敌人造成[green]75[/green]点伤害。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_GUIDING_STAR",
@@ -2220,6 +2490,9 @@
     "role": null,
     "melee": false,
     "prototype": "GuidingStar",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/regent/guiding_star.tres",
     "baseVars": {
       "Damage": 12,
@@ -2250,6 +2523,9 @@
     "role": "antena",
     "melee": false,
     "prototype": "Hailstorm",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/hailstorm.tres",
     "baseVars": {
       "HailstormPower": 6,
@@ -2278,6 +2554,9 @@
     "role": "kikuchiyo",
     "melee": true,
     "prototype": "HandOfGreed",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/hand_of_greed.tres",
     "baseVars": {
       "Damage": 20,
@@ -2293,10 +2572,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成20点伤害。\n[gold]斩杀[/gold]时，获得20[gold]金币[/gold]。",
-    "upgradedText": "造成[green]25[/green]点伤害。\n[gold]斩杀[/gold]时，获得[green]25[/green][gold]金币[/gold]。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成20点伤害。\n[gold]斩杀[/gold]时，获得20[gold]金币[/gold]。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]25[/green]点伤害。\n[gold]斩杀[/gold]时，获得[green]25[/green][gold]金币[/gold]。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_HANG",
@@ -2308,6 +2591,9 @@
     "role": "alyce",
     "melee": false,
     "prototype": "Hang",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/hang.tres",
     "baseVars": {
       "Damage": 10,
@@ -2336,6 +2622,9 @@
     "role": "kirakira",
     "melee": false,
     "prototype": "Haze",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/haze.tres",
     "baseVars": {
       "PoisonPower": 4,
@@ -2366,6 +2655,9 @@
     "role": null,
     "melee": false,
     "prototype": "Headbutt",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/headbutt.tres",
     "baseVars": {
       "Damage": 9,
@@ -2394,6 +2686,9 @@
     "role": "tora",
     "melee": false,
     "prototype": "HelixDrill",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/helix_drill.tres",
     "baseVars": {
       "Damage": 3,
@@ -2428,6 +2723,9 @@
     "role": "medhico",
     "melee": false,
     "prototype": "Hologram",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/hologram.tres",
     "baseVars": {
       "Block": 3,
@@ -2458,6 +2756,9 @@
     "role": "zappa",
     "melee": false,
     "prototype": "Impervious",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/impervious.tres",
     "baseVars": {
       "Block": 30,
@@ -2490,6 +2791,9 @@
     "role": "kuma",
     "melee": false,
     "prototype": "Inflame",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/inflame.tres",
     "baseVars": {
       "StrengthPower": 2,
@@ -2518,6 +2822,9 @@
     "role": null,
     "melee": false,
     "prototype": "IronWave",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/iron_wave.tres",
     "baseVars": {
       "Damage": 5,
@@ -2548,6 +2855,9 @@
     "role": "zappa",
     "melee": false,
     "prototype": "Juggernaut",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/juggernaut.tres",
     "baseVars": {
       "JuggernautPower": 6,
@@ -2576,6 +2886,9 @@
     "role": "kuma",
     "melee": true,
     "prototype": "Knockdown",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/knockdown.tres",
     "baseVars": {
       "Damage": 10,
@@ -2591,10 +2904,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成10点伤害。\n该敌人在本回合受到的来自其他队员的伤害变为两倍。",
-    "upgradedText": "造成[green]14[/green]点伤害。\n该敌人在本回合受到的来自其他队员的伤害变为三倍。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成10点伤害。\n该敌人在本回合受到的来自其他同伴的伤害变为两倍。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]14[/green]点伤害。\n该敌人在本回合受到的来自其他同伴的伤害变为三倍。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_LEAP",
@@ -2606,6 +2923,9 @@
     "role": null,
     "melee": false,
     "prototype": "Leap",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/leap.tres",
     "baseVars": {
       "Block": 9,
@@ -2634,6 +2954,9 @@
     "role": "porno",
     "melee": true,
     "prototype": "LegSweep",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/leg_sweep.tres",
     "baseVars": {
       "Block": 11,
@@ -2649,10 +2972,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "给予2层[gold]虚弱[/gold]。\n获得11点[gold]格挡[/gold]。",
-    "upgradedText": "给予[green]3[/green]层[gold]虚弱[/gold]。\n获得[green]14[/green]点[gold]格挡[/gold]。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n给予2层[gold]虚弱[/gold]。\n获得11点[gold]格挡[/gold]。",
+    "upgradedText": "[gold]突前[/gold]。\n给予[green]3[/green]层[gold]虚弱[/gold]。\n获得[green]14[/green]点[gold]格挡[/gold]。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_LETHALITY",
@@ -2664,6 +2991,9 @@
     "role": "kikuchiyo",
     "melee": false,
     "prototype": "Lethality",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/lethality.tres",
     "baseVars": {
       "LethalityPower": 50,
@@ -2696,6 +3026,9 @@
     "role": "medhico",
     "melee": false,
     "prototype": "Lift",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/lift.tres",
     "baseVars": {
       "Block": 11,
@@ -2709,8 +3042,8 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "给另一名队员11点[gold]格挡[/gold]。",
-    "upgradedText": "给另一名队员[green]16[/green]点[gold]格挡[/gold]。",
+    "baseText": "给另一名同伴11点[gold]格挡[/gold]。",
+    "upgradedText": "给另一名同伴[green]16[/green]点[gold]格挡[/gold]。",
     "baseKeywords": [],
     "upgradedKeywords": []
   },
@@ -2724,6 +3057,9 @@
     "role": "antena",
     "melee": false,
     "prototype": "Loop",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/loop.tres",
     "baseVars": {
       "Loop": 1,
@@ -2752,6 +3088,9 @@
     "role": "alyce",
     "melee": false,
     "prototype": "MachineLearning",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/machine_learning.tres",
     "baseVars": {
       "Cards": 1,
@@ -2782,6 +3121,9 @@
     "role": "porno",
     "melee": false,
     "prototype": "Malaise",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/malaise.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -2812,6 +3154,9 @@
     "role": "kuma",
     "melee": false,
     "prototype": "ManifestAuthority",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/regent/manifest_authority.tres",
     "baseVars": {
       "Block": 7,
@@ -2840,6 +3185,9 @@
     "role": "medhico",
     "melee": false,
     "prototype": "MasterOfStrategy",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/master_of_strategy.tres",
     "baseVars": {
       "Cards": 3,
@@ -2872,6 +3220,9 @@
     "role": "zappa",
     "melee": false,
     "prototype": "Mimic",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/mimic.tres",
     "baseVars": {
       "CalculationBase": 0,
@@ -2906,6 +3257,9 @@
     "role": "alyce",
     "melee": false,
     "prototype": "MindBlast",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/mind_blast.tres",
     "baseVars": {
       "CalculationBase": 0,
@@ -2942,6 +3296,9 @@
     "role": "kirakira",
     "melee": false,
     "prototype": "Mirage",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/mirage.tres",
     "baseVars": {
       "CalculationBase": 0,
@@ -2976,6 +3333,9 @@
     "role": null,
     "melee": false,
     "prototype": "MomentumStrike",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/momentum_strike.tres",
     "baseVars": {
       "Damage": 11,
@@ -3004,6 +3364,9 @@
     "role": "porno",
     "melee": false,
     "prototype": "MonarchsGaze",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/regent/monarchs_gaze.tres",
     "baseVars": {
       "StrengthLoss": 1,
@@ -3032,6 +3395,9 @@
     "role": "alyce",
     "melee": false,
     "prototype": "Murder",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/murder.tres",
     "baseVars": {
       "CalculationBase": 1,
@@ -3064,6 +3430,9 @@
     "role": "kuma",
     "melee": false,
     "prototype": "Nostalgia",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/nostalgia.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -3090,6 +3459,9 @@
     "role": "medhico",
     "melee": false,
     "prototype": "NotYet",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/not_yet.tres",
     "baseVars": {
       "Heal": 10,
@@ -3103,8 +3475,8 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "回复一名存活队员10点生命。\n[gold]消耗[/gold]。",
-    "upgradedText": "回复一名存活队员[green]13[/green]点生命。\n[gold]消耗[/gold]。",
+    "baseText": "回复一名存活同伴10点生命。\n[gold]消耗[/gold]。",
+    "upgradedText": "回复一名存活同伴[green]13[/green]点生命。\n[gold]消耗[/gold]。",
     "baseKeywords": [
       "Exhaust"
     ],
@@ -3122,6 +3494,9 @@
     "role": "kirakira",
     "melee": false,
     "prototype": "NoxiousFumes",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/noxious_fumes.tres",
     "baseVars": {
       "PoisonPerTurn": 2,
@@ -3150,6 +3525,9 @@
     "role": "kuma",
     "melee": false,
     "prototype": "Offering",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/offering.tres",
     "baseVars": {
       "HpLoss": 6,
@@ -3186,6 +3564,9 @@
     "role": "tora",
     "melee": false,
     "prototype": "OneTwoPunch",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/one_two_punch.tres",
     "baseVars": {
       "Attacks": 1,
@@ -3214,6 +3595,9 @@
     "role": "kirakira",
     "melee": false,
     "prototype": "Outbreak",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/outbreak.tres",
     "baseVars": {
       "PoisonPower": 9,
@@ -3242,6 +3626,9 @@
     "role": "joker",
     "melee": false,
     "prototype": "Panache",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/panache.tres",
     "baseVars": {
       "PanacheDamage": 10,
@@ -3270,6 +3657,9 @@
     "role": "joker",
     "melee": false,
     "prototype": "Patter",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/regent/patter.tres",
     "baseVars": {
       "Block": 8,
@@ -3300,6 +3690,9 @@
     "role": null,
     "melee": false,
     "prototype": "PerfectedStrike",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/perfected_strike.tres",
     "baseVars": {
       "CalculationBase": 6,
@@ -3332,6 +3725,9 @@
     "role": "porno",
     "melee": false,
     "prototype": "PiercingWail",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/piercing_wail.tres",
     "baseVars": {
       "StrengthLoss": 6,
@@ -3364,6 +3760,9 @@
     "role": "kikuchiyo",
     "melee": true,
     "prototype": "Pillage",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/pillage.tres",
     "baseVars": {
       "Damage": 6,
@@ -3377,10 +3776,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成6点伤害。\n抽牌直到你抽到一张非攻击牌。",
-    "upgradedText": "造成[green]9[/green]点伤害。\n抽牌直到你抽到一张非攻击牌。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成6点伤害。\n抽牌直到你抽到一张非攻击牌。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]9[/green]点伤害。\n抽牌直到你抽到一张非攻击牌。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PINPOINT",
@@ -3392,6 +3795,9 @@
     "role": "alyce",
     "melee": false,
     "prototype": "Pinpoint",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/pinpoint.tres",
     "baseVars": {
       "Damage": 15,
@@ -3420,6 +3826,9 @@
     "role": "kirakira",
     "melee": true,
     "prototype": "PoisonedStab",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/poisoned_stab.tres",
     "baseVars": {
       "Damage": 6,
@@ -3435,10 +3844,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成6点伤害。\n给予3层[gold]中毒[/gold]。",
-    "upgradedText": "造成[green]8[/green]点伤害。\n给予[green]4[/green]层[gold]中毒[/gold]。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成6点伤害。\n给予3层[gold]中毒[/gold]。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]8[/green]点伤害。\n给予[green]4[/green]层[gold]中毒[/gold]。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_POMMEL_STRIKE",
@@ -3450,6 +3863,9 @@
     "role": "kikuchiyo",
     "melee": true,
     "prototype": "PommelStrike",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/pommel_strike.tres",
     "baseVars": {
       "Damage": 9,
@@ -3465,10 +3881,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成9点伤害。\n抽1张牌。",
-    "upgradedText": "造成[green]10[/green]点伤害。\n抽[green]2[/green]张牌。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成9点伤害。\n抽1张牌。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]10[/green]点伤害。\n抽[green]2[/green]张牌。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_POUNCE",
@@ -3480,6 +3900,9 @@
     "role": "kikuchiyo",
     "melee": true,
     "prototype": "Pounce",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/pounce.tres",
     "baseVars": {
       "Damage": 14,
@@ -3493,10 +3916,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成14点伤害。\n你的下一张技能牌耗能变为0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
-    "upgradedText": "造成[green]20[/green]点伤害。\n你的下一张技能牌耗能变为0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成14点伤害。\n你的下一张技能牌耗能变为0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]20[/green]点伤害。\n你的下一张技能牌耗能变为0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PRECISE_CUT",
@@ -3508,6 +3935,9 @@
     "role": "joker",
     "melee": true,
     "prototype": "PreciseCut",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/precise_cut.tres",
     "baseVars": {
       "CalculationBase": 13,
@@ -3525,10 +3955,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成13点伤害。\n你的[gold]手牌[/gold]中每有一张牌，此牌的伤害就降低2点。",
-    "upgradedText": "造成[green]16[/green]点伤害。\n你的[gold]手牌[/gold]中每有一张牌，此牌的伤害就降低2点。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成13点伤害。\n你的[gold]手牌[/gold]中每有一张牌，此牌的伤害就降低2点。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]16[/green]点伤害。\n你的[gold]手牌[/gold]中每有一张牌，此牌的伤害就降低2点。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_PREDATOR",
@@ -3540,6 +3974,9 @@
     "role": "alyce",
     "melee": false,
     "prototype": "Predator",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/predator.tres",
     "baseVars": {
       "Damage": 15,
@@ -3568,6 +4005,9 @@
     "role": "joker",
     "melee": false,
     "prototype": "PrepTime",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/prep_time.tres",
     "baseVars": {
       "PrepTimePower": 4,
@@ -3596,6 +4036,9 @@
     "role": null,
     "melee": false,
     "prototype": "Prepared",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/prepared.tres",
     "baseVars": {
       "Cards": 1,
@@ -3624,6 +4067,9 @@
     "role": "zappa",
     "melee": false,
     "prototype": "Prolong",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/prolong.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -3652,6 +4098,9 @@
     "role": "kuma",
     "melee": false,
     "prototype": "Prowess",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/prowess.tres",
     "baseVars": {
       "StrengthPower": 1,
@@ -3682,6 +4131,9 @@
     "role": "medhico",
     "melee": false,
     "prototype": "Purity",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/purity.tres",
     "baseVars": {
       "Cards": 3,
@@ -3716,6 +4168,9 @@
     "role": "porno",
     "melee": false,
     "prototype": "Putrefy",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/putrefy.tres",
     "baseVars": {
       "Power": 2,
@@ -3748,6 +4203,9 @@
     "role": "kuma",
     "melee": false,
     "prototype": "Pyre",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/pyre.tres",
     "baseVars": {
       "Energy": 1,
@@ -3776,6 +4234,9 @@
     "role": "antena",
     "melee": false,
     "prototype": "Rainbow",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/rainbow.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -3804,6 +4265,9 @@
     "role": "antena",
     "melee": false,
     "prototype": "Rally",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/rally.tres",
     "baseVars": {
       "Block": 12,
@@ -3817,8 +4281,8 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "所有队员获得12点[gold]格挡[/gold]。",
-    "upgradedText": "所有队员获得[green]17[/green]点[gold]格挡[/gold]。",
+    "baseText": "所有同伴获得12点[gold]格挡[/gold]。",
+    "upgradedText": "所有同伴获得[green]17[/green]点[gold]格挡[/gold]。",
     "baseKeywords": [],
     "upgradedKeywords": []
   },
@@ -3832,6 +4296,9 @@
     "role": "medhico",
     "melee": false,
     "prototype": "Reboot",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/reboot.tres",
     "baseVars": {
       "Cards": 4,
@@ -3864,6 +4331,9 @@
     "role": "zappa",
     "melee": false,
     "prototype": "Reflect",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/regent/reflect.tres",
     "baseVars": {
       "Block": 15,
@@ -3892,6 +4362,9 @@
     "role": "porno",
     "melee": true,
     "prototype": "Rend",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/rend.tres",
     "baseVars": {
       "CalculationBase": 10,
@@ -3909,10 +4382,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成10点伤害。\n该名敌人身上每有一种负面效果，就额外造成5点伤害。",
-    "upgradedText": "造成[green]12[/green]点伤害。\n该名敌人身上每有一种负面效果，就额外造成[green]8[/green]点伤害。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成10点伤害。\n该名敌人身上每有一种负面效果，就额外造成5点伤害。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]12[/green]点伤害。\n该名敌人身上每有一种负面效果，就额外造成[green]8[/green]点伤害。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_RESONANCE",
@@ -3924,6 +4401,9 @@
     "role": "kuma",
     "melee": false,
     "prototype": "Resonance",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/regent/resonance.tres",
     "baseVars": {
       "StrengthPower": 1,
@@ -3952,6 +4432,9 @@
     "role": "tora",
     "melee": false,
     "prototype": "Ricochet",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/ricochet.tres",
     "baseVars": {
       "Damage": 3,
@@ -3986,6 +4469,9 @@
     "role": "alyce",
     "melee": false,
     "prototype": "Salvo",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/salvo.tres",
     "baseVars": {
       "Damage": 12,
@@ -4014,6 +4500,9 @@
     "role": "medhico",
     "melee": false,
     "prototype": "SecretTechnique",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/secret_technique.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -4042,6 +4531,9 @@
     "role": "alyce",
     "melee": false,
     "prototype": "SecretWeapon",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/secret_weapon.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -4070,6 +4562,9 @@
     "role": "kikuchiyo",
     "melee": true,
     "prototype": "SeekerStrike",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/seeker_strike.tres",
     "baseVars": {
       "Damage": 9,
@@ -4085,10 +4580,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成9点伤害。\n从[gold]抽牌堆[/gold]的随机3张牌中选择一张加入你的[gold]手牌[/gold]。",
-    "upgradedText": "造成[green]12[/green]点伤害。\n从[gold]抽牌堆[/gold]的随机3张牌中选择一张加入你的[gold]手牌[/gold]。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成9点伤害。\n从[gold]抽牌堆[/gold]的随机3张牌中选择一张加入你的[gold]手牌[/gold]。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]12[/green]点伤害。\n从[gold]抽牌堆[/gold]的随机3张牌中选择一张加入你的[gold]手牌[/gold]。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SETUP_STRIKE",
@@ -4100,6 +4599,9 @@
     "role": "joker",
     "melee": false,
     "prototype": "SetupStrike",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/setup_strike.tres",
     "baseVars": {
       "Damage": 7,
@@ -4130,6 +4632,9 @@
     "role": "joker",
     "melee": false,
     "prototype": "ShadowStep",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/shadow_step.tres",
     "baseVars": {
       "Cards": 3,
@@ -4158,6 +4663,9 @@
     "role": "antena",
     "melee": false,
     "prototype": "Shatter",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/shatter.tres",
     "baseVars": {
       "Damage": 7,
@@ -4190,6 +4698,9 @@
     "role": null,
     "melee": false,
     "prototype": "ShrugItOff",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/shrug_it_off.tres",
     "baseVars": {
       "Block": 8,
@@ -4220,6 +4731,9 @@
     "role": "tora",
     "melee": true,
     "prototype": "Skewer",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/skewer.tres",
     "baseVars": {
       "Damage": 8,
@@ -4233,10 +4747,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成8点伤害X次。",
-    "upgradedText": "造成[green]11[/green]点伤害X次。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成8点伤害X次。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]11[/green]点伤害X次。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SLEIGHT_OF_FLESH",
@@ -4248,6 +4766,9 @@
     "role": "porno",
     "melee": false,
     "prototype": "SleightOfFlesh",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/sleight_of_flesh.tres",
     "baseVars": {
       "SleightOfFleshPower": 9,
@@ -4276,6 +4797,9 @@
     "role": "kirakira",
     "melee": false,
     "prototype": "Snakebite",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/snakebite.tres",
     "baseVars": {
       "PoisonPower": 7,
@@ -4308,6 +4832,9 @@
     "role": "zappa",
     "melee": false,
     "prototype": "StoneArmor",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/stone_armor.tres",
     "baseVars": {
       "PlatingPower": 4,
@@ -4336,6 +4863,9 @@
     "role": null,
     "melee": false,
     "prototype": "SuckerPunch",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/sucker_punch.tres",
     "baseVars": {
       "Damage": 8,
@@ -4366,6 +4896,9 @@
     "role": "kikuchiyo",
     "melee": true,
     "prototype": "Sunder",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/sunder.tres",
     "baseVars": {
       "Damage": 26,
@@ -4381,10 +4914,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成26点伤害。\n如果这张牌击杀了敌人，则获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
-    "upgradedText": "造成[green]34[/green]点伤害。\n如果这张牌击杀了敌人，则获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成26点伤害。\n如果这张牌击杀了敌人，则获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]34[/green]点伤害。\n如果这张牌击杀了敌人，则获得[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img][img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_SWEEPING_BEAM",
@@ -4396,6 +4933,9 @@
     "role": "antena",
     "melee": false,
     "prototype": "SweepingBeam",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/sweeping_beam.tres",
     "baseVars": {
       "Damage": 6,
@@ -4426,6 +4966,9 @@
     "role": "tora",
     "melee": false,
     "prototype": "SwordBoomerang",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/sword_boomerang.tres",
     "baseVars": {
       "Damage": 3,
@@ -4456,6 +4999,9 @@
     "role": "kuma",
     "melee": true,
     "prototype": "TagTeam",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/tag_team.tres",
     "baseVars": {
       "Damage": 11,
@@ -4469,10 +5015,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成11点伤害。\n其他队员的下一张攻击牌将在该名敌人身上额外生效一次。",
-    "upgradedText": "造成[green]15[/green]点伤害。\n其他队员的下一张攻击牌将在该名敌人身上额外生效一次。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成11点伤害。\n其他同伴的下一张攻击牌将在该名敌人身上额外生效一次。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]15[/green]点伤害。\n其他同伴的下一张攻击牌将在该名敌人身上额外生效一次。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_TANK",
@@ -4484,6 +5034,9 @@
     "role": "zappa",
     "melee": false,
     "prototype": "Tank",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/tank.tres",
     "baseVars": {
       "DamageIncrease": 1.5,
@@ -4514,6 +5067,9 @@
     "role": "kuma",
     "melee": false,
     "prototype": "Taunt",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/taunt.tres",
     "baseVars": {
       "Block": 6,
@@ -4544,6 +5100,9 @@
     "role": "antena",
     "melee": false,
     "prototype": "Tempest",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/defect/tempest.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -4570,6 +5129,9 @@
     "role": "joker",
     "melee": false,
     "prototype": "Terraforming",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/regent/terraforming.tres",
     "baseVars": {
       "VigorPower": 7,
@@ -4598,6 +5160,9 @@
     "role": "kikuchiyo",
     "melee": true,
     "prototype": "TheHunt",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/the_hunt.tres",
     "baseVars": {
       "Damage": 10,
@@ -4611,12 +5176,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成10点伤害。\n[gold]斩杀[/gold]时，额外获得一次卡牌奖励。\n[gold]消耗[/gold]。",
-    "upgradedText": "造成[green]15[/green]点伤害。\n[gold]斩杀[/gold]时，额外获得一次卡牌奖励。\n[gold]消耗[/gold]。",
+    "baseText": "[gold]突前[/gold]。\n造成10点伤害。\n[gold]斩杀[/gold]时，额外获得一次卡牌奖励。\n[gold]消耗[/gold]。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]15[/green]点伤害。\n[gold]斩杀[/gold]时，额外获得一次卡牌奖励。\n[gold]消耗[/gold]。",
     "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE",
       "Exhaust"
     ],
     "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE",
       "Exhaust"
     ]
   },
@@ -4630,6 +5197,9 @@
     "role": "kirakira",
     "melee": true,
     "prototype": "TheScythe",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/the_scythe.tres",
     "baseVars": {
       "Damage": 13,
@@ -4645,12 +5215,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成13点伤害。\n这张牌在本局游戏中的伤害永久性增加5。\n[gold]消耗[/gold]。",
-    "upgradedText": "造成13点伤害。\n这张牌在本局游戏中的伤害永久性增加[green]7[/green]。\n[gold]消耗[/gold]。",
+    "baseText": "[gold]突前[/gold]。\n造成13点伤害。\n这张牌在本局游戏中的伤害永久性增加5。\n[gold]消耗[/gold]。",
+    "upgradedText": "[gold]突前[/gold]。\n造成13点伤害。\n这张牌在本局游戏中的伤害永久性增加[green]7[/green]。\n[gold]消耗[/gold]。",
     "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE",
       "Exhaust"
     ],
     "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE",
       "Exhaust"
     ]
   },
@@ -4664,6 +5236,9 @@
     "role": "medhico",
     "melee": false,
     "prototype": "ThinkingAhead",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/thinking_ahead.tres",
     "baseVars": {
       "Cards": 2,
@@ -4694,6 +5269,9 @@
     "role": "tora",
     "melee": true,
     "prototype": "Thrash",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/thrash.tres",
     "baseVars": {
       "Damage": 4,
@@ -4707,10 +5285,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成4点伤害两次。\n[gold]消耗[/gold]你的[gold]手牌[/gold]中随机一张攻击牌，并将它的伤害添加给这张牌。",
-    "upgradedText": "造成[green]6[/green]点伤害两次。\n[gold]消耗[/gold]你的[gold]手牌[/gold]中随机一张攻击牌，并将它的伤害添加给这张牌。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成4点伤害两次。\n[gold]消耗[/gold]你的[gold]手牌[/gold]中随机一张攻击牌，并将它的伤害添加给这张牌。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]6[/green]点伤害两次。\n[gold]消耗[/gold]你的[gold]手牌[/gold]中随机一张攻击牌，并将它的伤害添加给这张牌。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_THRUMMING_HATCHET",
@@ -4722,6 +5304,9 @@
     "role": "alyce",
     "melee": false,
     "prototype": "ThrummingHatchet",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/colorless/thrumming_hatchet.tres",
     "baseVars": {
       "Damage": 11,
@@ -4750,6 +5335,9 @@
     "role": null,
     "melee": false,
     "prototype": "Thunderclap",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/thunderclap.tres",
     "baseVars": {
       "Damage": 4,
@@ -4780,6 +5368,9 @@
     "role": "joker",
     "melee": false,
     "prototype": "ToolsOfTheTrade",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/tools_of_the_trade.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -4806,6 +5397,9 @@
     "role": "porno",
     "melee": false,
     "prototype": "Tracking",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/silent/tracking.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -4832,6 +5426,9 @@
     "role": "tora",
     "melee": false,
     "prototype": "Transfigure",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/necrobinder/transfigure.tres",
     "baseVars": {
       "Energy": 1,
@@ -4862,6 +5459,9 @@
     "role": null,
     "melee": false,
     "prototype": "TrueGrit",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/true_grit.tres",
     "baseVars": {
       "Block": 7,
@@ -4890,6 +5490,9 @@
     "role": "tora",
     "melee": true,
     "prototype": "TwinStrike",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/twin_strike.tres",
     "baseVars": {
       "Damage": 5,
@@ -4903,10 +5506,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成5点伤害两次。",
-    "upgradedText": "造成[green]7[/green]点伤害两次。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成5点伤害两次。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]7[/green]点伤害两次。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_UNMOVABLE",
@@ -4918,6 +5525,9 @@
     "role": "zappa",
     "melee": false,
     "prototype": "Unmovable",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/unmovable.tres",
     "baseVars": {
       "FallbackDamage": 6,
@@ -4944,6 +5554,9 @@
     "role": "kikuchiyo",
     "melee": true,
     "prototype": "Unrelenting",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/unrelenting.tres",
     "baseVars": {
       "Damage": 14,
@@ -4957,10 +5570,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成14点伤害。\n你打出的下一张攻击牌耗能变为0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
-    "upgradedText": "造成[green]20[/green]点伤害。\n你打出的下一张攻击牌耗能变为0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成14点伤害。\n你打出的下一张攻击牌耗能变为0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "upgradedText": "[gold]突前[/gold]。\n造成[green]20[/green]点伤害。\n你打出的下一张攻击牌耗能变为0[img]res://images/packed/sprite_fonts/colorless_energy_icon.png[/img]。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_UPPERCUT",
@@ -4972,6 +5589,9 @@
     "role": "porno",
     "melee": true,
     "prototype": "Uppercut",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/uppercut.tres",
     "baseVars": {
       "Damage": 13,
@@ -4987,10 +5607,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成13点伤害。\n给予1层[gold]虚弱[/gold]。\n给予1层[gold]易伤[/gold]。",
-    "upgradedText": "造成13点伤害。\n给予[green]2[/green]层[gold]虚弱[/gold]。\n给予[green]2[/green]层[gold]易伤[/gold]。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n造成13点伤害。\n给予1层[gold]虚弱[/gold]。\n给予1层[gold]易伤[/gold]。",
+    "upgradedText": "[gold]突前[/gold]。\n造成13点伤害。\n给予[green]2[/green]层[gold]虚弱[/gold]。\n给予[green]2[/green]层[gold]易伤[/gold]。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_VICIOUS",
@@ -5002,6 +5626,9 @@
     "role": "porno",
     "melee": false,
     "prototype": "Vicious",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/vicious.tres",
     "baseVars": {
       "Cards": 1,
@@ -5030,6 +5657,9 @@
     "role": "tora",
     "melee": true,
     "prototype": "Whirlwind",
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://images/atlases/card_atlas.sprites/ironclad/whirlwind.tres",
     "baseVars": {
       "Damage": 5,
@@ -5043,10 +5673,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "对所有敌人造成5点伤害X次。",
-    "upgradedText": "对所有敌人造成[green]8[/green]点伤害X次。",
-    "baseKeywords": [],
-    "upgradedKeywords": []
+    "baseText": "[gold]突前[/gold]。\n对所有敌人造成5点伤害X次。",
+    "upgradedText": "[gold]突前[/gold]。\n对所有敌人造成[green]8[/green]点伤害X次。",
+    "baseKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ],
+    "upgradedKeywords": [
+      "DOHNA_DOHNA_KEYWORD_ADVANCE"
+    ]
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_DEFEND",
@@ -5058,6 +5692,9 @@
     "role": null,
     "melee": false,
     "prototype": null,
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://DohnaDohna/images/cards/squad.png",
     "baseVars": {
       "Block": 5
@@ -5080,6 +5717,9 @@
     "role": null,
     "melee": false,
     "prototype": null,
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://DohnaDohna/images/cards/squad.png",
     "baseVars": {
       "Damage": 7,
@@ -5093,8 +5733,8 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成7点伤害。\n附加效果取决于当前前排队员。",
-    "upgradedText": "造成[green]10[/green]点伤害。\n附加效果取决于当前前排队员。",
+    "baseText": "造成7点伤害。\n附加效果取决于当前最前方同伴。",
+    "upgradedText": "造成[green]10[/green]点伤害。\n附加效果取决于当前最前方同伴。",
     "baseKeywords": [],
     "upgradedKeywords": []
   },
@@ -5108,6 +5748,9 @@
     "role": null,
     "melee": false,
     "prototype": null,
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://DohnaDohna/images/cards/squad.png",
     "baseVars": {
       "Damage": 6,
@@ -5136,13 +5779,19 @@
     "role": null,
     "melee": false,
     "prototype": null,
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://DohnaDohna/images/cards/squad.png",
     "baseVars": {},
     "upgradedVars": {},
-    "baseText": "最右侧队员与另一名存活队员交换位置。",
-    "upgradedText": "[gold]保留[/gold]。\n最右侧队员与另一名存活队员交换位置。",
-    "baseKeywords": [],
+    "baseText": "[gold]固有[/gold]。\n最前方同伴与另一名存活同伴交换位置。",
+    "upgradedText": "[gold]固有[/gold]。\n[gold]保留[/gold]。\n最前方同伴与另一名存活同伴交换位置。",
+    "baseKeywords": [
+      "Innate"
+    ],
     "upgradedKeywords": [
+      "Innate",
       "Retain"
     ]
   },
@@ -5156,6 +5805,9 @@
     "role": null,
     "melee": false,
     "prototype": null,
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://DohnaDohna/images/cards/squad.png",
     "baseVars": {
       "Damage": 14,
@@ -5169,14 +5821,14 @@
       "FallbackBlock": 5,
       "FallbackCards": 2
     },
-    "baseText": "造成14点伤害。\n附加效果取决于当前前排队员。",
-    "upgradedText": "造成[green]20[/green]点伤害。\n附加效果取决于当前前排队员。",
+    "baseText": "造成14点伤害。\n附加效果取决于当前最前方同伴。",
+    "upgradedText": "造成[green]20[/green]点伤害。\n附加效果取决于当前最前方同伴。",
     "baseKeywords": [],
     "upgradedKeywords": []
   },
   {
     "id": "CARD.DOHNA_DOHNA_CARD_SQUAD_REVIVE_CHOICE",
-    "title": "复活队员",
+    "title": "复活同伴",
     "cost": -1,
     "upgradedCost": -1,
     "type": "Skill",
@@ -5184,6 +5836,9 @@
     "role": null,
     "melee": false,
     "prototype": null,
+    "attackWindup": "Automatic",
+    "castWindup": "Automatic",
+    "saucerShot": "Automatic",
     "portrait": "res://DohnaDohna/images/cards/squad.png",
     "baseVars": {
       "Heal": 0,
@@ -5193,8 +5848,8 @@
       "Heal": 0,
       "MaxHp": 25
     },
-    "baseText": "以0血复活，在后排接受本次休息治疗。\n基础休息治疗：0。生命上限：25。",
-    "upgradedText": "以0血复活，在后排接受本次休息治疗。\n基础休息治疗：0。生命上限：25。",
+    "baseText": "以0血复活，在队尾接受本次休息治疗。\n基础休息治疗：0。生命上限：25。",
+    "upgradedText": "以0血复活，在队尾接受本次休息治疗。\n基础休息治疗：0。生命上限：25。",
     "baseKeywords": [],
     "upgradedKeywords": []
   }

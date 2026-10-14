@@ -1,5 +1,6 @@
 using DohnaDohna.Cards;
 using DohnaDohna.Code.Visuals;
+using DohnaDohna.Code.Patches;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -56,23 +57,20 @@ public sealed class SquadActions(SquadCombatState squad)
 #else
             .FromCard(card, play)
 #endif
-            .WithNoAttackerAnim();
+            ;
         // Host has no generic pet-attacker setter (FromOsty rejects non-Osty).
         AccessTools.PropertySetter(typeof(AttackCommand), nameof(AttackCommand.Attacker)).Invoke(command, [actor]);
         if (play.Target?.IsAlive != true) return;
         command.Targeting(play.Target);
         if (!card.IsStrike && role == "alyce")
             AccessTools.PropertySetter(typeof(AttackCommand), nameof(AttackCommand.DamageProps)).Invoke(command, [ValueProp.Move | ValueProp.Unblockable]);
-        Creature[] targets = [play.Target];
-        bool cinematic = SquadFinisher.CanFinish(command, card, play, targets);
-        ConfigureNativeImpact(command, role, card.IsStrike);
-        await RoleVisuals.PlayAttack(actor, card.IsStrike ? "strike" : "special", ResolveHit, squad.Cancellation.Token, targets, cinematic);
+        await ResolveHit();
         squad.SyncController();
 
         async Task ResolveHit()
         {
             if (actor.IsDead) return;
-            await command.Execute(context);
+            await command.ExecuteSquad(context);
             if (card.IsStrike || actor.IsDead) return;
             bool upgraded = card.IsUpgraded;
             int scale = card.EffectMultiplier;
@@ -104,8 +102,14 @@ public sealed class SquadActions(SquadCombatState squad)
         switch (role)
         {
             case "antena":
-                command.WithHitFx(tmpSfx: "blunt_attack.mp3") // Beam Cell's energy-impact sound.
-                    .WithHitVfxNode(NSweepingBeamImpactVfx.Create);
+                if (SaucerShot.Resolve(command.ModelSource as CardModel) == SaucerShotStyle.SmallCannon)
+                    command.WithHitFx(sfx: SquadCannonImpactPatch.HitSound).WithHitVfxNode(t =>
+                    {
+                        var smoke = NFireSmokePuffVfx.Create(t);
+                        if (smoke != null) smoke.Scale = Godot.Vector2.One * .35f;
+                        return smoke;
+                    });
+                else command.WithHitFx(tmpSfx: "blunt_attack.mp3").WithHitVfxNode(NSweepingBeamImpactVfx.Create);
                 break;
             case "tora" when strike:
             case "joker" when !strike:
@@ -121,6 +125,9 @@ public sealed class SquadActions(SquadCombatState squad)
             case "porno" when !strike:
                 command.WithHitFx(tmpSfx: "heavy_attack.mp3").WithHitVfxNode(t =>
                     t.GetCreatureNode() is { } node ? NHeavyBluntVfx.Create(node.GetBottomOfHitbox()) : null);
+                break;
+            case "kikuchiyo" when !command.IsSingleTargeted && !command.IsRandomlyTargeted:
+                command.WithHitFx(VfxCmd.giantHorizontalSlashPath, "event:/sfx/enemy/enemy_attacks/vantom/vantom_dismember");
                 break;
             case "kikuchiyo":
             case "porno":

@@ -19,6 +19,17 @@ using STS2RitsuLib.Patching.Models;
 
 namespace DohnaDohna.Code.Patches;
 
+public sealed class SquadPreparePatch : IPatchMethod
+{
+    public static string PatchId => "dohnadohna_squad_prepare";
+    public static ModPatchTarget[] GetTargets() => [new(typeof(Player), nameof(Player.PopulateCombatState),
+        [typeof(MegaCrit.Sts2.Core.Random.Rng), typeof(CombatState)])];
+    public static void Postfix(Player __instance, CombatState state)
+    {
+        if (__instance.Character is DohnaSquad) SquadCombatState.Prepare(__instance, state);
+    }
+}
+
 public sealed class SquadStartPatch : IPatchMethod
 {
     public static string PatchId => "dohnadohna_squad_start";
@@ -30,7 +41,7 @@ public sealed class SquadStartPatch : IPatchMethod
         if (combat == null) return;
         foreach (var owner in combat.Players.Where(p => p.Character is DohnaSquad).ToArray())
         {
-            await SquadCombatState.Create(owner);
+            await SquadCombatState.Start(owner);
             await PowerCmd.Apply<SquadRules>(new BlockingPlayerChoiceContext(), owner.Creature, 1, owner.Creature, null);
         }
     }
@@ -45,8 +56,12 @@ public sealed class SquadDamageTargetPatch : IPatchMethod
         , typeof(CardPlay)
 #endif
         ])];
-    public static void Prefix(ref IEnumerable<Creature>? targets, ref Creature? dealer)
+    public static void Prefix(ref IEnumerable<Creature>? targets, ref Creature? dealer, CardModel? cardSource,
+        ValueProp props, out MegaCrit.Sts2.Core.Commands.Builders.AttackCommand? __state)
     {
+        var selection = SquadPlaySelection.Current;
+        __state = selection?.ContactCommand.Value;
+        if (selection != null) selection.ContactCommand.Value = null;
         if (targets == null) return;
         var mapped = new List<Creature>();
         foreach (var target in targets)
@@ -60,6 +75,18 @@ public sealed class SquadDamageTargetPatch : IPatchMethod
         targets = mapped;
         var attackerSquad = SquadCombatState.TryGet(dealer?.Player);
         if (attackerSquad?.Living.Any() == true) dealer = attackerSquad.Front;
+        if (selection?.PresentedCommand is { } command && dealer == selection.Actor
+            && cardSource == selection.Card && props == command.DamageProps)
+            selection.ContactCommand.Value = command;
+        var stage = DohnaDohna.Code.Visuals.RoleFinisher.Current;
+        if (stage != null && stage.Actor == dealer && SquadPlaySelection.Current?.PresentedCommand != null)
+            stage.Impact();
+        if (SquadPlaySelection.Current is { PresentedCommand: not null } play && dealer == play.Actor)
+            (dealer.GetCreatureNode()?.Visuals as DohnaDohna.Code.Visuals.RoleVisuals)?.ContactEmissions(mapped);
+    }
+    public static void Postfix(MegaCrit.Sts2.Core.Commands.Builders.AttackCommand? __state)
+    {
+        if (SquadPlaySelection.Current is { } play) play.ContactCommand.Value = __state;
     }
 }
 
@@ -160,6 +187,22 @@ public sealed class SquadGainBlockPatch : IPatchMethod
     public static void Prefix(ref Creature creature)
     {
         if (SquadCombatState.TryGet(creature.Player) is { } squad) creature = squad.Front;
+    }
+}
+
+public sealed class SquadOpeningBlockPatch : IPatchMethod
+{
+    public static string PatchId => "dohnadohna_opening_block";
+    public static ModPatchTarget[] GetTargets() => [new(typeof(Creature), nameof(Creature.AfterTurnStart), [typeof(CombatSide)])];
+    public static bool Prefix(Creature __instance, CombatSide side, ref Task __result)
+    {
+        // Native player creatures retain their precombat block on turn one.
+        // Give only our initial participants that same exception; subsequent
+        // clears (and Barricade/Blur hooks) remain completely native.
+        if (!SquadCombatState.IsMember(__instance) || side != CombatSide.Player
+            || __instance.PetOwner?.PlayerCombatState?.TurnNumber != 1) return true;
+        __result = Task.CompletedTask;
+        return false;
     }
 }
 

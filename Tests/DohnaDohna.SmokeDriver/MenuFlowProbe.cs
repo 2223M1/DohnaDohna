@@ -47,6 +47,8 @@ public partial class MenuFlowProbe : Node
     {
         try
         {
+            SaveManager.Instance.PrefsSave.FastMode = Entry.TestSpeed;
+            GD.Print("DOHNA_SMOKE_SPEED=" + SaveManager.Instance.PrefsSave.FastMode);
             var roster = System.Environment.GetEnvironmentVariable("DOHNA_MENU_ROSTER")?.Split(',') ?? ["kuma", "alyce", "antena", "tora"];
             if (roster.Length != 4 || roster.Distinct().Count() != 4) throw new Exception("GUI fixture must specify four unique roles");
             foreach (var role in roster) _ = RoleDefinition.Get(role);
@@ -99,6 +101,12 @@ public partial class MenuFlowProbe : Node
                 var button = selector.GetChildrenRecursive<SquadRoleButton>().Single(b => b.Name == role.Id);
                 await Click(button);
                 if (!button.IsSelected) throw new Exception("Role was not selectable: " + role.Id);
+                await Screenshot("level-two-preview-" + role.Id + ".png");
+                var description = selector.GetNode<Control>("MemberInfo/VBoxContainer/DescriptionLabel");
+                var backdrop = selector.GetNode<Control>("MemberInfo/NinePatchRect");
+                float posterLeft = selector.GetNode<Control>("BattlePortraits").GlobalPosition.X;
+                if (description.GetGlobalRect().End.X > posterLeft || backdrop.GetGlobalRect().End.X > posterLeft)
+                    throw new Exception($"Native info overlaps portrait: {role.Id}, text={description.GetGlobalRect()}, backdrop={backdrop.GetGlobalRect()}, poster={posterLeft}");
                 await Click(button);
             }
             GD.Print("DOHNA_MENU_ALL_TEN_SELECTABLE_PASS");
@@ -119,6 +127,10 @@ public partial class MenuFlowProbe : Node
             if (!slots.Select(b => b.Role!.Id).SequenceEqual(roster.Skip(1).Append(roster[0])))
                 throw new Exception("Native drag did not reorder the four selected members");
             await Screenshot("level-two-reordered.png");
+            var posterOrder = selector.GetNode<Control>("BattlePortraits").GetChildrenRecursive<TextureRect>()
+                .Select(p => p.Texture?.ResourcePath).ToArray();
+            if (!posterOrder.SequenceEqual(roster.Skip(1).Append(roster[0]).Select(r => RoleDefinition.Get(r).AssetRoot + "/selection_bust.png")))
+                throw new Exception("Native drag updated slots but not battle poster");
             await Drag(slots[3], slots[0]);
             if (!slots.Select(b => b.Role!.Id).SequenceEqual(roster)) throw new Exception("Reverse drag did not restore order");
             GD.Print("DOHNA_MENU_DRAG_REORDER_PASS");
@@ -229,7 +241,7 @@ public partial class MenuFlowProbe : Node
         // meant to change on a swap. Keep all other native powers on their owner;
         // dedicated Core/CatalogRules scenarios verify exact aura contributions.
         var snapshots = squad.Living.ToDictionary(c => c, c => (c.CurrentHp, c.Block,
-            Powers: c.Powers.Where(p => p is not StrengthPower and not ThornsPower and not VigorPower and not DohnaDohna.Powers.SquadTemporaryStrength)
+            Powers: c.Powers.Where(p => p is not StrengthPower and not ThornsPower and not VigorPower and not DohnaDohna.Powers.SquadTemporaryStrength and not DohnaDohna.Powers.ToraSupportStrength)
                 .ToDictionary(p => p, p => p.Amount)));
         var holder = NGame.Instance!.GetChildrenRecursive<NHandCardHolder>().Single(h => h.CardModel == swap);
         await KeyInput(Key.Up);

@@ -48,12 +48,12 @@ public partial class LoadProbe
         await CardCmd.AutoPlay(context, combat.CreateCard<SquadSweepingBeam>(owner), null);
         CatalogCheck(squad.Living.Where(c => c != antena).All(c => c.GetPowerAmount<DexterityPower>() == combat.Enemies.Count),
             "Antena second attack grants no additional dexterity");
-        int rewards = tora.GetPowerAmount<SquadTemporaryStrength>();
+        int rewards = tora.GetPowerAmount<ToraSupportStrength>();
         await PowerCmd.Apply<ArtifactPower>(context, tora, 1, tora, null);
         await PowerCmd.Apply<ArtifactPower>(context, tora, 2, tora, null);
         await PowerCmd.Remove<ArtifactPower>(tora);
         await PowerCmd.Apply<ArtifactPower>(context, tora, 1, tora, null);
-        CatalogCheck(tora.GetPowerAmount<SquadTemporaryStrength>() == rewards + 1, "Tora rewards a positive type once, no recursion/reapply farm");
+        CatalogCheck(tora.GetPowerAmount<ToraSupportStrength>() == rewards + 1, "Tora rewards a positive type once, no recursion/reapply farm");
         foreach (var enemy in combat.Enemies) await CreatureCmd.LoseBlock(context, enemy, enemy.Block, null);
         int hp = target.CurrentHp;
         await CardCmd.AutoPlay(context, combat.CreateCard<SquadBeamCell>(owner), target);
@@ -175,7 +175,7 @@ public partial class LoadProbe
                 await CardCmd.AutoPlay(context, combat.CreateCard<SquadSweepingBeam>(owner), null);
                 CatalogCheck(squad.GetActor("alyce").GetPowerAmount<DexterityPower>() == 2 * combat.Enemies.Count,
                     "refined Antena grants two dexterity per target");
-                CatalogCheck(squad.GetActor("tora").GetPowerAmount<SquadTemporaryStrength>() == 2,
+                CatalogCheck(squad.GetActor("tora").GetPowerAmount<ToraSupportStrength>() == 2,
                     "refined Tora grants two strength per positive type");
                 var target = combat.Enemies.First();
                 int hp = target.CurrentHp, hand = PileType.Hand.GetPile(owner).Cards.Count;

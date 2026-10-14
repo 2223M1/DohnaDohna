@@ -1,4 +1,5 @@
 using System.Text.Json;
+using STS2RitsuLib.Keywords;
 using DohnaDohna.Cards;
 using DohnaDohna.Cards.Catalog;
 using DohnaDohna.Code.Patches;
@@ -28,6 +29,7 @@ namespace DohnaDohna.SmokeDriver;
 
 public partial class LoadProbe
 {
+    private static string KeywordId(CardKeyword keyword) => keyword.TryGetModKeywordId(out var id) ? id : keyword.ToString();
     // Host-supported test selector. This is command verification, not an input/UI claim.
     private sealed class CatalogSelector : ICardSelector
     {
@@ -58,6 +60,7 @@ public partial class LoadProbe
     {
         var cards = ModelDb.Character<DohnaSquad>().CardPool.AllCards.OfType<SquadCatalogCard>().ToArray();
         CatalogCheck(cards.Length == 170 && cards.Select(c => c.Prototype).Distinct().Count() == 170, "170 unique prototypes");
+        await VerifyKeywords(owner, run, cards);
         CatalogCheck(cards.Count(c => c.FixedRole == null && c.Rarity == CardRarity.Common) == 20, "20 common public cards");
         foreach (var role in RoleDefinition.All)
         {
@@ -77,15 +80,18 @@ public partial class LoadProbe
             var card = run.CreateCard(canonical, owner);
             var baseVars = card.DynamicVars.ToDictionary(p => p.Key, p => p.Value.BaseValue);
             var baseText = card.GetDescriptionForPile(PileType.Deck);
-            var baseKeywords = card.Keywords.Select(k => k.ToString()).ToArray();
+            var baseKeywords = card.Keywords.Select(KeywordId).ToArray();
             var baseCost = card.EnergyCost.GetWithModifiers(CostModifiers.None);
             if (card.IsUpgradable) card.UpgradeInternal();
             metadata.Add(new { id = canonical.Id.ToString(), title = canonical.TitleLocString.GetFormattedText(),
                 cost = baseCost, upgradedCost = card.EnergyCost.GetWithModifiers(CostModifiers.None), type = card.Type.ToString(), rarity = card.Rarity.ToString(),
                 role, melee = (card as SquadCardModel)?.IsMelee ?? false, prototype = (card as SquadCatalogCard)?.Prototype,
+                attackWindup = (card as SquadCardModel)?.AttackWindup.ToString() ?? "Automatic",
+                castWindup = (card as SquadCardModel)?.CastWindup.ToString() ?? "Automatic",
+                saucerShot = (card as SquadCardModel)?.SaucerShot.ToString() ?? "Automatic",
                 portrait = card.PortraitPath, baseVars, upgradedVars = card.DynamicVars.ToDictionary(p => p.Key, p => p.Value.BaseValue),
                 baseText, upgradedText = card.GetDescriptionForPile(PileType.Deck), baseKeywords,
-                upgradedKeywords = card.Keywords.Select(k => k.ToString()).ToArray() });
+                upgradedKeywords = card.Keywords.Select(KeywordId).ToArray() });
         }
         SquadStore.State.Set(run, owner.NetId, saved);
         System.IO.File.WriteAllText(System.IO.Path.Combine(System.Environment.GetEnvironmentVariable("LOCALAPPDATA")!, "runtime-cards.json"),
@@ -105,6 +111,7 @@ public partial class LoadProbe
             CatalogCheck(SquadPool.ForPlayer(owner, cards).Count() == 80, string.Join(',', roster) + " 80-card pool");
             await EnterBattle(owner);
             var squad = SquadCombatState.Get(owner);
+            CatalogCheck(PileType.Hand.GetPile(owner).Cards.Any(c => c is SquadSwap), "native Innate puts starter Swap in opening hand");
             var combat = owner.Creature.CombatState!;
             CatalogCheck(squad.Living.Count() == 4 && combat.Players.Count == 1, "one player / four native members");
             foreach (var member in squad.Living)
@@ -170,6 +177,7 @@ public partial class LoadProbe
     private async Task VerifyRoleRelics(Player owner, RunState run)
     {
         CatalogCheck(owner.Relics.OfType<SquadRoleRelic>().Count() == 4, "exactly four starting native relics");
+        await VerifyRelicVisuals(owner, run);
         var touch = (TouchOfOrobas)ModelDb.Relic<TouchOfOrobas>().ToMutable();
         foreach (var role in RoleDefinition.All)
         {
@@ -206,6 +214,13 @@ public partial class LoadProbe
         var holders = selection!.GetChildrenRecursive<MegaCrit.Sts2.Core.Nodes.Cards.Holders.NGridCardHolder>()
             .Where(h => h.CardModel is SquadRelicUpgradeChoice).ToArray();
         CatalogCheck(holders.Length == 4, "native refinement grid displays all four starter relics");
+        foreach (var holder in holders)
+        {
+            var option = (SquadRelicUpgradeChoice)holder.CardModel;
+            CatalogCheck(option.PortraitPath == RoleDefinition.Get(option.Original!.Role).AssetRoot + "/relic_refinement.png",
+                option.Original.Role + " native refinement option uses gold relic artwork");
+        }
+        await Screenshot("relic-refinement-gold.png");
         var chosen = holders.Single(h => ((SquadRelicUpgradeChoice)h.CardModel).Original!.Role == "medhico");
         await ClickNativeChoice(chosen, "refinement");
         await obtaining.WaitAsync(TimeSpan.FromSeconds(15));

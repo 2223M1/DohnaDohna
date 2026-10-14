@@ -4,10 +4,11 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
+import { validateBoard, normalizeBoard, defaultLayout, descriptionFor, editableFields } from './card-board-model.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const baselinePath = 'Docs/authoring/card-board-baseline.json';
 const htmlPath = 'Docs/authoring/DohnaDohna-card-board.html';
-const fields = new Set(['name','cost','upgradedCost','role','melee','text','upgradedText','notes','mark','order','hp','color']);
+const fields = new Set(editableFields);
 const sha = value => crypto.createHash('sha256').update(value).digest('hex');
 const encode = value => JSON.stringify(value).replaceAll('<', '\\u003c');
 const plain = text => (text ?? '').replace(/\[\/?(?:gold|green|red|blue|purple|orange|aqua)\]/g, '')
@@ -19,23 +20,13 @@ export function readBoard(html) {
   const payloads = [...html.matchAll(/<script\s+id="dohna-board-data"\s+type="application\/json"\s*>([\s\S]*?)<\/script\s*>/gi)];
   assert.equal(payloads.length, 1, 'Exactly one inert DohnaDohna data block is required');
   const data = JSON.parse(payloads[0][1]);
-  assert.equal(data.schema, 1);
-  assert.equal(data.project, 'DohnaDohna');
-  assert(Array.isArray(data.entries) && data.entries.length < 2000);
-  assert.equal(new Set(data.entries.map(e => e.id)).size, data.entries.length, 'Duplicate stable ID');
-  for (const e of data.entries) {
-    assert(typeof e.id === 'string' && /^[\w.-]{1,150}$/.test(e.id), 'Invalid stable ID');
-    assert(['card','role','relic','effect','power'].includes(e.kind), 'Unknown entry kind');
-    for (const [key, value] of Object.entries(e)) {
-      assert(['id','kind','source','rarity','type',...fields].includes(key), 'Unknown field: ' + key);
-      assert(['string','number','boolean'].includes(typeof value) || value === null, 'Scalar fields only');
-      if (typeof value === 'string') assert(value.length < 20000, 'Field too large');
-    }
-  }
+  validateBoard(data);
   return data;
 }
 
 export function diffBoard(baseline, returned) {
+  validateBoard(baseline);
+  validateBoard(returned);
   assert.equal(returned.baselineHash, baseline.baselineHash, 'Different baseline: use the baseline delivered with this board');
   assert.equal(sha(JSON.stringify(baseline.entries)), baseline.baselineHash, 'Repository baseline was modified');
   const old = new Map(baseline.entries.map(e => [e.id, e]));
@@ -48,13 +39,39 @@ export function diffBoard(baseline, returned) {
     if (!before) continue;
     const changes = {};
     for (const key of new Set([...Object.keys(before), ...Object.keys(e)])) {
+      if (key==='attackWindup' || key==='castWindup' || key==='saucerShot') {
+        if ((before[key]??'Automatic')!==(e[key]??'Automatic')) changes[key]={before:before[key]??'Automatic',after:e[key]??'Automatic'};
+        continue;
+      }
+      if (key === 'designText') {
+        if (descriptionFor(before) !== descriptionFor(e)) changes.designText = {before:descriptionFor(before),after:descriptionFor(e)};
+        continue;
+      }
       if (JSON.stringify(before[key]) === JSON.stringify(e[key])) continue;
       assert(fields.has(key), 'Readonly identity/source changed: ' + e.id + '/' + key);
       changes[key] = { before: before[key] ?? null, after: e[key] ?? null };
     }
     if (Object.keys(changes).length) changed.push({ id: e.id, name: e.name, changes });
   }
-  return { project: 'DohnaDohna', baselineHash: baseline.baselineHash, added, removed, changed };
+  const layoutBefore = baseline.layout ?? defaultLayout(baseline.entries);
+  const layoutAfter = returned.layout ?? defaultLayout(returned.entries);
+  const structure = rows => new Map(rows.map(r=>[r.id,{id:r.id,role:r.role,rarity:r.rarity,slots:r.slots.map(s=>s.id)}]));
+  const left=structure(layoutBefore),right=structure(layoutAfter);
+  const locations=rows=>new Map(rows.flatMap(r=>r.slots.filter(s=>s.entryId).map(s=>[s.entryId,s.id])));
+  const previous=locations(layoutBefore),nextLocations=locations(layoutAfter);
+  const layoutChanges={
+    addedRows:[...right.values()].filter(r=>!left.has(r.id)),
+    removedRows:[...left.values()].filter(r=>!right.has(r.id)),
+    changedRows:[...right.values()].filter(r=>left.has(r.id) && JSON.stringify(r)!==JSON.stringify(left.get(r.id))).map(r=>({before:left.get(r.id),after:r})),
+    placements:[...new Set([...previous.keys(),...nextLocations.keys()])].filter(id=>previous.get(id)!==nextLocations.get(id)).map(id=>({id,before:previous.get(id)??null,after:nextLocations.get(id)??null}))
+  };
+  return { project: 'DohnaDohna', baselineHash: baseline.baselineHash, added, removed, changed, layoutChanges };
+}
+
+export function renderBoardHtml(data) {
+  const template=fs.readFileSync(path.join(root,'tools/card-board.template.html'),'utf8');
+  const model=fs.readFileSync(path.join(root,'tools/card-board-model.mjs'),'utf8').replace(/^export /gm,'');
+  return template.replace('__DOHNA_MODEL__',()=>model).replace('__DOHNA_DATA__',()=>encode(normalizeBoard(data)));
 }
 
 function patchFile(file, content) {
@@ -76,7 +93,8 @@ function generate(runtimeFile, vanillaRoot) {
   let order = 0;
   const entries = runtime.map(c=>({id:c.id,kind:'card',name:c.title,cost:c.cost,upgradedCost:c.upgradedCost,
     role:c.role ?? '',melee:c.melee,text:plain(c.baseText),upgradedText:plain(c.upgradedText),notes:'',mark:'',order:order++,
-    rarity:c.rarity,type:c.type,source:c.prototype ? `STS2 0.111.0 · ${c.prototype}` : 'DohnaDohna'}));
+    rarity:c.rarity,type:c.type,attackWindup:c.attackWindup??'Automatic',castWindup:c.castWindup??'Automatic',saucerShot:c.saucerShot??'Automatic',
+    source:c.prototype ? `STS2 0.111.0 · ${c.prototype}` : 'DohnaDohna'}));
   for (const r of roles) {
     entries.push({id:'ROLE.'+r.id,kind:'role',name:r.name,role:r.id,hp:r.hp,color:r.color,notes:'',mark:'',order:order++,source:'RoleDefinition / 原作基础HP ÷ 10'});
     for (const suffix of ['', '_PLUS']) {
@@ -102,16 +120,15 @@ function generate(runtimeFile, vanillaRoot) {
   }
   const baseline = {schema:1,project:'DohnaDohna',label:'170张卡池 · 真实初始遗物 · 2026-10-09',host:'0.111.0',
     runtimeSha256:sha(fs.readFileSync(path.resolve(root,runtimeFile))),baselineHash:sha(JSON.stringify(entries)),entries};
-  const template = fs.readFileSync(path.join(root,'tools/card-board.template.html'),'utf8');
   if (process.argv.includes('--write')) {
     fs.mkdirSync(path.join(root,'Docs/authoring'),{recursive:true});
     fs.writeFileSync(path.join(root,baselinePath),JSON.stringify(baseline,null,2)+'\n');
-    fs.writeFileSync(path.join(root,htmlPath),template.replace('__DOHNA_DATA__',encode(baseline)));
+    fs.writeFileSync(path.join(root,htmlPath),renderBoardHtml(baseline));
     console.log(`Generated offline board: ${entries.length} entries; baseline ${baseline.baselineHash}`);
     return;
   }
   console.log('*** Begin Patch\n' + patchFile(baselinePath,JSON.stringify(baseline,null,2))
-    + patchFile(htmlPath,template.replace('__DOHNA_DATA__',encode(baseline))) + '*** End Patch');
+    + patchFile(htmlPath,renderBoardHtml(baseline)) + '*** End Patch');
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
@@ -119,5 +136,10 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   else if (process.argv[2] === 'diff') {
     const returned = readBoard(fs.readFileSync(process.argv[3], 'utf8'));
     console.log(JSON.stringify(diffBoard(json(process.argv[4] ?? baselinePath),returned),null,2));
-  } else throw new Error('Usage: node tools/card-board.mjs generate <runtime-cards.json> <vanilla-localization-root> | diff <returned.html> [baseline.json]');
+  } else if (process.argv[2] === 'refresh') {
+    const input=process.argv[3] ?? htmlPath, output=process.argv[4] ?? htmlPath;
+    const data=readBoard(fs.readFileSync(path.resolve(root,input),'utf8'));
+    diffBoard(json(baselinePath),data); // Preserve and verify edits against the original baseline.
+    console.log('*** Begin Patch\n'+patchFile(output,renderBoardHtml(data))+'*** End Patch');
+  } else throw new Error('Usage: node tools/card-board.mjs generate <runtime-cards.json> <vanilla-localization-root> | diff <returned.html> [baseline.json] | refresh [existing.html] [output.html] (prints patch)');
 }

@@ -42,6 +42,10 @@ public partial class LoadProbe
     private async Task VerifyScaling(Player owner, RunState run)
     {
         var context = new BlockingPlayerChoiceContext();
+        // Explicit formation: this fixture predates removal of the starter
+        // relic's automatic rotation. It needs Antena in front and Tora healthy
+        // behind her, rather than relying on that retired opening side effect.
+        await SetCatalogRoster(owner, run, SquadRunState.Create(["kuma", "alyce", "tora", "antena"]));
         await EnterBattle(owner, ModelDb.Encounter<ShrinkerBeetleWeak>().ToMutable());
         var squad = SquadCombatState.Get(owner);
         var combat = owner.Creature.CombatState!;
@@ -86,9 +90,11 @@ public partial class LoadProbe
         var signature = combat.CreateCard(ModelDb.Card<AntenaSignature>(), owner);
         if (squad.RoleOf(shrunk) != "antena") throw new Exception("Unexpected opening formation for shrink fixture");
         await CardCmd.AutoPlay(context, signature, beetle);
-        if (hp - beetle.CurrentHp != 6) throw new Exception("Rear signature did not retain native shrink damage reduction");
+        // The retained legacy signature now shares the current 7-damage base:
+        // native Shrink multiplies by .7, then damage is truncated to 4.
+        if (hp - beetle.CurrentHp != 4) throw new Exception($"Rear signature did not retain native shrink damage reduction: {hp - beetle.CurrentHp}");
         AssertMemberScale(shrunk, .5f, "after-rear-attack");
-        GD.Print("DOHNA_SMOKE_BEETLE_SCALE_DAMAGE_PASS realEnemyTurn=True strike=4 healthy=6 rearSignature=6");
+        GD.Print("DOHNA_SMOKE_BEETLE_SCALE_DAMAGE_PASS realEnemyTurn=True strike=4 healthy=6 rearSignature=4");
 
         // The actual monster move also exercises native Artifact before the power's AfterApplied.
         await PowerCmd.Apply<ArtifactPower>(context, healthy, 1, healthy, null);
@@ -171,6 +177,9 @@ public partial class LoadProbe
         await RelicCmd.Remove(mushroom);
         await EnterBattle(owner);
         squad = SquadCombatState.Get(owner);
+        // NHealthBar's native entrance tween still advances after Play begins.
+        // Capture a settled baseline, not a fractional in-flight HUD position.
+        await ToSignal(GetTree().CreateTimer(1), SceneTreeTimer.SignalName.Timeout);
         foreach (var actor in squad.Actors) AssertMemberScale(actor, 1, "without-relic");
         var maxBefore = squad.Actors.ToDictionary(c => c, c => c.MaxHp);
         var rootsBefore = squad.Actors.ToDictionary(c => c, c => c.GetCreatureNode()!.Position);
@@ -184,7 +193,7 @@ public partial class LoadProbe
             AssertMemberScale(actor, 1.5f, "mid-combat-obtain");
             if (actor.GetCreatureNode()!.Position != rootsBefore[actor]
                 || actor.GetCreatureNode()!.GetNode<Control>("%HealthBar").GlobalPosition != hudBefore[actor])
-                throw new Exception("Mushroom changed original member/HUD position");
+                throw new Exception($"Mushroom changed original member/HUD position: {squad.RoleOf(actor)} root {rootsBefore[actor]} -> {actor.GetCreatureNode()!.Position}, HUD {hudBefore[actor]} -> {actor.GetCreatureNode()!.GetNode<Control>("%HealthBar").GlobalPosition}");
         }
         await squad.Swap(squad.Living.First());
         foreach (var actor in squad.Actors) AssertMemberScale(actor, 1.5f, "large-swap");

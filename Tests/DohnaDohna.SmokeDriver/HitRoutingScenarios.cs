@@ -238,6 +238,9 @@ public partial class LoadProbe
     {
         var initialSize = GetWindow().Size;
         var sizes = new[] { new Vector2I(1600, 900), new Vector2I(1280, 960), new Vector2I(1920, 810) };
+        var stylePatch = new HarmonyLib.Harmony("DohnaDohna.SmokeDriver.EmissionAlignment");
+        stylePatch.Patch(HarmonyLib.AccessTools.PropertyGetter(typeof(SquadCardModel), nameof(SquadCardModel.SaucerShot)),
+            postfix: new HarmonyLib.HarmonyMethod(typeof(LoadProbe), nameof(EmissionCardStyle)));
         try
         {
             for (int shape = 0; shape < sizes.Length; shape++)
@@ -253,67 +256,82 @@ public partial class LoadProbe
                 var squad = SquadCombatState.Get(owner);
                 var actor = squad.GetActor("antena");
                 var visuals = (RoleVisuals)actor.GetCreatureNode()!.Visuals;
-                var enemies = owner.Creature.CombatState!.Enemies.ToArray();
+                var combat = owner.Creature.CombatState!;
+                var enemies = combat.Enemies.ToArray();
                 foreach (var enemy in enemies) await CreatureCmd.GainMaxHp(enemy, 1000);
-                var orbContext = new BlockingPlayerChoiceContext();
-                await OrbCmd.Channel<MegaCrit.Sts2.Core.Models.Orbs.LightningOrb>(orbContext, owner);
-                await OrbCmd.Channel<MegaCrit.Sts2.Core.Models.Orbs.FrostOrb>(orbContext, owner);
-                await OrbCmd.Channel<MegaCrit.Sts2.Core.Models.Orbs.DarkOrb>(orbContext, owner);
-                var manager = owner.Creature.GetCreatureNode()!.OrbManager!;
-                if (manager.Scale != Vector2.One) throw new Exception("Orb manager changed native display scale");
+                var context = new BlockingPlayerChoiceContext();
                 foreach (bool atFront in new[] { false, true })
                 {
                     if ((squad.Front == actor) != atFront) await squad.Swap(atFront ? actor : squad.GetActor("kuma"));
-                    foreach (string cue in new[] { "strike", "special" })
+                    await SquadFormation.Ensure(MegaCrit.Sts2.Core.Nodes.Rooms.NCombatRoom.Instance!).FinishMovement(squad.Cancellation.Token);
+                    // A native tall foe and a visual 1.4x size fixture verify
+                    // that the firing lane follows actual rendered height.
+                    if (shape == 1 && atFront) enemies[0].GetCreatureNode()!.Visuals.Scale *= 1.4f;
+                    foreach (string mode in new[] { "cannon", "sweep", "hyperbeam" })
                     {
-                        string clip = $"saucer-{shape}-{(atFront ? "front" : "rear")}-{cue}";
+                        bool beam = mode == "sweep";
+                        string clip = $"saucer-{shape}-{(atFront ? "front" : "rear")}-{mode}";
                         MotionMarker("antena", clip, "start");
-                        int witnesses = 0, hits = 0;
-                        var targets = cue == "strike" ? new[] { enemies[^1] } : enemies;
-                        var home = visuals.SaucerAnchor!.Value;
-                        var memberNode = actor.GetCreatureNode()!;
-                        var memberTransform = (memberNode.Position, memberNode.Scale, memberNode.Rotation);
-                        float flightDistance = 0;
-                        var task = visuals.Play(cue, async () =>
+                        var node = actor.GetCreatureNode()!;
+                        var original = node.GetTransform();
+                        CardModel card = beam ? combat.CreateCard<SquadSweepingBeam>(owner) : combat.CreateCard<SquadBallLightning>(owner);
+                        _emissionCard = mode == "hyperbeam" ? (SquadCardModel)card : null;
+                        _emissionStyle = SaucerShotStyle.Hyperbeam;
+                        decimal before = enemies.Sum(e => e.CurrentHp);
+                        int witnesses = 0;
+                        Vector2 hoverMuzzle = visuals.SaucerMuzzle!.Value;
+                        bool movedEmitter = false;
+                        bool contactCaptured = false;
+                        var action = CardCmd.AutoPlay(context, card, beam ? null : enemies[^1]);
+                        while (!action.IsCompleted || visuals.IsPlaying)
                         {
-                            hits++;
-                            var targetPoint = targets.Aggregate(Vector2.Zero, (sum, target) =>
-                                sum + target.GetCreatureNode()!.Visuals.VfxSpawnPosition.GlobalPosition) / targets.Length;
-                            var expected = targetPoint + visuals.GlobalTransform.BasisXform(new Vector2(36 - 320, -360 + 160 - 38));
-                            if (visuals.SaucerAnchor!.Value.DistanceTo(expected) > .02f)
-                                throw new Exception($"Saucer did not reach actual target firing fixture: {visuals.SaucerAnchor} != {expected}");
-                            await Screenshot($"saucer-contact-{shape}-{atFront}-{cue}.png");
-                            await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), targets, 1, ValueProp.Move, actor);
-                        }, squad.Cancellation.Token, targets);
-                        while (!task.IsCompleted || visuals.IsPlaying)
-                        {
-                            await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-                            flightDistance = Math.Max(flightDistance, home.DistanceTo(visuals.SaucerAnchor!.Value));
-                            if ((memberNode.Position, memberNode.Scale, memberNode.Rotation) != memberTransform)
-                                throw new Exception("Flying saucer moved the member/HUD root");
-                            VerifyComposition(visuals);
-                            int connected = VerifyAntenaEmitter(visuals, cue);
-                            if (connected > 0 && witnesses == 0) await Screenshot($"emitter-{shape}-{atFront}-{cue}.png");
-                            witnesses += connected;
+                            await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
+                            if (node.GetTransform() != original) throw new Exception("Emission moved member/HUD root");
+                            foreach (var shot in GetTree().Root.GetChildrenRecursive<SaucerShot>().Where(s => s.IsInsideTree() && !s.IsQueuedForDeletion()))
+                            {
+                                movedEmitter |= visuals.SaucerMuzzle!.Value.DistanceTo(hoverMuzzle) > 30;
+                                if (shot.Attached && shot.GlobalPosition.DistanceTo(visuals.SaucerMuzzle!.Value) > .02f)
+                                    throw new Exception("Native beam detached from UFO muzzle");
+                                if (witnesses++ == 2) await Screenshot(clip + ".png");
+                                if (mode != "cannon" && !shot.Pending && !contactCaptured)
+                                {
+                                    if (beam)
+                                        VerifyEmissionRay(shot, SaucerShotStyle.SweepingBeam,
+                                            enemies.MaxBy(e => e.GetCreatureNode()!.VfxSpawnPosition.DistanceTo(shot.GlobalPosition))!, []);
+                                    if (mode == "hyperbeam")
+                                    {
+                                        VerifyEmissionRay(shot, SaucerShotStyle.Hyperbeam, enemies[^1], enemies.Where(e => e != enemies[^1]));
+                                        var bounds = enemies[^1].GetCreatureNode()!.Visuals.Bounds.GetGlobalRect();
+                                        var muzzle = visuals.SaucerMuzzle!.Value;
+                                        if (muzzle.Y > bounds.Position.Y - 45 && muzzle.X > bounds.Position.X - 45 && muzzle.X < bounds.End.X + 45)
+                                            throw new Exception("UFO failed to clear tall enemy's actual body");
+                                        GD.Print($"DOHNA_EMISSION_HEIGHT_PASS shape={shape} front={atFront} bounds={bounds} muzzle={muzzle}");
+                                    }
+                                    contactCaptured = true; await Screenshot(clip + "-contact.png");
+                                }
+                            }
                         }
-                        await task;
+                        await action;
+                        if (witnesses == 0 || enemies.Sum(e => e.CurrentHp) >= before) throw new Exception("No native emission or actual damage");
+                        if (!movedEmitter) throw new Exception("Saucer stayed at its hover point instead of taking its firing lane");
+                        await ToSignal(GetTree().CreateTimer(1.5), SceneTreeTimer.SignalName.Timeout);
+                        if (GetTree().Root.GetChildrenRecursive<SaucerShot>().Any()) throw new Exception("Unreleased native emission");
                         MotionMarker("antena", clip, "end");
-                        if (witnesses == 0 || hits != 1 || flightDistance < 25 || visuals.SaucerAnchor!.Value.DistanceTo(home) > .02f)
-                            throw new Exception("Emitter matrix did not witness flight, one hit, connected beams and return");
-                        GD.Print($"DOHNA_SMOKE_EMITTER_MATRIX_PASS shape={shape} size={sizes[shape]} front={atFront} cue={cue} samples={witnesses} flightDistance={flightDistance}");
+                        GD.Print($"DOHNA_SMOKE_EMITTER_MATRIX_PASS shape={shape} front={atFront} mode={mode} samples={witnesses}");
                     }
                 }
                 await OrbCmd.AddSlots(owner, 3);
                 await ToSignal(GetTree().CreateTimer(.8), SceneTreeTimer.SignalName.Timeout);
+                var manager = owner.Creature.GetCreatureNode()!.OrbManager!;
                 var orbNodes = manager.GetChildrenRecursive<MegaCrit.Sts2.Core.Nodes.Orbs.NOrb>().ToArray();
-                if (orbNodes.Length != 6 || orbNodes.Any(n => n.Scale.DistanceTo(Vector2.One * .85f) > .001f
-                    || n.Position.Y >= 0)) throw new Exception("Expanded native orbs lost size or upper arc layout");
+                if (manager.Scale != Vector2.One || orbNodes.Length != 6 || orbNodes.Any(n => n.Scale.DistanceTo(Vector2.One * .85f) > .001f || n.Position.Y >= 0))
+                    throw new Exception("Expanded native orbs lost size or upper arc");
                 await Screenshot($"saucer-expanded-{shape}.png");
                 await FinishCombat(owner);
                 await RunManager.Instance.EnterRoomDebug(RoomType.RestSite, showTransition: false);
             }
         }
-        finally { GetWindow().Size = initialSize; }
+        finally { _emissionCard = null; stylePatch.UnpatchAll(stylePatch.Id); GetWindow().Size = initialSize; }
     }
 
     private async Task NativeAudioWitness(string label, Func<Task> action)

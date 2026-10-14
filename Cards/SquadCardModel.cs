@@ -19,6 +19,11 @@ public abstract class SquadCardModel(int cost, CardType type, CardRarity rarity,
 {
     public virtual string? FixedRole => null;
     public virtual bool IsMelee => false;
+    public override IEnumerable<CardKeyword> CanonicalKeywords => IsMelee
+        ? [.. base.CanonicalKeywords, SquadKeywords.Advance] : base.CanonicalKeywords;
+    internal virtual DohnaDohna.Code.Visuals.AttackWindup AttackWindup => DohnaDohna.Code.Visuals.AttackWindup.Automatic;
+    internal virtual DohnaDohna.Code.Visuals.CastWindup CastWindup => DohnaDohna.Code.Visuals.CastWindup.Automatic;
+    internal virtual DohnaDohna.Code.Visuals.SaucerShotStyle SaucerShot => DohnaDohna.Code.Visuals.SaucerShotStyle.Automatic;
     protected virtual IEnumerable<DynamicVar> OriginalVars => [];
     protected sealed override IEnumerable<DynamicVar> CanonicalVars => OriginalVars.Concat([
         new FallbackDamageVar(), new FallbackBlockVar(), new FallbackCardsVar()]);

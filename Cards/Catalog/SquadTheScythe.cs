@@ -61,7 +61,7 @@ public sealed class SquadTheScythe : SquadCatalogCard
 		}
 	}
 
-	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+	public override IEnumerable<CardKeyword> CanonicalKeywords => [.. base.CanonicalKeywords, CardKeyword.Exhaust];
 
 	protected override IEnumerable<DynamicVar> OriginalVars => new DynamicVar[2]
 	{

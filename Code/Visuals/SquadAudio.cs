@@ -17,7 +17,7 @@ public static class SquadAudio
         FmodStudioDeferredBankRegistration.RegisterBank(Bank);
         FmodStudioDeferredBankRegistration.RegisterStudioGuidMappings(Guids);
     }
-    public static IAudioHandle Play(string reference) => CreatePlayback(reference, AudioLifecycleScope.Combat);
+    public static IAudioHandle Play(string reference) => CreatePlayback(reference, AudioLifecycleScope.Room);
 
     // No combat visual owns event-room deaths. RitsuLib retains and releases
     // these one-shot handles at the native room boundary, even without a poster.

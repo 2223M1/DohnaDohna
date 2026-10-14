@@ -61,6 +61,8 @@ public partial class LoadProbe
         await EnterBattle(owner);
         squad = SquadCombatState.Get(owner);
         combat = owner.Creature.CombatState!;
+        await squad.Swap(squad.GetActor("antena"));
+        await SquadFormation.Ensure(NCombatRoom.Instance!).FinishMovement(squad.Cancellation.Token);
         foreach (var enemy in combat.Enemies) await CreatureCmd.SetCurrentHp(enemy, 1);
         // A real native phase/death-summon prevention hook must suppress prediction.
         var blocker = await PowerCmd.Apply<InfestedPower>(context, combat.Enemies.First(), 1, null, null);
@@ -84,6 +86,7 @@ public partial class LoadProbe
 
         async Task Observe(CardModel card, Creature? target, bool expected, string label)
         {
+            expected &= MegaCrit.Sts2.Core.Saves.SaveManager.Instance.PrefsSave.FastMode != MegaCrit.Sts2.Core.Settings.FastModeType.Instant;
             if (expected)
             {
                 GD.Print("DOHNA_SMOKE_FINISHER_EXTERNAL " + string.Join(",", owner.RunState.IterateHookListeners(combat)
@@ -93,13 +96,18 @@ public partial class LoadProbe
                     + " stop=" + MegaCrit.Sts2.Core.Hooks.Hook.ShouldStopCombatFromEnding(combat));
             }
             bool cameraSeen = false, lightingSeen = false;
+            bool doomSeen = false, frozenImpactSeen = false;
+            double maxImpactTime = 0;
+            var presentation = new List<object>();
+            var enemyScales = combat.Enemies.Select(e => e.GetCreatureNode()!).ToDictionary(n => n, n => n.Visuals.Scale);
             var allies = squad.Living.Select(c => c.GetCreatureNode()!.Visuals.GetCurrentBody()).ToArray();
             var colors = allies.ToDictionary(n => n, n => n.Modulate);
             var roleVisuals = (RoleVisuals)squad.Actions.ActorFor(card).GetCreatureNode()!.Visuals;
             _impactCommand = null; _impactObserving = true; _impactTargets = target == null ? combat.Enemies.ToArray() : [target];
+            MotionMarker(squad.RoleOf(squad.Actions.ActorFor(card)), "finisher-" + label, "start");
             var attack = CardCmd.AutoPlay(context, card, target);
             int frames = 0, motionFrames = 0;
-            while (!attack.IsCompleted)
+            while (!attack.IsCompleted || RoleFinisher.Current != null)
             {
                 await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
                 var camera = NCombatRoom.Instance!.GetNodeOrNull<CanvasLayer>("DohnaMotionCamera");
@@ -110,11 +118,31 @@ public partial class LoadProbe
                     if (!viewport.Grow(.001f).Encloses(camera.Transform.AffineInverse() * viewport))
                         throw new Exception("Finisher camera escaped baseline scene: " + label);
                 }
-                lightingSeen |= GetTree().Root.GetChildrenRecursive<ColorRect>().Any(n => n.Name == "DohnaActionLighting");
+                lightingSeen |= GetTree().Root.GetChildrenRecursive<ColorRect>().Any(n => n.Name == "DohnaFinisherBackdrop");
+                if (RoleFinisher.Current is { Holding: true } stage)
+                {
+                    const System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+                    double elapsed = (double)typeof(RoleFinisher).GetField("_time", flags)!.GetValue(stage)!;
+                    int frozen = ((System.Collections.ICollection)typeof(RoleFinisher).GetField("_frozen", flags)!.GetValue(stage)!).Count;
+                    maxImpactTime = Math.Max(maxImpactTime, elapsed);
+                    frozenImpactSeen |= frozen > 0;
+                    var mask = GetTree().Root.GetChildrenRecursive<ColorRect>().Single(n => n.Name == "DohnaFinisherBackdrop");
+                    if (Math.Abs(mask.Color.A - .55f) > .001f && elapsed < .43)
+                        throw new Exception("Finisher backdrop is not the B-profile translucent mask");
+                    presentation.Add(new { elapsed, frozen, zoom = camera?.Transform.Scale.X, alpha = mask.Color.A,
+                        speed = MegaCrit.Sts2.Core.Saves.SaveManager.Instance.PrefsSave.FastMode.ToString() });
+                }
+                doomSeen |= GetTree().Root.GetChildrenRecursive<RoleDoomHold>().Any();
+                foreach (var held in GetTree().Root.GetChildrenRecursive<RoleDoomHold>().Where(n => !n.IsQueuedForDeletion()))
+                    if (held.GetParent<MegaCrit.Sts2.Core.Nodes.Combat.NCreature>() is { SpineAnimation.IsValid: true } victim
+                        && victim.SpineAnimation.GetCurrentAnimationName() != "hurt")
+                        throw new Exception("Native death replaced the Doom visual hold: " + label);
+                if (enemyScales.Any(p => GodotObject.IsInstanceValid(p.Key) && p.Key.Visuals.Scale != p.Value))
+                    throw new Exception("Finisher scaled a monster: " + label);
                 if (!expected && (cameraSeen || lightingSeen || colors.Any(pair => pair.Key.Modulate != pair.Value)))
                     throw new Exception("Ordinary attack used cinematic effects: " + label);
                 frames++;
-                if (roleVisuals.IsPlaying && ++motionFrames == 45)
+                if (roleVisuals.IsPlaying && ++motionFrames == 18)
                 {
                     if (label == "last-enemy" && alyce.GetPowerAmount<VigorPower>() != 2)
                         throw new Exception("Forecast consumed Vigor before impact");
@@ -122,16 +150,24 @@ public partial class LoadProbe
                 }
             }
             await attack;
+            MotionMarker(squad.RoleOf(squad.Actions.ActorFor(card)), "finisher-" + label, "end");
             _impactObserving = false;
             if (_impactCommand == null || card is SquadAttackCard && (_impactCommand.HitSfx == null && _impactCommand.TmpHitSfx == null))
                 throw new Exception("Finisher/native contact feedback double-play or omission: " + label);
-            if (card is SquadThunderclap && (_impactCommand.HitVfx != "vfx/vfx_attack_slash"
-                || _impactCommand.HitSfx != null || _impactCommand.TmpHitSfx != null))
-                throw new Exception("Prototype Thunderclap no longer preserves its exact native contact configuration");
+            if (card is SquadThunderclap && _impactCommand.HitSfx != DohnaDohna.Code.Patches.SquadCannonImpactPatch.HitSound)
+                throw new Exception("Generic catalog attack did not use its real UFO actor's contact configuration");
             var customHits = (System.Collections.ICollection)HarmonyLib.AccessTools.Field(_impactCommand.GetType(), "_customHitVfxNodes").GetValue(_impactCommand)!;
             if (_impactCommand.HitVfx == null && customHits.Count == 0) throw new Exception("Missing native finisher/contact VFX");
             if (cameraSeen != expected) throw new Exception($"Finisher eligibility {label}: expected={expected}, observed={cameraSeen}");
-            await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+            if (doomSeen != expected) throw new Exception("Visual Doom eligibility: " + label);
+            if (expected && (maxImpactTime < .39 || !frozenImpactSeen))
+                throw new Exception($"B-profile was shortened or had no held impact: {label} time={maxImpactTime} particles={frozenImpactSeen}");
+            System.IO.File.WriteAllText(System.IO.Path.Combine(System.Environment.GetEnvironmentVariable("LOCALAPPDATA")!,
+                "finisher-timing-" + label + ".json"), System.Text.Json.JsonSerializer.Serialize(presentation));
+            while (RoleFinisher.Current != null) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+            // Gameplay is intentionally complete before natural recovery.
+            // Check the final stance only after that role-owned visual tail.
+            while (roleVisuals.IsPlaying) await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
             MenuFlowProbe.AssertAlignment(squad, "finisher-" + label);
             if (GetTree().Root.GetChildrenRecursive<CanvasLayer>().Any(n => n.Name == "DohnaMotionCamera"))
                 throw new Exception("Camera retained after action: " + label);

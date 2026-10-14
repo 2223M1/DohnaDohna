@@ -34,30 +34,28 @@ public sealed class SquadEchoingSlash : SquadCatalogCard
 
 	protected override async Task OnSquadPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 	{
-        var squad = SquadCombatState.Get(Owner);
-        await DohnaDohna.Code.Visuals.RoleVisuals.PlayAttack(Actor, "special", async () =>
-        {
-            await using AttackContext attackContext = await AttackCommand.CreateContextAsync(base.CombatState!, choiceContext,
+        // Native EchoingSlash has no attack gate; its visual release is immediate.
+        await CreatureCmd.TriggerAnim(Actor, "Attack", 0);
+        await using AttackContext attackContext = await AttackCommand.CreateContextAsync(base.CombatState!, choiceContext,
 #if DOHNADOHNA_STABLE
-                this);
+            this);
 #else
-                cardPlay);
+            cardPlay);
 #endif
-            int attackCount = 1;
-            while (attackCount-- > 0 && Actor.IsAlive && base.CombatState!.HittableEnemies.Count > 0)
-            {
-                var targets = base.CombatState.HittableEnemies.ToArray();
-                foreach (var target in targets) VfxCmd.PlayOnCreatureCenter(target, "vfx/vfx_attack_slash");
-                MegaCrit.Sts2.Core.Audio.Debug.NDebugAudioManager.Instance?.Play("slash_attack.mp3");
-                var results = (await CreatureCmd.Damage(choiceContext, targets, DynamicVars.Damage, Actor, this
+        int attackCount = 1;
+        while (attackCount-- > 0 && Actor.IsAlive && base.CombatState!.HittableEnemies.Count > 0)
+        {
+            var targets = base.CombatState.HittableEnemies.ToArray();
+            foreach (var target in targets) VfxCmd.PlayOnCreatureCenter(target, "vfx/vfx_attack_slash");
+            MegaCrit.Sts2.Core.Audio.Debug.NDebugAudioManager.Instance?.Play("slash_attack.mp3");
+            var results = (await CreatureCmd.Damage(choiceContext, targets, DynamicVars.Damage, Actor, this
 #if !DOHNADOHNA_STABLE
-                    , cardPlay
+                , cardPlay
 #endif
-                )).ToArray();
-                attackContext.AddHit(results);
-                attackCount += results.Count(r => r.WasTargetKilled);
-            }
-        }, squad.Cancellation.Token, base.CombatState!.HittableEnemies.ToArray());
+            )).ToArray();
+            attackContext.AddHit(results);
+            attackCount += results.Count(r => r.WasTargetKilled);
+        }
 	}
 
 	protected override void OnUpgrade()

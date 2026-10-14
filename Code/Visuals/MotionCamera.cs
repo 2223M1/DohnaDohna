@@ -20,29 +20,16 @@ internal sealed partial class MotionCamera : CanvasLayer
         return camera;
     }
 
-    internal void Apply(float zoom, Vector2 desiredOrigin, Rect2 subjects)
+    internal void Apply(float zoom, Vector2 desiredOrigin)
     {
         zoom = Math.Max(1, zoom);
         var viewport = GetViewport().GetVisibleRect();
-        var focus = (viewport.GetCenter() - desiredOrigin) / zoom;
-        const float margin = 32;
-        float fit = Math.Min((viewport.Size.X - 2 * margin) / Math.Max(1, subjects.Size.X),
-            (viewport.Size.Y - 2 * margin) / Math.Max(1, subjects.Size.Y));
-        zoom = Math.Max(1, Math.Min(zoom, fit));
-        desiredOrigin = viewport.GetCenter() - focus * zoom;
+        // Fit the scene, not every dying enemy's complete picture. The latter
+        // unintentionally erased the close-up and most of its shake.
         var origin = new Vector2(
-            FrameAxis(desiredOrigin.X, viewport.Position.X, viewport.End.X, subjects.Position.X, subjects.End.X),
-            FrameAxis(desiredOrigin.Y, viewport.Position.Y, viewport.End.Y, subjects.Position.Y, subjects.End.Y));
+            MotionCameraBounds.ClampOrigin(desiredOrigin.X, viewport.Position.X, viewport.End.X, zoom),
+            MotionCameraBounds.ClampOrigin(desiredOrigin.Y, viewport.Position.Y, viewport.End.Y, zoom));
         Transform = new Transform2D(0, Vector2.One * zoom, 0, origin);
-
-        float FrameAxis(float desired, float low, float high, float subjectLow, float subjectHigh)
-        {
-            float min = Math.Max(high * (1 - zoom), low + margin - subjectLow * zoom);
-            float max = Math.Min(low * (1 - zoom), high - margin - subjectHigh * zoom);
-            // Oversized/distant subjects cannot justify exposing outside the scene.
-            return min <= max ? Math.Clamp(desired, min, max)
-                : MotionCameraBounds.ClampOrigin(desired, low, high, zoom);
-        }
     }
 
     private void Sync()
@@ -58,7 +45,7 @@ internal sealed partial class MotionCamera : CanvasLayer
         }
     }
 
-    internal void Release()
+    internal void Release(bool exiting = false)
     {
         if (_released) return;
         _released = true;
@@ -73,8 +60,8 @@ internal sealed partial class MotionCamera : CanvasLayer
                 root.TopLevel ? root.GetGlobalTransform() : root.GetTransform());
         }
         _roots.Clear();
-        QueueFree();
+        if (!exiting) { GetParent()?.RemoveChild(this); QueueFree(); }
     }
 
-    public override void _ExitTree() => Release();
+    public override void _ExitTree() => Release(exiting: true);
 }

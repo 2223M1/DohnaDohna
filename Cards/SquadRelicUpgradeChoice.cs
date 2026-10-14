@@ -38,7 +38,7 @@ public sealed class SquadRelicUpgradeChoice() : ModCardTemplate(-1, CardType.Ski
             var role = RoleDefinition.Get(Original.Role);
             var material = SquadCardAssets.ColorMaterial(new Color(role.Color));
             return new(FrameMaterial: material, BannerMaterial: material, PortraitBorderMaterial: material,
-                PortraitPath: role.AssetRoot + "/card.png");
+                PortraitPath: role.AssetRoot + "/relic_refinement.png");
         }
     }
 }

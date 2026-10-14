@@ -27,6 +27,7 @@ public sealed partial class SquadSelectPanel : Control
     private Control _primaryBar = null!, _primaryInfo = null!, _memberInfo = null!;
     private NConfirmButton _confirm = null!;
     private NCard? _preview;
+    private SquadSelectPortraits _portraits = null!;
     private bool _locked;
     public bool IsSecondary => Visible;
     internal Control DefaultFocusedControl => _buttons[0];
@@ -49,15 +50,26 @@ public sealed partial class SquadSelectPanel : Control
         _primaryBar = _screen.GetNode<Control>("CharSelectButtons");
         _primaryInfo = _screen.GetNode<Control>("InfoPanel");
         _confirm = _screen.GetNode<NConfirmButton>("ConfirmButton");
+        _portraits = new SquadSelectPortraits { Name = "BattlePortraits" };
+        AddChild(_portraits);
         _memberInfo = (Control)_primaryInfo.Duplicate();
         _memberInfo.Name = "MemberInfo";
         AddChild(_memberInfo);
         _memberInfo.SetAnchorsAndOffsetsPreset(LayoutPreset.TopLeft);
-        _memberInfo.Position = new Vector2(245, 170);
-        _memberInfo.Size = new Vector2(600, 365);
         var descriptionLayout = _memberInfo.GetNode<VBoxContainer>("VBoxContainer");
+        descriptionLayout.SetAnchorsAndOffsetsPreset(LayoutPreset.TopLeft);
         descriptionLayout.Alignment = BoxContainer.AlignmentMode.Begin;
-        descriptionLayout.Size = new Vector2(550, 360);
+        var memberName = _memberInfo.GetNode<MegaLabel>("VBoxContainer/Name");
+        memberName.ClipText = true;
+        memberName.CustomMinimumSize = new Vector2(0, 115);
+        var description = _memberInfo.GetNode<MegaRichTextLabel>("VBoxContainer/DescriptionLabel");
+        description.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+        var infoBackdrop = _memberInfo.GetNode<NinePatchRect>("NinePatchRect");
+        infoBackdrop.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
+        infoBackdrop.OffsetLeft = -26;
+        infoBackdrop.OffsetTop = -24;
+        infoBackdrop.OffsetRight = 26;
+        infoBackdrop.OffsetBottom = 24;
         _memberInfo.GetNode<Control>("VBoxContainer/HpGoldSpacer/HpGold/Gold").Hide();
         _memberInfo.GetNode<Control>("VBoxContainer/Relic/Icon").Hide();
         AddChild(_roles);
@@ -116,7 +128,15 @@ public sealed partial class SquadSelectPanel : Control
         _formation.Position = new Vector2((_screen.Size.X - _formation.Size.X) * .5f, _roles.Position.Y - 170);
         _caption.Size = new Vector2(width, 32);
         _caption.Position = new Vector2(_roles.Position.X, _formation.Position.Y - 42);
-        if (_preview != null) _preview.Position = new Vector2(_screen.Size.X - 390, 380);
+        // A large battle-bust quartet, with native information and card preview
+        // flanking it. Keep the existing bottom buttons and their input paths.
+        float side = Math.Clamp(_screen.Size.X * .22f, 330, 430);
+        _memberInfo.Position = new Vector2(110, 165);
+        _memberInfo.Size = new Vector2(side - 160, 315);
+        _memberInfo.GetNode<VBoxContainer>("VBoxContainer").Size = new Vector2(side - 160, 315);
+        _portraits.Position = new Vector2(side + 10, 90);
+        _portraits.Size = new Vector2(_screen.Size.X - side - 325, _caption.Position.Y - 108);
+        if (_preview != null) _preview.Position = new Vector2(_screen.Size.X - 185, 345);
     }
 
     private void Toggle(string role)
@@ -143,6 +163,7 @@ public sealed partial class SquadSelectPanel : Control
             _slots[i].FocusNeighborBottom = _buttons[Math.Min(i * 3, 9)].GetPath();
         }
         foreach (var button in _buttons) button.SetSelected(_selected.Contains(button.Role!.Id));
+        _portraits.SetRoster(_selected);
         var text = new LocString("characters", "DOHNA_DOHNA_SQUAD_UI.formation");
         text.Add("Count", _selected.Count);
         _caption.Text = text.GetFormattedText();
@@ -168,8 +189,8 @@ public sealed partial class SquadSelectPanel : Control
         {
             _preview = NCard.Create(model) ?? throw new InvalidOperationException("Native card preview could not be created.");
             AddChild(_preview);
-            _preview.Scale = Vector2.One * .8f;
-            _preview.Position = new Vector2(_screen.Size.X - 390, 380);
+            _preview.Scale = Vector2.One * .65f;
+            _preview.Position = new Vector2(_screen.Size.X - 185, 345);
             _preview.MouseFilter = MouseFilterEnum.Ignore;
         }
         else _preview.Model = model;

@@ -50,7 +50,7 @@ public sealed class SquadCombatState : IDisposable
     public void RecordPlay(CardPlay play, Creature actor) => _playedActors[play] = actor;
     public Creature? ActorOf(CardPlay play) => _playedActors.GetValueOrDefault(play);
 
-    public static async Task Create(Player owner)
+    internal static void Prepare(Player owner, CombatState combat)
     {
         if (owner.Character is not DohnaSquad) return;
         TryGet(owner)?.Dispose();
@@ -62,7 +62,7 @@ public sealed class SquadCombatState : IDisposable
         {
             var model = (SquadMember)ModelDb.Monster<SquadMember>().ToMutable();
             model.RoleId = member.RoleId;
-            var actor = owner.Creature.CombatState!.CreateCreature(model, CombatSide.Player, null);
+            var actor = combat.CreateCreature(model, CombatSide.Player, null);
             actor.SetMaxHpInternal(member.MaxHp);
             actor.SetCurrentHpInternal(member.Hp);
             state._actors.Add(member.RoleId, actor);
@@ -70,15 +70,23 @@ public sealed class SquadCombatState : IDisposable
         }
         foreach (var actor in state.Actors)
         {
-            await PlayerCmd.AddPet(actor, owner);
+            // Initial participants, not mid-combat summons. PlayerCmd.AddPet
+            // requires IsInProgress and cannot be used during SetUpCombat.
+            // PopulateCombatState runs before the manager registers the complete
+            // creature list and publishes CombatSetUp. Native startup then owns
+            // AfterAddedToRoom, turns, powers and death subscriptions exactly once.
+            owner.PlayerCombatState!.AddPetInternal(actor);
+            combat.AddCreature(actor);
+            NCombatRoom.Instance?.AddCreature(actor);
             if (actor.IsDead) NCombatRoom.Instance?.GetCreatureNode(actor)?.Hide();
         }
-        // Native AfterRoomEntered/Grow runs before BeforeCombatStart creates
-        // these members. Reapply only the owned relic's visual at this boundary.
-        if (owner.GetRelic<MegaCrit.Sts2.Core.Models.Relics.BigMushroom>() is { IsMelted: false })
-            DohnaDohna.Code.Patches.SquadBigMushroomPatch.GrowMembers(state);
         state.SyncController();
         state.Layout();
+    }
+
+    internal static async Task Start(Player owner)
+    {
+        var state = Get(owner);
         await DohnaDohna.Powers.SquadInnatePower.Install(state);
         if (NCombatRoom.Instance is { } room) DohnaDohna.Code.UI.SquadSharedDisplay.Create(state, room);
         if (state.IsAlive("antena")) await OrbCmd.AddSlots(owner, 3);
@@ -91,12 +99,12 @@ public sealed class SquadCombatState : IDisposable
         Owner.Creature.SetCurrentHpInternal(front.CurrentHp);
     }
 
-    public void Layout(bool animate = false)
+    public void Layout(bool animate = false, Creature? acting = null)
     {
         if (NCombatRoom.Instance is not { } room) return;
         var encounter = Owner.Creature.CombatState?.Encounter;
         SquadFormation.Ensure(room).Reflow(this, encounter?.GetCameraScaling() ?? room.SceneContainer.Scale.X,
-            encounter?.FullyCenterPlayers ?? false, animate);
+            encounter?.FullyCenterPlayers ?? false, animate, acting);
     }
 
     public async Task Swap(Creature target)
@@ -109,10 +117,9 @@ public sealed class SquadCombatState : IDisposable
         await Reordered(before, oldFront, target, directSwap: true);
         SyncController();
         Layout(animate: true);
-        if (NCombatRoom.Instance is { } room) await SquadFormation.Ensure(room).FinishMovement(Cancellation.Token);
     }
 
-    public async Task MoveToFront(Creature actor)
+    public async Task MoveToFront(Creature actor, bool combineWindup = false)
     {
         if (!SquadTargeting.IsLivingMember(actor, Owner) || actor == Front) return;
         var before = Living.ToArray();
@@ -121,8 +128,7 @@ public sealed class SquadCombatState : IDisposable
         _order.Add(RoleOf(actor));
         await Reordered(before, actor, destination, directSwap: false);
         SyncController();
-        Layout(animate: true);
-        if (NCombatRoom.Instance is { } room) await SquadFormation.Ensure(room).FinishMovement(Cancellation.Token);
+        Layout(animate: true, acting: combineWindup ? actor : null);
     }
 
     private async Task Reordered(Creature[] before, Creature mover, Creature destination, bool directSwap)

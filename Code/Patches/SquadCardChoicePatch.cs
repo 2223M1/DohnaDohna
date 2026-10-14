@@ -50,7 +50,24 @@ public sealed class SquadPlaySeriesPatch : IPatchMethod
     }
     // The host async method captured this scope for its whole series. Restore the caller immediately,
     // so nested auto-plays own their own context and cannot overwrite a suspended outer card.
-    public static void Postfix(SquadPlaySelection? __state) => SquadPlaySelection.Current = __state;
+    public static void Postfix(CardModel __instance, SquadPlaySelection? __state, ref Task __result)
+    {
+        var selection = SquadPlaySelection.Current;
+        SquadPlaySelection.Current = __state;
+        if (SquadCombatState.TryGet(__instance.Owner) != null) __result = Finish(__result, __instance, selection);
+    }
+    private static async Task Finish(Task play, CardModel card, SquadPlaySelection? selection)
+    {
+        try { await play; }
+        finally
+        {
+            SquadPreparationInput.Cancel(card);
+            // A canceled/no-animation command must not strand committed
+            // formation movement waiting for a gate that will never arrive.
+            if (selection != null && MegaCrit.Sts2.Core.Nodes.Rooms.NCombatRoom.Instance is { } room)
+                DohnaDohna.Code.Visuals.SquadFormation.Ensure(room).BeginWindup(selection.Actor, .4f);
+        }
+    }
 }
 
 public sealed class SquadQueuedPlayCancelPatch : IPatchMethod
@@ -59,6 +76,10 @@ public sealed class SquadQueuedPlayCancelPatch : IPatchMethod
     public static ModPatchTarget[] GetTargets() => [new(typeof(PlayCardAction), "CancelAction", Type.EmptyTypes)];
     public static void Postfix(PlayCardAction __instance)
     {
-        if (__instance.NetCombatCard.ToCardModelOrNull() is { } card) SquadPlaySelection.Take(card);
+        if (__instance.NetCombatCard.ToCardModelOrNull() is { } card)
+        {
+            SquadPlaySelection.Take(card);
+            SquadPreparationInput.Cancel(card);
+        }
     }
 }

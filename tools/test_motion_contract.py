@@ -2,6 +2,7 @@ import importlib.util
 import json
 import pathlib
 import unittest
+from motion_images import compose, reaction_registration
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("import_roles", ROOT / "tools/Import-OriginalRoles.py")
@@ -10,6 +11,21 @@ spec.loader.exec_module(importer)
 
 
 class MotionContractTests(unittest.TestCase):
+    def test_complete_hit_registration_includes_embedded_pixel_travel(self):
+        for path in (ROOT / "DohnaDohna/roles").glob("*/motions.json"):
+            data = json.loads(path.read_text(encoding="utf-8"))
+            idle, origin = compose(ROOT, data["motions"]["idle"]["frames"][0]["CgLayers"].values())
+            baseline = reaction_registration(idle, origin)
+            for index, frame in enumerate(data["motions"]["hit"]["frames"]):
+                body = [l for l in frame["CgLayers"].values()
+                        if l["IsShadow"] and not l["IsGlobalPosition"] and not l["impact"]]
+                art, origin = compose(ROOT, body)
+                anchor = reaction_registration(art, origin)
+                dx, dy = frame["compactHurtShift"]
+                self.assertAlmostEqual(anchor[0] + dx, baseline[0], places=2, msg=f'{data["roleId"]}/{index}')
+                self.assertEqual(anchor[1] + dy, data["groundContact"][1])
+            self.assertNotIn("compactHurtShift", data["motions"]["idle"]["frames"][0])
+
     def test_generated_ground_preserves_authored_horizontal_station(self):
         paths = list((ROOT / "DohnaDohna/roles").glob("*/motions.json"))
         self.assertEqual(len(paths), 10)

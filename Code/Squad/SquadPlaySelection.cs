@@ -13,7 +13,11 @@ public sealed class SquadPlaySelection(CardModel card, Creature actor, Creature?
     public Creature? Auxiliary { get; } = auxiliary;
     public CardPlay? Play { get; set; }
     public bool Substituting { get; set; }
-    public bool AttackPresented { get; set; }
+    internal MegaCrit.Sts2.Core.Commands.Builders.AttackCommand? PresentedCommand { get; set; }
+    // Native Damage captures this per-play slot across its awaits. Nested
+    // thorns/self-damage gets null, not the outer attack's hit palette.
+    internal readonly AsyncLocal<MegaCrit.Sts2.Core.Commands.Builders.AttackCommand?> ContactCommand = new();
+    internal IReadOnlyList<Creature> AnimationTargets { get; set; } = [];
     private static readonly ConditionalWeakTable<CardModel, SquadPlaySelection> Queued = new();
     private static readonly AsyncLocal<SquadPlaySelection?> Active = new();
 

@@ -40,10 +40,9 @@ public sealed class SquadRules : PowerModel
         selection.Actor = Squad.Actions.ActorFor(play.Card);
         selection.Play = play;
         selection.Substituting = play.Card is SquadCardModel { IsFallback: true };
-        selection.AttackPresented = false;
         Squad.RecordPlay(play, selection.Actor);
         if (!selection.Substituting && play.Card is SquadCardModel { IsMelee: true })
-            await Squad.MoveToFront(selection.Actor);
+            await Squad.MoveToFront(selection.Actor, combineWindup: true);
     }
     public override Task AfterCombatEnd(CombatRoom room)
     {

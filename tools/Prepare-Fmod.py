@@ -52,6 +52,8 @@ if not project.exists():
 assets = target / "Assets"
 assets.mkdir(exist_ok=True)
 mapping = {}
+# Natural one-shots retain their recorded release; mixed impact recordings
+# remain filtered by the runtime. No uniform trim follows the visual windup.
 for name, relative in receipt["audio"].items():
     source = original / relative.replace("\\", "/")
     if not source.is_file():

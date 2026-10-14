@@ -46,11 +46,11 @@ public sealed class SquadHitCastPatch : IPatchMethod
     public static string PatchId => "dohnadohna_native_hit_cast";
     public static ModPatchTarget[] GetTargets() => [new(typeof(CreatureCmd), nameof(CreatureCmd.TriggerAnim),
         [typeof(Creature), typeof(string), typeof(float)])];
-    public static bool Prefix(ref Creature creature, string triggerName, ref Task __result)
+    public static bool Prefix(ref Creature creature, string triggerName, float waitTime, ref Task __result)
     {
-        if (triggerName is "Hit" or "Cast" or "PowerUp" && SquadCombatState.TryGet(creature.Player) is { } squad)
-            creature = squad.Front;
-        if (!SquadCombatState.IsMember(creature) || triggerName is not ("Hit" or "Cast" or "PowerUp")
+        if (triggerName is "Hit" or "Cast" or "PowerUp" or "Attack" or "heavyAttack" && SquadCombatState.TryGet(creature.Player) is { } squad)
+            creature = SquadPlaySelection.Current?.Actor ?? squad.Front;
+        if (!SquadCombatState.IsMember(creature) || triggerName is not ("Hit" or "Cast" or "PowerUp" or "Attack" or "heavyAttack")
             || creature.GetCreatureNode()?.Visuals is not RoleVisuals visuals) return true;
         // Native Thorns resolves before the outer hit. Killing the final enemy
         // ends combat immediately after that hit, but its visible reaction still
@@ -58,8 +58,15 @@ public sealed class SquadHitCastPatch : IPatchMethod
         // death or _ExitTree; the combat/action token would cut it off at victory.
         __result = triggerName == "Hit"
             ? creature.IsAlive ? visuals.PlayHurt(CancellationToken.None) : Task.CompletedTask
-            : visuals.Play("cast", null, SquadCombatState.Get(creature.PetOwner!).Cancellation.Token);
+            : visuals.PlayNative(triggerName, waitTime, SquadCombatState.Get(creature.PetOwner!).Cancellation.Token);
         return false;
+    }
+
+    public static void Postfix(Creature creature, string triggerName)
+    {
+        // Damage's native Hit trigger follows its prefix. Hold that real hurt
+        // track without suppressing the host's impact particles or audio.
+        if (triggerName == "Hit") creature.GetCreatureNode()?.GetNodeOrNull<RoleDoomHold>("DohnaDoomHold")?.HitTriggered();
     }
 }
 
@@ -86,4 +93,6 @@ public sealed class SquadDeathAnimationPatch : IPatchMethod
         __result = 0;
         return false;
     }
+    public static void Postfix(NCreature __instance) =>
+        __instance.GetNodeOrNull<RoleDoomHold>("DohnaDoomHold")?.DeathStarted();
 }

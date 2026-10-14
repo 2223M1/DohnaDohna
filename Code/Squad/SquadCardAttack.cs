@@ -23,20 +23,34 @@ internal static class SquadCardAttack
         if (SquadCombatState.TryGet(card.Owner) is not { } squad) return await command.Execute(context);
         var selection = SquadPlaySelection.CurrentFor(card) ?? throw new InvalidOperationException("Missing squad play selection.");
         if (selection.Actor.IsDead) return command;
-        command.WithNoAttackerAnim();
-        // Keep the native command's hit count, target RNG and contact feedback. Only its body's presentation changes.
-        if (selection.AttackPresented) return await command.Execute(context);
-        selection.AttackPresented = true;
         Creature[] targets = command.IsSingleTargeted && selection.Play?.Target is { } target ? [target]
             : selection.Actor.CombatState!.HittableEnemies.Where(c => c.IsAlive).ToArray();
-        // Prototypes already carry native feedback (including custom hit nodes).
-        // Only substitution attacks need a default contact; never append a second VFX.
-        if (selection.Substituting)
-            SquadActions.ConfigureNativeImpact(command, squad.RoleOf(selection.Actor), true);
-        await RoleVisuals.PlayAttack(selection.Actor, card is SquadCardModel { IsMelee: true } ? "special" : "strike",
-            async () => { if (selection.Actor.IsAlive) await command.Execute(context); },
-            squad.Cancellation.Token, targets, SquadFinisher.CanFinish(command, card, selection.Play, targets));
-        squad.SyncController();
-        return command;
+        // Replace generic physical feedback across the catalog. Bespoke hit
+        // nodes/elemental effects stay native: WithHitVfxNode is additive.
+        if (selection.Substituting || card is SquadAttackCard || command.HitVfx is
+                MegaCrit.Sts2.Core.Commands.VfxCmd.slashPath or MegaCrit.Sts2.Core.Commands.VfxCmd.bluntPath
+                or MegaCrit.Sts2.Core.Commands.VfxCmd.heavyBluntPath or MegaCrit.Sts2.Core.Commands.VfxCmd.giantHorizontalSlashPath)
+            SquadActions.ConfigureNativeImpact(command, squad.RoleOf(selection.Actor), SquadMotionTiming.Cue(card) == "strike");
+        var previous = selection.PresentedCommand;
+        var previousTargets = selection.AnimationTargets;
+        selection.PresentedCommand = command;
+        selection.AnimationTargets = targets;
+        RoleFinisher? finish = null;
+        try
+        {
+            // Native Execute owns TriggerAnim, OnlyPlayAnimOnce, all hit waits
+            // and the actual VFX/damage. The role supplies only its visual gate.
+            if (SquadFinisher.CanFinish(command, card, selection.Play, targets))
+                finish = RoleFinisher.Begin(selection.Actor, SquadMotionTiming.Cue(card), targets);
+            return await command.Execute(context);
+        }
+        finally
+        {
+            (selection.Actor.GetCreatureNode()?.Visuals as RoleVisuals)?.CancelPendingEmissions(selection);
+            finish?.CommandComplete();
+            selection.PresentedCommand = previous;
+            selection.AnimationTargets = previousTargets;
+            squad.SyncController();
+        }
     }
 }

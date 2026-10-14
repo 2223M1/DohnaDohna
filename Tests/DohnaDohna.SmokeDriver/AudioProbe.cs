@@ -16,6 +16,7 @@ internal static class AudioProbe
     private static readonly Dictionary<string, string> VoiceRoles = [];
     private static readonly List<object> Events = [];
     internal static readonly List<IAudioHandle> RoomVoiceHandles = [];
+    internal static readonly Dictionary<string, int> Starts = [];
     private static string? _directory;
     internal static string? NativeWitnessGate;
     internal static void Mark(string reference)
@@ -65,6 +66,7 @@ internal static class AudioProbe
 
     private static void Trace(string reference, IAudioHandle __result)
     {
+        Starts[reference] = Starts.GetValueOrDefault(reference) + 1;
         if (__result.Scope == AudioLifecycleScope.Room) RoomVoiceHandles.Add(__result);
         var raw = __result.RawInstance;
         double? volume = raw?.HasMethod("get_volume") == true ? raw.Call("get_volume").AsDouble() : null;

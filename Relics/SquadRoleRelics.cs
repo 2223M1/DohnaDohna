@@ -19,8 +19,16 @@ public abstract class SquadRoleRelic : ModRelicTemplate
     public virtual int Multiplier => 1;
     public override RelicRarity Rarity => RelicRarity.Starter;
     public override bool IsAllowedInShops => false;
-    public override RelicAssetProfile AssetProfile => new(IconPath: RoleDefinition.Get(Role).AssetRoot + "/portrait.png",
-        IconOutlinePath: RoleDefinition.Get(Role).AssetRoot + "/portrait.png", BigIconPath: RoleDefinition.Get(Role).AssetRoot + "/portrait.png");
+    public override RelicAssetProfile AssetProfile
+    {
+        get
+        {
+            var root = RoleDefinition.Get(Role).AssetRoot;
+            var suffix = Multiplier == 2 ? "_plus" : "";
+            return new(IconPath: root + "/relic_icon" + suffix + ".png",
+                IconOutlinePath: root + "/relic_outline.png", BigIconPath: root + "/relic_big" + suffix + ".png");
+        }
+    }
     public static SquadRoleRelic Basic(string role) => role switch
     {
         "kuma" => ModelDb.Relic<KumaEmblem>(), "alyce" => ModelDb.Relic<AlyceEmblem>(),

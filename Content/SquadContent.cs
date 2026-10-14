@@ -37,8 +37,9 @@ public sealed class DohnaSquad : ModCharacterTemplate<SquadCardPool, SquadRelicP
     public override int StartingGold => 99;
     public override bool RequiresEpochAndTimeline => false;
     public override bool AllowInVanillaRandomCharacterSelect => false;
-    public override float AttackAnimDelay => 0;
-    public override float CastAnimDelay => 0;
+    public override float AttackAnimDelay => Code.Visuals.SquadMotionTiming.Attack(Code.Squad.SquadPlaySelection.Current?.Card);
+    public override float CastAnimDelay => Code.Visuals.SquadMotionTiming.Cast(Code.Squad.SquadPlaySelection.Current?.Card);
+    public override float PowerUpAnimDelay => Code.Visuals.SquadMotionTiming.Cast(Code.Squad.SquadPlaySelection.Current?.Card, power: true);
     public override List<string> GetArchitectAttackVfx() => ["vfx/vfx_attack_blunt"];
     public override CharacterAssetProfile AssetProfile => CharacterAssetProfiles.Merge(
         CharacterAssetProfiles.Ironclad(), new CharacterAssetProfile(

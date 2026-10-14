@@ -23,11 +23,12 @@ public sealed class SquadBackstab : SquadCatalogCard
 	public override bool IsMelee => true;
 	public override string Prototype => "Backstab";
 	public override CardModel PrototypeCard => ModelDb.Card<Backstab>();
-	public override IEnumerable<CardKeyword> CanonicalKeywords => new CardKeyword[2]
-	{
+	public override IEnumerable<CardKeyword> CanonicalKeywords =>
+	[
+		.. base.CanonicalKeywords,
 		CardKeyword.Exhaust,
 		CardKeyword.Innate
-	};
+	];
 
 	protected override IEnumerable<DynamicVar> OriginalVars => [new DamageVar(11m, ValueProp.Move)];
 

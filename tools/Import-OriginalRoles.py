@@ -11,7 +11,7 @@ import re
 import shutil
 from pathlib import Path
 from PIL import Image
-from motion_images import compose, contact, ground_shadow
+from motion_images import compose, contact, ground_shadow, reaction_registration
 
 ROOT = Path(__file__).resolve().parents[1]
 # Audited spelling discrepancy in the current motion table. Both names are recorded
@@ -64,7 +64,7 @@ def validate_motion(frames, label):
     for index, frame in enumerate(frames):
         for key, value in frame.items():
             where = f"{label}/{index}/{key}"
-            if key in scalars or key in ("CgLayers", "Effects", "shadows"):
+            if key in scalars or key in ("CgLayers", "Effects", "shadows", "compactHurtShift"):
                 continue
             active = isinstance(value, dict) and any(value.get(flag) for flag in ("Enable", "Start", "End", "JumpStart", "JumpEnd"))
             if key not in events:
@@ -265,6 +265,15 @@ def import_roles(original):
             audio_refs[reference] = audio[reference]["output"]
         idle_image, idle_origin = compose(ROOT, compiled["idle"]["frames"][0]["CgLayers"].values())
         ground = contact(idle_image, idle_origin)
+        # Explicitly edited hit registration. The unchanged source offsets are
+        # still used by original reference playback and all non-hit motions.
+        idle_registration = reaction_registration(idle_image, idle_origin)
+        for frame in compiled["hit"]["frames"]:
+            body = [l for l in frame["CgLayers"].values()
+                    if l["IsShadow"] and not l["IsGlobalPosition"] and not l["impact"]]
+            picture, origin = compose(ROOT, body)
+            anchor = reaction_registration(picture, origin)
+            frame["compactHurtShift"] = [round(idle_registration[0] - anchor[0], 3), ground[1] - anchor[1]]
         payload = {"roleId": role_id, "name": name, "color": color,
                    "groundContact": ground, "bodyHeight": ground[1]-idle_origin[1],
                    "motionSource": motion_base, "poster": poster, "deathVoice": death_voice,

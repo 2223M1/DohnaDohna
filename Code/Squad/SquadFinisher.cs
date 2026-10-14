@@ -30,6 +30,16 @@ internal static class SquadFinisher
             || Calculated.GetValue(command) != null || BeforeDamage.GetValue(command) != null || AfterAnimation.GetValue(command) != null
             || Hook.ShouldStopCombatFromEnding(combat)
             || Hook.ModifyAttackHitCount(combat, command, Hits(command)) != 1) return false;
+        // A mod may intercept raw HP loss without exposing a model hook (for
+        // example an invulnerability toggle). Prediction cannot prove a clear
+        // in that case. Keep the native attack/death path, omit only the closeup.
+        var hpPatches = Harmony.GetPatchInfo(AccessTools.Method(typeof(Creature), nameof(Creature.LoseHpInternal)));
+        if (hpPatches != null && (hpPatches.Transpilers.Count != 0
+            || hpPatches.Prefixes.Any(p => !IsInactiveNinjaHpPatch(p, combat.Players)
+                && (p.PatchMethod.ReturnType == typeof(bool)
+                    || p.PatchMethod.GetParameters().Any(arg => arg.ParameterType.IsByRef && arg.Name != "__state")))
+            || hpPatches.Postfixes.Concat(hpPatches.Finalizers).Any(p => p.PatchMethod.GetParameters()
+                .Any(arg => arg.Name == "__result" && arg.ParameterType.IsByRef)))) return false;
         var primary = combat.Enemies.Where(c => c.IsAlive && c.IsPrimaryEnemy).ToArray();
         if (primary.Length == 0 || primary.Any(c => !targets.Contains(c))) return false;
 
@@ -37,7 +47,7 @@ internal static class SquadFinisher
         // run observers (metrics, audio, lifecycle) are not attack participants;
         // merely registering one must not disable every finisher in other mods.
         if (run.IterateHookListeners(combat).Any(model =>
-            model is CardModel or PowerModel or MonsterModel or RelicModel or PotionModel && IsExternal(model)))
+            model is CardModel or PowerModel or MonsterModel or RelicModel or PotionModel or ModifierModel && IsExternal(model)))
             return false;
         // Reflection can kill the actor before the attack's remaining targets.
         // Leave these attacks ordinary instead of speculative lethal protection.
@@ -67,4 +77,19 @@ internal static class SquadFinisher
 
     private static bool IsExternal(AbstractModel model) => model.GetType().Assembly != typeof(CardModel).Assembly
         && model.GetType().Assembly != typeof(SquadFinisher).Assembly;
+
+    private static bool IsInactiveNinjaHpPatch(Patch patch, IEnumerable<MegaCrit.Sts2.Core.Entities.Players.Player> players)
+    {
+        var method = patch.PatchMethod;
+        var type = method.DeclaringType;
+        // Verified 1.0.19: the absorption prefix requires its own Naraku power
+        // (already rejected above by the foreign-model check); the protection
+        // prefix requires a Ninja finisher session/player. Mere co-loading must
+        // not disable Dohna closeups. No strong dependency or broad owner trust.
+        return method.Name == "Prefix" && method.ReturnType == typeof(void)
+            && type?.Assembly.GetName().Name == "NinjaSlayer"
+            && type.FullName is "NinjaSlayer.Code.Patches.NarakuLifeDamagePatch"
+                or "NinjaSlayer.Code.Patches.NinjaSlayerFinisherLethalDamagePatch"
+            && !players.Any(p => p.Character.GetType().Assembly == type.Assembly);
+    }
 }

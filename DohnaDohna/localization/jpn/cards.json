@@ -18,7 +18,7 @@
   "DOHNA_DOHNA_CARD_SQUAD_DEFEND.description": "[gold]ブロック[/gold]{Block:diff()}を得る。",
   "DOHNA_DOHNA_CARD_SQUAD_SWAP.title": "交代",
   "DOHNA_DOHNA_CARD_SQUAD_SWAP.description": "先頭の隊員と他の生存している隊員の位置を入れ替える。",
-  "DOHNA_DOHNA_CARD_SQUAD_SWAP.upgradeDescription": "先頭の隊員と他の生存している隊員の位置を入れ替える。\n[gold]保留[/gold]。",
+  "DOHNA_DOHNA_CARD_SQUAD_SWAP.upgradeDescription": "先頭の隊員と他の生存している隊員の位置を入れ替える。",
   "DOHNA_DOHNA_CARD_SQUAD_SPECIAL.title": "連携攻撃",
   "DOHNA_DOHNA_CARD_SQUAD_SPECIAL.description": "{Damage:diff()}ダメージを与える。\n{RoleEffect}",
   "DOHNA_DOHNA_CARD_KUMA_SIGNATURE.title": "クマ · 連携攻撃",

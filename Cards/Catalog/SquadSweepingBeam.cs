@@ -48,8 +48,12 @@ public sealed class SquadSweepingBeam : SquadCatalogCard
 			{
 				List<Creature> targets = base.CombatState.HittableEnemies.ToList();
 		if (Actor.IsDead) return;
-				NSweepingBeamVfx nSweepingBeamVfx = NSweepingBeamVfx.Create(Actor, targets);
-				if (nSweepingBeamVfx != null)
+				if (Actor.GetCreatureNode()?.Visuals is DohnaDohna.Code.Visuals.RoleVisuals visuals && visuals.SaucerMuzzle != null)
+				{
+					visuals.BeginSaucerShot(targets, .5f, this, nativeImpact: true);
+					await Cmd.Wait(.5f);
+				}
+				else if (NSweepingBeamVfx.Create(Actor, targets) is { } nSweepingBeamVfx)
 				{
 					NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(nSweepingBeamVfx);
 					await Cmd.Wait(0.5f);

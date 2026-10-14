@@ -58,6 +58,28 @@ def contact(image, origin):
     return [0, origin[1] + bounds[3]]
 
 
+def reaction_registration(image, origin):
+    """Offline registration for the requested *in-place hit edit*, not idle.
+
+    Hit sheets bake travel into their transparent canvas as well as PosX/Y.
+    Use opaque torso mass for horizontal registration and actual opaque sole
+    pixels for height, never the rectangular canvas/bbox centre as a foot.
+    All original drawings remain intact. This edit is deliberately separate
+    from contact(), which MUST keep normal authored idle/action offsets.
+    """
+    alpha = np.asarray(image.getchannel("A"), dtype=np.float64)
+    rows = np.flatnonzero((alpha >= 128).any(axis=1))
+    if not len(rows):
+        raise ValueError("Hit registration has no opaque body")
+    first, last = rows[0], rows[-1]
+    torso = alpha[round(first + (last-first)*.25):round(first + (last-first)*.65)+1]
+    mass = torso.sum(axis=0)
+    if mass.sum() <= 0:
+        raise ValueError("Hit registration has no torso mass")
+    return [origin[0] + float(np.dot(mass, np.arange(image.width)) / mass.sum()),
+            origin[1] + int(last) + 1]
+
+
 def ground_shadow(image, origin):
     """Bake a pose-driven painted contact patch, not a flattened human cutout.
 

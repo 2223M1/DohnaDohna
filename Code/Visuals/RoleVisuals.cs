@@ -6,6 +6,8 @@ using MegaCrit.Sts2.Core.Nodes.Combat;
 using STS2RitsuLib.Scaffolding.Godot;
 using STS2RitsuLib.Audio;
 using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
+using MegaCrit.Sts2.Core.Commands;
+using DohnaDohna.Code.Squad;
 
 namespace DohnaDohna.Code.Visuals;
 
@@ -35,19 +37,16 @@ public partial class RoleVisuals : NCreatureVisuals
     private readonly Dictionary<string, Sprite2D> _sprites = [];
     private readonly Dictionary<Sprite2D, int> _layerOrder = [];
     private readonly HashSet<RoleMotionEffects> _effectLayers = [];
+    private readonly List<RoleMotionEffects> _effectTails = [];
     private int _beforeActionDepth, _actionDepth;
     private readonly Dictionary<string, Texture2D> _textures = [];
     private MotionTimeline _idle = null!;
     private MotionTimeline? _hurt;
     private double _hurtTime;
-    private int _hurtNext;
     private Vector2 _hurtOffset;
-    // The authored reaction carries its knockback inside the artwork: the draw
-    // position travels away from the slot and then a separate jump brings it
-    // back. Ordinary hits keep the drawn pose but play where the character
-    // stands, so that net travel is removed from the drawn position.
-    private RoleMotionEffects? _hurtEffects;
-    private readonly List<IAudioHandle> _hurtSounds = [];
+    private float _hurtStartX;
+    // Full authored hit poses, with a small body-only recoil. Formation/HUD
+    // never move and no return-jump controller is entered by an ordinary hit.
     private CancellationToken _hurtCancellation;
     private JsonElement _primaryFrame;
     private readonly List<Sprite2D> _shadows = [];
@@ -57,22 +56,32 @@ public partial class RoleVisuals : NCreatureVisuals
     private static readonly Vector2 SaucerFixture = new(36, -360);
     private Vector2 _saucerPosition = SaucerHover;
     private float _saucerSpread;
-    public Vector2? SaucerAnchor => _saucer != null && !_dead ? _motionBody.ToGlobal(_saucerPosition + new Vector2(0, -38)) : null;
+    public Vector2? SaucerAnchor => _saucerOrbAnchor != null && !_dead ? _saucerOrbAnchor.GlobalPosition : null;
     private ulong? _lastHurtVoice;
     private double _idleTime;
     private bool _playing;
     private bool _cinematic;
     private bool _dead;
-    public bool IsPlaying => _playing || _hurt != null || _cut != null;
+    public bool IsPlaying => _playing || _hurt != null || _cut != null || _jump != null || IsPreparing;
     public NCreature? FormationOrigin { get; set; }
     private CancellationTokenSource? _action;
     private RoleMotionEffects? _primaryEffects;
     private MotionPlacement? _placement;
     private Vector2 _returnOffset;
+    private Vector2 _finisherOffset;
+    private JsonElement _heldPose;
+    internal string RoleId => _document!.RootElement.GetProperty("roleId").GetString()!;
+    internal JsonElement SourceMotion(string cue) => _document!.RootElement.GetProperty("motions").GetProperty(cue);
+    internal Vector2 FinisherOffset
+    {
+        get => _finisherOffset;
+        set { _finisherOffset = value; _motionBody.Position = -_ground + value; }
+    }
+    internal void HoldImpact(bool hold) => _heldPose = hold ? _primaryFrame : default;
     // A role owns its visual tail. No detached task, shared actor dictionary or
     // card copy: replacement releases only this presentation.
     private sealed class CutPlayback(MotionRecut edit, string cue, RoleMotionEffects effects,
-        CancellationTokenSource cancellation, double rate, IReadOnlyList<Creature> targets)
+        CancellationTokenSource cancellation, IReadOnlyList<Creature> targets)
     {
         public readonly MotionRecut Edit = edit;
         public readonly string Cue = cue;
@@ -80,18 +89,24 @@ public partial class RoleVisuals : NCreatureVisuals
         public readonly CancellationTokenSource Cancellation = cancellation;
         public readonly CancellationToken Token = cancellation.Token;
         public readonly List<IAudioHandle> Sounds = [];
-        public readonly double Rate = rate;
+        public readonly List<SaucerShot> Emissions = [];
+        public double LeadRate;
         public readonly IReadOnlyList<Creature> Targets = targets;
         public double Time, EntryTime;
         public int Next;
         public bool HitStarted, LogicDone;
+        public bool PhaseHold;
+        public readonly SquadPlaySelection? Play = SquadPlaySelection.Current;
         public Vector2 Carry;
         public Vector2 SaucerStart, SaucerDestination;
     }
-    private readonly Dictionary<string, MotionRecut> _edits = [];
+    private readonly Dictionary<(string Cue, float Seconds), MotionRecut> _edits = [];
     private CutPlayback? _cut;
     private readonly List<IAudioHandle> _sounds = [];
+    private readonly List<(IAudioHandle Sound, double Age, double Duration)> _fadingSounds = [];
     private IAudioHandle? _reactionVoice;
+    private IAudioHandle? _attackVoice;
+    private bool _castVoiced;
     private bool _audioPaused;
 
     public static RoleVisuals Create(RoleDefinition role)
@@ -118,6 +133,10 @@ public partial class RoleVisuals : NCreatureVisuals
             _saucer = new Sprite2D { Name = "PersistentSaucer", Texture = texture, Centered = false,
                 Position = SaucerHover, Offset = new Vector2(-texture.GetWidth() * .5f, -texture.GetHeight()) };
             _motionBody.AddChild(_saucer);
+            _saucerMuzzle = new Marker2D { Name = "EmissionMuzzle", Position = new Vector2(3, -31) };
+            _saucer.AddChild(_saucerMuzzle);
+            _saucerOrbAnchor = new Marker2D { Name = "OrbAnchor", Position = new Vector2(0, -38) };
+            _saucer.AddChild(_saucerOrbAnchor);
         }
         float height = _document.RootElement.GetProperty("bodyHeight").GetSingle();
         Bounds.Position = new Vector2(-75, -height);
@@ -138,12 +157,25 @@ public partial class RoleVisuals : NCreatureVisuals
             _audioPaused = paused;
         }
         if (_document == null || _layers == null || paused) return;
+        AdvancePoseBridge(delta);
+        AdvanceMovementGhosts(delta);
+        AdvanceSaucerReturn(delta);
+        AdvanceSaucerMotion(delta);
+        AdvanceSoundTails(delta);
+        for (int i = _effectTails.Count - 1; i >= 0; i--)
+        {
+            var effect = _effectTails[i];
+            effect.AdvanceTail(delta);
+            if (effect.HasEmissions && !_dead) continue;
+            effect.Restore(); effect.QueueFree(); _effectTails.RemoveAt(i);
+        }
         if (_cut is { } cut)
         {
-            if (cut.Token.IsCancellationRequested || _dead) StopCut(cut, true);
-            else
+            if (_dead || (cut.Token.IsCancellationRequested && (!cut.LogicDone || !MegaCrit.Sts2.Core.Combat.CombatManager.Instance.IsOverOrEnding)
+                && _heldPose.ValueKind != JsonValueKind.Object)) StopCut(cut, true);
+            else if (_heldPose.ValueKind != JsonValueKind.Object && !cut.PhaseHold)
             {
-                cut.Time += delta * cut.Rate;
+                cut.Time += delta * (cut.HitStarted ? 1 : cut.LeadRate);
                 if (!cut.HitStarted) cut.Time = Math.Min(cut.Time, cut.Edit.Contact);
                 AdvanceCut(cut);
                 if (cut.LogicDone && cut.Time >= cut.Edit.Timeline.Duration) StopCut(cut, false);
@@ -155,11 +187,18 @@ public partial class RoleVisuals : NCreatureVisuals
             if (_hurtCancellation.IsCancellationRequested || _dead) StopHurt(true);
             else
             {
-                AdvanceHurt();
+                _hurtOffset = new Vector2(MotionRecut.HurtDisplacement(_hurtTime, _hurt.Duration, _hurtStartX), 0);
                 if (_hurtTime >= _hurt.Duration) StopHurt(false);
                 if (_hurt != null) { DrawFrame(_hurt.Frames[_hurt.IndexAt(_hurtTime)]); return; }
             }
         }
+        if (_heldPose.ValueKind == JsonValueKind.Object)
+        {
+            DrawFrame(_heldPose, true);
+            return;
+        }
+        if (AdvanceJump(delta)) return;
+        if (AdvancePreparation(delta)) return;
         if (_playing || _cut != null)
         {
             if (_primaryFrame.ValueKind == JsonValueKind.Object) DrawFrame(_primaryFrame, true);
@@ -197,7 +236,7 @@ public partial class RoleVisuals : NCreatureVisuals
         return _motionBody.ToGlobal(point + (!action && _hurt != null ? _hurtOffset : _returnOffset));
     }
 
-    internal Node2D CopyPose(Node2D parent)
+    internal Node2D CopyPose(Node parent, bool afterimage = true)
     {
         var pose = new Node2D { Name = "DohnaPreviousPose" };
         parent.AddChild(pose);
@@ -206,7 +245,7 @@ public partial class RoleVisuals : NCreatureVisuals
             var copy = new Sprite2D { Texture = sprite.Texture, Centered = false,
                 Offset = sprite.Offset, FlipH = sprite.FlipH, FlipV = sprite.FlipV,
                 Material = sprite.Material,
-                SelfModulate = new Color(80f / 255, 80f / 255, 1) };
+                SelfModulate = afterimage ? new Color(80f / 255, 80f / 255, 1) : sprite.SelfModulate };
             pose.AddChild(copy);
             copy.GlobalTransform = sprite.GlobalTransform;
         }
@@ -264,7 +303,8 @@ public partial class RoleVisuals : NCreatureVisuals
         if (_saucer != null)
         {
             _saucer.Visible = !_dead;
-            _saucer.Position = _saucerPosition;
+            _saucer.Position = _saucerPosition + _saucerFloat;
+            _saucer.Rotation = _saucerTilt;
         }
         // AIN33857 applies CgLayers and ShadowOffset only. FrameInfo.Offset is
         // end-of-action return metadata, not an additional per-frame translation.
@@ -315,6 +355,7 @@ public partial class RoleVisuals : NCreatureVisuals
         }
         SortLayers();
         DrawShadows(frame, action);
+        BlendPreparedPose();
     }
 
     private Texture2D Texture(string path)
@@ -354,7 +395,7 @@ public partial class RoleVisuals : NCreatureVisuals
             // otherwise a travelling/jumping shadow slides backwards as it shrinks.
             shadow.Offset = new Vector2(origin[0].GetSingle() - anchor, origin[1].GetSingle());
             shadow.Position = new Vector2(anchor - _ground.X + Number(frame, "ShadowOffsetX"), Number(frame, "ShadowOffsetY"))
-                + (!action && _hurt != null ? _hurtOffset : _returnOffset);
+                + (!action && _hurt != null ? _hurtOffset : _returnOffset) + new Vector2(_finisherOffset.X, 0);
             if (action && _placement != null)
             {
                 shadow.Position += _placement.Map(new Vector2(anchor, 0), entry.GetProperty("global").GetBoolean(), true) - new Vector2(anchor, 0);
@@ -368,12 +409,13 @@ public partial class RoleVisuals : NCreatureVisuals
 
     public async Task Play(string cue, Func<Task>? hit, CancellationToken cancellation, IReadOnlyList<Creature>? targets = null, bool cinematic = false)
     {
-        if (cue is "strike" or "special")
+        if (cue is "strike" or "special" or "cast")
         {
-            await PlayCut(cue, hit, cancellation, targets ?? [], cinematic);
+            await PlayCut(cue, hit, cancellation, targets ?? [], cinematic, cue == "cast" ? .25f : .15f);
             return;
         }
         PruneSounds();
+        ClearPreparation();
         if (_cut is { } cut) StopCut(cut, true);
         _action?.Cancel();
         if (GodotObject.IsInstanceValid(_primaryEffects)) { _primaryEffects!.Restore(); _primaryEffects.Hide(); }
@@ -432,20 +474,71 @@ public partial class RoleVisuals : NCreatureVisuals
         }
     }
 
+    internal Task PlayNative(string trigger, float waitTime, CancellationToken cancellation)
+    {
+        var play = SquadPlaySelection.Current;
+        bool cast = trigger is "Cast" or "PowerUp";
+        string cue = cast ? "cast" : SquadMotionTiming.Cue(play?.Card);
+        waitTime = cast ? SquadMotionTiming.Cast(play?.Card, trigger == "PowerUp", waitTime)
+            : SquadMotionTiming.Attack(play?.Card, waitTime);
+        // A second phase of this same native attack (e.g. SweepingBeam's
+        // Cast) uses the readied pose, not another summon/holster cycle. It
+        // still pays its entire original logical gate.
+        if (cast && play?.Card.Type == MegaCrit.Sts2.Core.Entities.Cards.CardType.Attack
+            && _cut is { HitStarted: true } current && current.Play == play)
+            return ContinueAttackPhase(current, waitTime, cancellation);
+        var targets = play?.AnimationTargets ?? [];
+        if (targets.Count == 0 && play?.Play?.Target is { } target) targets = new[] { target };
+        // Some prototypes (SweepingBeam) have an explicit Attack before they
+        // construct their command. Its all-enemy intent is already known;
+        // resolve visual anchors here without choosing any random target.
+        if (targets.Count == 0 && play?.Card is { Type: MegaCrit.Sts2.Core.Entities.Cards.CardType.Attack,
+                TargetType: MegaCrit.Sts2.Core.Entities.Cards.TargetType.AllEnemies } areaCard)
+            targets = areaCard.CombatState!.HittableEnemies.Where(c => c.IsAlive).ToArray();
+        return PlayCut(cue, null, cancellation, targets, false, waitTime);
+    }
+
+    private async Task ContinueAttackPhase(CutPlayback state, float seconds, CancellationToken cancellation)
+    {
+        state.PhaseHold = true;
+        try
+        {
+            await Cmd.CustomScaledWait(Math.Min(seconds * .5f, .25f), seconds, cancellationToken: cancellation);
+            await MegaCrit.Sts2.Core.Combat.CombatManager.Instance.WaitForUnpause();
+            cancellation.ThrowIfCancellationRequested();
+        }
+        finally { state.PhaseHold = false; }
+    }
+
     private async Task PlayCut(string cue, Func<Task>? hit, CancellationToken cancellation,
-        IReadOnlyList<Creature> targets, bool cinematic)
+        IReadOnlyList<Creature> targets, bool cinematic, float waitTime)
     {
         cancellation.ThrowIfCancellationRequested();
+        var mode = MegaCrit.Sts2.Core.Saves.SaveManager.Instance.PrefsSave.FastMode;
+        double nativeWait = mode == MegaCrit.Sts2.Core.Settings.FastModeType.Instant ? 0
+            : mode == MegaCrit.Sts2.Core.Settings.FastModeType.Fast ? Math.Min(waitTime * .5f, .25f) : waitTime;
+        var actorNode = GetParent<NCreature>();
+        if (MegaCrit.Sts2.Core.Nodes.Rooms.NCombatRoom.Instance is { } combatRoom)
+            SquadFormation.Ensure(combatRoom).BeginWindup(actorNode.Entity, (float)nativeWait);
         PruneSounds();
-        if (!_edits.TryGetValue(cue, out var edit))
-            _edits.Add(cue, edit = MotionRecut.Create(_document!.RootElement.GetProperty("roleId").GetString()!,
-                cue, _document.RootElement.GetProperty("motions").GetProperty(cue)));
+        Vector2? interruptedHurt = _hurt != null ? _hurtOffset : null;
+        if (interruptedHurt != null) { BeginPoseBridge(); StopHurt(true); }
+        // A subsequent action may take over a visual tail, never an earlier
+        // command's windup. This restores the camera before sampling anchors.
+        if (RoleFinisher.Current is { Holding: true } previousFinish) previousFinish.Close();
+        Vector2 interruptedReturn = _jump?.From != null ? _finisherOffset : Vector2.Zero;
+        _jump = null;
+        if (interruptedReturn != Vector2.Zero) FinisherOffset = Vector2.Zero;
+        if (!_edits.TryGetValue((cue, waitTime), out var edit))
+            _edits.Add((cue, waitTime), edit = MotionRecut.Create(RoleId, cue, SourceMotion(cue), waitTime));
+        edit = TakePreparation(cue, edit, waitTime);
+        RoleFinisher? preview = cinematic ? RoleFinisher.Begin(GetParent<NCreature>().Entity, cue, targets) : null;
         var previous = _cut;
-        bool resume = previous != null && previous.HitStarted && previous.Targets.SequenceEqual(targets)
+        bool resume = cue != "cast" && previous != null && previous.Cue != "cast" && previous.HitStarted && previous.Targets.SequenceEqual(targets)
             && previous.Time < previous.Edit.Timeline.Starts[^3] &&
             (previous.Cue == cue || _document!.RootElement.GetProperty("roleId").GetString() is "kuma" or "antena");
-        var carry = previous == null ? Vector2.Zero :
-            new Vector2(Number(_primaryFrame, "actionAnchorX"), 0) + _returnOffset;
+        var carry = interruptedReturn + (interruptedHurt ?? (previous == null ? Vector2.Zero :
+            new Vector2(Number(_primaryFrame, "actionAnchorX"), 0) + _returnOffset));
         var saucerStart = _saucerPosition;
         if (previous != null) StopCut(previous, true);
         _action?.Cancel();
@@ -454,72 +547,76 @@ public partial class RoleVisuals : NCreatureVisuals
         _action = null;
         _playing = false;
         if (GodotObject.IsInstanceValid(_primaryEffects)) { _primaryEffects!.Restore(); _primaryEffects.Hide(); }
-        var mode = MegaCrit.Sts2.Core.Saves.SaveManager.Instance.PrefsSave.FastMode;
-        double rate = mode == MegaCrit.Sts2.Core.Settings.FastModeType.Fast ? 2 : 1;
         bool instant = mode == MegaCrit.Sts2.Core.Settings.FastModeType.Instant;
-        // A finisher gets a readable anticipation and a short recovery, not the
-        // uncut source movie. Instant mode never waits for visual presentation.
-        if (cinematic && !instant) rate *= .65;
         var effects = new RoleMotionEffects();
         _layers.AddChild(effects);
         var state = new CutPlayback(edit, cue, effects,
-            CancellationTokenSource.CreateLinkedTokenSource(cancellation), rate, targets);
+            CancellationTokenSource.CreateLinkedTokenSource(cancellation), targets);
         if (resume)
         {
             state.Next = edit.ResumeIndex;
             state.Time = edit.Timeline.Starts[state.Next];
         }
         state.EntryTime = state.Time;
+        state.LeadRate = nativeWait > 0 ? (edit.Contact - state.EntryTime) / nativeWait : 0;
         state.Carry = carry - new Vector2(Number(edit.Timeline.Frames[state.Next], "actionAnchorX"), 0);
         _cut = state;
         _primaryEffects = effects;
         var nodes = targets.Select(c => c.GetCreatureNode()).OfType<NCreature>().ToArray();
         var motion = _document!.RootElement.GetProperty("motions").GetProperty(cue);
         _returnOffset = Vector2.Zero;
-        _placement = nodes.Length == 0 ? null : new MotionPlacement(this, nodes,
+        _placement = cue == "cast" || nodes.Length == 0 ? null : new MotionPlacement(this, nodes,
             motion.GetProperty("metadata").GetProperty("Range").GetInt32(), compact: true);
         state.SaucerStart = saucerStart;
         state.SaucerDestination = SaucerHover;
         if (_saucer != null && _placement != null)
         {
-            // AIN33555/33841 keep equipment and emission in the same fixture.
-            // Resolve that fixture against actual targets, without moving the
-            // member, its health bar, or a monster's native body.
-            state.SaucerDestination = _placement.Map(SaucerFixture, true);
-            if (FormationOrigin is { } origin && GodotObject.IsInstanceValid(origin))
-                state.SaucerDestination += GlobalTransform.BasisXformInv(origin.Visuals.GlobalPosition - GlobalPosition);
+            // A new firing lane replaces this actor's attached visual tail,
+            // not a projectile already in flight. An old beam must not sweep
+            // through uninvolved enemies while the saucer takes its next shot.
+            foreach (var shot in _shots.Where(s => GodotObject.IsInstanceValid(s) && s.Attached && !s.Pending))
+            { shot.Hide(); shot.QueueFree(); }
+            state.SaucerDestination = ChooseSaucerDestination(SaucerShot.Resolve(SquadPlaySelection.Current?.Card), nodes);
         }
-        // Original impact art/audio is omitted in the short edit, including
-        // finishers. Native contact feedback remains exactly once per command.
+        // Keep existing finisher emissions; ordinary actions use native VFX.
+        // The lease is captured for this action, not read from a later card.
         _cinematic = false;
-        effects.Initialize(this, targets, edit.Timeline, cinematic: cinematic, recut: true);
+        effects.Initialize(this, targets, edit.Timeline,
+            originalEffects: RoleFinisher.Current?.OwnsWindup(actorNode.Entity) == true);
+        var playingCard = SquadPlaySelection.Current?.Card;
+        bool sweeping = playingCard is DohnaDohna.Cards.SquadCatalogCard { Prototype: "SweepingBeam", IsFallback: false };
+        if (_saucer != null && cue != "cast" && !sweeping && (SquadPlaySelection.Current?.PresentedCommand != null || hit != null))
+            state.Emissions.AddRange(BeginSaucerShot(targets, (float)nativeWait, playingCard));
         bool resolved = false;
         try
         {
             AdvanceCut(state);
-            if (instant) { state.Time = edit.Contact; AdvanceCut(state); }
-            while (state.Time < edit.Contact)
+            // Exactly the host TriggerAnim gate. The visual cursor is not a
+            // second gameplay clock; compatible continuation keeps this wait.
+            await Cmd.CustomScaledWait(Math.Min(waitTime * .5f, .25f), waitTime, cancellationToken: cancellation);
+            await MegaCrit.Sts2.Core.Combat.CombatManager.Instance.WaitForUnpause();
+            cancellation.ThrowIfCancellationRequested();
+            if (_cut == state)
             {
-                state.Token.ThrowIfCancellationRequested();
-                await this.AwaitProcessFrame(state.Token);
+                state.Time = edit.Contact;
+                AdvanceCut(state);
             }
-            state.Token.ThrowIfCancellationRequested();
             state.HitStarted = true; // Before await: reflection can cause real death.
-            if (hit != null) await hit();
+            if (cue == "cast" && SquadPlaySelection.Current?.Card.Type != MegaCrit.Sts2.Core.Entities.Cards.CardType.Attack && !_castVoiced && !_dead)
+            {
+                _castVoiced = true; // RoleVisuals is recreated with each combat.
+                PlayActionVoice("cast");
+            }
+            preview?.Impact();
+            if (hit != null) { ContactEmissions(targets); await hit(); }
             resolved = true;
             state.LogicDone = true;
-            if (cinematic && !instant)
-                while (_cut == state && state.Time < edit.Timeline.Duration)
-                {
-                    state.Token.ThrowIfCancellationRequested();
-                    await this.AwaitProcessFrame(state.Token);
-                }
         }
-        catch (OperationCanceledException) when (!cancellation.IsCancellationRequested) { }
         finally
         {
-            if (_cut == state && (!resolved || cinematic || instant || state.Token.IsCancellationRequested))
-                StopCut(state, !resolved || state.Token.IsCancellationRequested);
+            preview?.CommandComplete();
+            if (_cut == state && (!resolved || instant || state.Token.IsCancellationRequested))
+                StopCut(state, !resolved || state.Token.IsCancellationRequested, skipVisualTail: instant);
         }
     }
 
@@ -544,43 +641,50 @@ public partial class RoleVisuals : NCreatureVisuals
 
     private void AdvanceSaucer(CutPlayback state, double time)
     {
-        if (_saucer == null) return;
+        if (_saucer == null || state.Cue == "cast") return;
         var timeline = state.Edit.Timeline;
         // Reach the firing fixture before the first charge/beam, hold still
         // while the emitted beam sweeps, then return during the visual tail.
         double arrival = timeline.Starts[state.Edit.ContactIndex - 1];
         float outbound = MotionTimeline.Ease("EaseInOutCubic",
             (float)((time - state.EntryTime) / Math.Max(arrival - state.EntryTime, 1d / 60)));
-        double returning = timeline.Starts[9];
-        float inbound = MotionTimeline.Ease("EaseInOutCubic",
-            (float)((time - returning) / (timeline.Duration - returning)));
-        _saucerPosition = state.SaucerStart.Lerp(state.SaucerDestination, outbound).Lerp(SaucerHover, inbound);
-        _saucerSpread = outbound * (1 - inbound);
+        if (!state.HitStarted) _saucerPosition = state.SaucerStart.Lerp(state.SaucerDestination, outbound);
+        _saucerSpread = outbound;
     }
 
-    private void StopCut(CutPlayback state, bool canceled)
+    private void StopCut(CutPlayback state, bool canceled, bool skipVisualTail = false)
     {
         if (canceled) state.Cancellation.Cancel();
-        if (GodotObject.IsInstanceValid(state.Effects)) { state.Effects.Restore(); state.Effects.QueueFree(); }
+        if (skipVisualTail || canceled && !state.HitStarted)
+            foreach (var shot in state.Emissions.Where(GodotObject.IsInstanceValid)) shot.QueueFree();
+        if (GodotObject.IsInstanceValid(state.Effects))
+        {
+            state.Effects.EndEmission();
+            if (!skipVisualTail && state.Effects.HasEmissions && !_dead && IsInsideTree()) _effectTails.Add(state.Effects);
+            else { state.Effects.Restore(); state.Effects.QueueFree(); }
+        }
         if (_primaryEffects == state.Effects) _primaryEffects = null;
-        // Edited movement/charge clips must not outlive their shortened action.
-        ReleaseSounds(state.Sounds);
+        // Emitted one-shots belong to this role/room, not to the body cursor.
+        // Replacing a pose must not truncate a gunshot or its recorded release.
+        if (canceled && !state.HitStarted)
+            foreach (var sound in state.Sounds) FadeSound(sound, .12);
         state.Cancellation.Dispose();
         if (_cut != state) return;
         _cut = null;
-        _saucerPosition = SaucerHover;
+        if (skipVisualTail) { _saucerPosition = SaucerHover; _saucerHold = 0; ClearPoseBridge(); }
         _saucerSpread = 0;
         _placement = null;
         _returnOffset = Vector2.Zero;
         _primaryFrame = default;
-        if (!_dead && IsInsideTree() && _hurt == null) DrawFrame(_idle.Frames[0]);
+        if (!_dead && IsInsideTree() && _hurt == null)
+        { if (!skipVisualTail) BeginPoseBridge(); DrawFrame(_idle.Frames[0]); }
         PruneSounds();
     }
 
     private void ReleaseSounds(IEnumerable<IAudioHandle> sounds)
     {
         foreach (var sound in sounds)
-            if (_sounds.Remove(sound)) { sound.TryStop(false); sound.Dispose(); }
+            if (_sounds.Contains(sound)) FadeSound(sound, .12);
     }
 
     private async Task PlayReturn(Vector2 from, float authoredOffset, List<IAudioHandle> sounds, CancellationToken token, bool playVoice)
@@ -638,7 +742,38 @@ public partial class RoleVisuals : NCreatureVisuals
     {
         foreach (var sound in _sounds) { sound.TryStop(false); sound.Dispose(); }
         _sounds.Clear();
+        _fadingSounds.Clear();
         _reactionVoice = null;
+        _attackVoice = null;
+    }
+
+    private void FadeSound(IAudioHandle sound, double seconds)
+    {
+        if (!sound.IsValid || _fadingSounds.Any(f => f.Sound == sound)) return;
+        // Not all existing Studio one-shots have a release envelope. Use the
+        // installed handle API, so allowFadeOut cannot silently become a cut.
+        _fadingSounds.Add((sound, 0, seconds));
+    }
+
+    private void AdvanceSoundTails(double delta)
+    {
+        for (int i = _fadingSounds.Count - 1; i >= 0; i--)
+        {
+            var (sound, age, duration) = _fadingSounds[i];
+            age += delta;
+            if (!sound.IsValid || age >= duration)
+            {
+                if (sound.IsValid) { sound.TryStop(false); sound.Dispose(); }
+                _sounds.Remove(sound);
+                _fadingSounds.RemoveAt(i);
+                continue;
+            }
+            float fraction = (float)(1 - age / duration);
+            if (!sound.TrySetVolume(MathF.Pow(10, SquadAudio.GainDb / 20) * fraction * fraction))
+                throw new InvalidOperationException("Role event cannot fade through the installed audio handle.");
+            _fadingSounds[i] = (sound, age, duration);
+        }
+        PruneSounds();
     }
 
     private void PlayFrameAudio(JsonElement frame, List<IAudioHandle> owner, bool cinematic = false, bool playVoice = true)
@@ -658,26 +793,11 @@ public partial class RoleVisuals : NCreatureVisuals
         }
     }
 
-    private void AdvanceHurt()
-    {
-        while (_hurtNext < _hurt!.Frames.Length && _hurt.Starts[_hurtNext] <= _hurtTime)
-        {
-            int next = _hurtNext++;
-            _hurtEffects!.AddFrame(_hurt.Frames[next], _hurt.Starts[next]);
-        }
-        _hurtEffects!.Advance(_hurtTime);
-    }
-
     private void StopHurt(bool canceled)
     {
+        if (_hurt != null && !canceled) BeginPoseBridge();
         _hurt = null;
         _hurtOffset = Vector2.Zero;
-        if (GodotObject.IsInstanceValid(_hurtEffects)) { _hurtEffects!.Restore(); _hurtEffects.QueueFree(); }
-        _hurtEffects = null;
-        if (canceled)
-            foreach (var sound in _hurtSounds)
-                if (_sounds.Remove(sound)) { sound.TryStop(false); sound.Dispose(); }
-        _hurtSounds.Clear();
         PruneSounds();
     }
 
@@ -692,11 +812,17 @@ public partial class RoleVisuals : NCreatureVisuals
             sound.Dispose();
             _sounds.RemoveAt(i);
             if (_reactionVoice == sound) _reactionVoice = null;
+            if (_attackVoice == sound) _attackVoice = null;
         }
     }
 
     private void PlayReactionVoice(string category)
     {
+        if (_attackVoice != null)
+        {
+            FadeSound(_attackVoice, category == "deathVoice" ? .04 : .08);
+            _attackVoice = null;
+        }
         ulong now = Time.GetTicksMsec();
         if (category == "hurtVoice")
         {
@@ -706,9 +832,7 @@ public partial class RoleVisuals : NCreatureVisuals
         }
         if (_reactionVoice != null)
         {
-            _reactionVoice.TryStop(false);
-            _reactionVoice.Dispose();
-            _sounds.Remove(_reactionVoice);
+            FadeSound(_reactionVoice, category == "deathVoice" ? .04 : .08);
         }
         var voices = _document!.RootElement.GetProperty(category);
         if (voices.GetArrayLength() == 0) throw new InvalidDataException("Missing role reaction voice: " + category);
@@ -719,21 +843,37 @@ public partial class RoleVisuals : NCreatureVisuals
 
     private static bool CanReplayHurtVoice(ulong now, ulong? last) => last == null || now > last.Value + 300;
 
+    internal void PlayFinisherVoice() => PlayActionVoice("strike");
+
+    private void PlayActionVoice(string cue)
+    {
+        // The regular attack's authored utterance, independent of special cue
+        // selection. It can outlive the body tail but never the role/room.
+        var voices = SourceMotion(cue).GetProperty("frames").EnumerateArray()
+            .Where(f => MotionTimeline.Enabled(f, "Voice", out _))
+            .SelectMany(f => f.GetProperty("Voice").EnumerateObject())
+            .Where(p => p.Name.StartsWith("Voice", StringComparison.Ordinal) && p.Value.ValueKind == JsonValueKind.String)
+            .Select(p => p.Value.GetString()).Where(s => !string.IsNullOrEmpty(s)).ToArray();
+        if (voices.Length == 0) throw new InvalidDataException("Missing action voice: " + RoleId + "/" + cue);
+        if (_attackVoice != null) { FadeSound(_attackVoice, .12); _attackVoice = null; }
+        _attackVoice = SquadAudio.PlayInRoom(voices[^1]!);
+        _sounds.Add(_attackVoice);
+    }
+
     public Task PlayHurt(CancellationToken token)
     {
         if (_dead) return Task.CompletedTask;
         token.ThrowIfCancellationRequested();
+        float previousRecoil = _hurtOffset.X;
         StopHurt(true);
         PlayReactionVoice("hurtVoice");
         var source = _document!.RootElement.GetProperty("motions").GetProperty("hit").GetProperty("frames");
-        _hurt = MotionRecut.Hurt(source, _idle.Frames[0]);
+        _hurt = MotionRecut.Hurt(source);
         _hurtTime = 0;
-        _hurtNext = 0;
+        _hurtStartX = previousRecoil;
+        _hurtOffset = new Vector2(previousRecoil, 0);
         _hurtCancellation = token;
-        _hurtEffects = new RoleMotionEffects();
-        _layers.AddChild(_hurtEffects);
-        _hurtEffects.Initialize(this, [], _hurt, stage: false);
-        AdvanceHurt();
+        _saucerHurtAge = 0;
         DrawFrame(_hurt.Frames[0]);
         return Task.CompletedTask;
     }
@@ -759,12 +899,20 @@ public partial class RoleVisuals : NCreatureVisuals
 
     public override void _ExitTree()
     {
+        _jump = null;
+        ClearPreparation();
         if (_cut is { } cut) StopCut(cut, true);
         _action?.Cancel();
         if (GodotObject.IsInstanceValid(_primaryEffects)) _primaryEffects!.Restore();
+        foreach (var effect in _effectTails) { effect.Restore(); effect.QueueFree(); }
+        _effectTails.Clear();
         StopHurt(true);
         StopSounds();
         _document?.Dispose();
+        foreach (var shot in _shots.Where(GodotObject.IsInstanceValid)) shot.QueueFree();
+        _shots.Clear();
+        foreach (var (pose, _) in _movementGhosts) if (GodotObject.IsInstanceValid(pose)) pose.QueueFree();
+        _movementGhosts.Clear();
         base._ExitTree();
     }
 }

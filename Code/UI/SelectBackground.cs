@@ -19,7 +19,6 @@ public partial class SelectBackground : Control
     private readonly List<(Sprite2D Node, float Period)> _circles = [];
     private Node2D _plane = null!;
     private Node2D _figurePlane = null!;
-    private Rect2 _figureBounds;
     private NCharacterSelectScreen _screen = null!;
     private Transform2D _figureScreenTransform;
     private bool _secondary;
@@ -37,9 +36,6 @@ public partial class SelectBackground : Control
         using var title = JsonDocument.Parse(Godot.FileAccess.GetFileAsString("res://DohnaDohna/images/original/title.json"));
         _plane.AddChild(new Sprite2D { Texture = GD.Load<Texture2D>(title.RootElement.GetProperty("系统／标题／背景").GetString()!), Centered = false });
         using var layout = JsonDocument.Parse(Godot.FileAccess.GetFileAsString("res://DohnaDohna/images/original/title-layout.json"));
-        var bounds = layout.RootElement.GetProperty("figureBounds");
-        _figureBounds = new Rect2(bounds[0].GetSingle(), bounds[1].GetSingle(),
-            bounds[2].GetSingle() - bounds[0].GetSingle(), bounds[3].GetSingle() - bounds[1].GetSingle());
         foreach (var circle in layout.RootElement.GetProperty("circles").EnumerateArray())
         {
             var sprite = new Sprite2D { Texture = GD.Load<Texture2D>(circle.GetProperty("image").GetString()!),
@@ -70,22 +66,17 @@ public partial class SelectBackground : Control
     public void SetSecondary(bool secondary) { _secondary = secondary; if (IsNodeReady()) Fit(); }
     private void Fit()
     {
-        // Uniform cover, centered. No viewport stretching or assumed 1920×1080 scale.
-        float scale = Math.Max(Size.X / 1280f, Size.Y / 720f);
-        _plane.Scale = Vector2.One * scale;
-        _plane.Position = (Size - new Vector2(1280, 720) * scale) * .5f;
-        // Fit the real opaque artwork, which extends beyond SceneTitle's 1280×720
-        // canvas. Reserve the native information/card/roster regions independently.
+        // SceneTitle deliberately crops the full-size artwork at its 1280x720
+        // viewport. Fitting all opaque pixels shrinks the cast to a thumbnail.
+        // Background, circles and figures share the original canvas transform.
         var screenSize = _screen.Size;
-        float left = screenSize.X * .43f;
-        float right = _secondary ? screenSize.X - 570 : screenSize.X * .97f;
-        float bottom = _secondary ? screenSize.Y - 445 : screenSize.Y - 235;
-        var safe = new Rect2(left, 60, Math.Max(160, right - left), Math.Max(180, bottom - 60));
-        float figureScale = .85f * Math.Min(Math.Min(screenSize.X / 1280f, screenSize.Y / 720f),
-            Math.Min(safe.Size.X / _figureBounds.Size.X, safe.Size.Y / _figureBounds.Size.Y));
-        _figureScreenTransform = new Transform2D(0, Vector2.One * figureScale, 0,
-            safe.GetCenter() - _figureBounds.GetCenter() * figureScale);
+        float scale = Math.Max(screenSize.X / 1280f, screenSize.Y / 720f);
+        _figureScreenTransform = new Transform2D(0, Vector2.One * scale, 0,
+            (screenSize - new Vector2(1280, 720) * scale) * .5f);
+        _plane.GlobalTransform = _screen.GetGlobalTransform() * _figureScreenTransform;
         _figurePlane.GlobalTransform = _screen.GetGlobalTransform() * _figureScreenTransform;
+        _figurePlane.Visible = !_secondary;
+        _plane.Modulate = _secondary ? new Color(.09f, .11f, .20f) : Colors.White;
     }
 
     public override void _Process(double delta)
@@ -94,6 +85,7 @@ public partial class SelectBackground : Control
         // Cancel only the native background's overscan transform, preserving
         // canvas draw order/modulation so native popups still cover the poster.
         _figurePlane.GlobalTransform = _screen.GetGlobalTransform() * _figureScreenTransform;
+        _plane.GlobalTransform = _figurePlane.GlobalTransform;
         _elapsed += delta;
         var pointer = _figurePlane.GetLocalMousePosition();
         if (new Rect2(Vector2.Zero, new Vector2(1280, 720)).HasPoint(pointer)) _pointer = pointer;

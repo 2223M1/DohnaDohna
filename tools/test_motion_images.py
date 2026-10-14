@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from PIL import Image, ImageDraw
-from motion_images import compose, contact, ground_shadow
+from motion_images import compose, contact, ground_shadow, reaction_registration
 
 
 class MotionImageTests(unittest.TestCase):
@@ -52,6 +52,19 @@ class MotionImageTests(unittest.TestCase):
     def test_empty_idle_rejected(self):
         with self.assertRaisesRegex(ValueError, "no ground contact"):
             contact(Image.new("RGBA", (10, 10)), (0, 0))
+
+    def test_reaction_registration_removes_baked_canvas_travel(self):
+        a = Image.new("RGBA", (512, 386))
+        b = Image.new("RGBA", (512, 386))
+        ImageDraw.Draw(a).rectangle((260, 80, 299, 320), fill="white")
+        ImageDraw.Draw(b).rectangle((70, 45, 109, 285), fill="white")
+        aa = reaction_registration(a, (-256, -386))
+        ba = reaction_registration(b, (-256, -386))
+        self.assertEqual(aa[0] - ba[0], 190)
+        self.assertEqual(aa[1] - ba[1], 35)
+        # A distant weapon tip must not become the character's torso anchor.
+        ImageDraw.Draw(b).rectangle((450, 10, 480, 12), fill=(255,255,255,1))
+        self.assertEqual(reaction_registration(b, (-256, -386)), ba)
 
     def test_shadow_ignores_elevation_but_keeps_horizontal_travel(self):
         layer = self.sprite(120, "a.png")

@@ -4,6 +4,9 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Saves;
+using MegaCrit.Sts2.Core.Settings;
 
 namespace DohnaDohna.Code.Visuals;
 
@@ -14,6 +17,9 @@ public sealed partial class SquadFormation : Node
     private readonly Dictionary<NCreature, Vector2> _starts = [];
     private float _elapsed;
     private bool _moving;
+    private Creature? _acting;
+    private Creature? _movingActor;
+    private float _duration = .4f;
     private NCombatRoom _room = null!;
 
     public static SquadFormation Ensure(NCombatRoom room)
@@ -24,7 +30,7 @@ public sealed partial class SquadFormation : Node
         return node;
     }
 
-    public void Reflow(SquadCombatState squad, float scaling, bool fullyCenterPlayers, bool animate = false)
+    public void Reflow(SquadCombatState squad, float scaling, bool fullyCenterPlayers, bool animate = false, Creature? acting = null)
     {
         var controller = _room.GetCreatureNode(squad.Owner.Creature);
         if (controller == null) return;
@@ -33,7 +39,8 @@ public sealed partial class SquadFormation : Node
         var nodes = squad.Living.Select(_room.GetCreatureNode).OfType<NCreature>().ToArray();
         foreach (var actor in squad.Actors.Where(c => c.IsDead))
             _room.SetCreatureIsInteractable(actor, false);
-        if (nodes.Length == 0) return;
+        if (nodes.Length == 0)
+        { _moving = false; _acting = null; _starts.Clear(); _destinations.Clear(); return; }
 
         // Use the same camera-space half-room and front-row baseline as native layout.
         // HUD width participates so adjacent health bars never occupy the same slot.
@@ -59,7 +66,7 @@ public sealed partial class SquadFormation : Node
             {
                 // Native layout may run during this animation (summon, resize, death).
                 // Restore the same interpolated position immediately, not one frame later.
-                if (_starts.TryGetValue(node, out var start)) node.Position = start.Lerp(destination, _elapsed / .2f);
+                if (_starts.TryGetValue(node, out var start)) node.Position = start.Lerp(destination, ProgressFor(node));
                 else node.Position = destination;
             }
             node.Modulate = Colors.White;
@@ -68,7 +75,16 @@ public sealed partial class SquadFormation : Node
             node.Show();
             _room.SetCreatureIsInteractable(node.Entity, true);
         }
-        if (animate) { _elapsed = 0; _moving = true; }
+        if (animate)
+        {
+            _elapsed = 0;
+            _moving = true;
+            _acting = acting;
+            _movingActor = acting;
+            _duration = .4f;
+            foreach (var node in nodes.Where(n => acting == null && _starts[n].DistanceTo(_destinations[n]) > .01f))
+                (node.Visuals as RoleVisuals)?.BeginFormationJump(_duration);
+        }
         foreach (var removed in _destinations.Keys.Where(n => !nodes.Contains(n)).ToArray())
         { _destinations.Remove(removed); _starts.Remove(removed); }
     }
@@ -78,14 +94,36 @@ public sealed partial class SquadFormation : Node
         while (_moving) await this.AwaitProcessFrame(token);
     }
 
+    // BeforeCardPlayed commits order/auras immediately. Its visible movement
+    // shares the FIRST native animation gate, never a second awaited delay.
+    internal void BeginWindup(Creature actor, float seconds)
+    {
+        if (!_moving || _acting != actor) return;
+        _acting = null;
+        _elapsed = 0;
+        _duration = Math.Max(seconds, .0001f);
+        foreach (var node in _starts.Keys.Where(n => n.Entity != actor))
+            (node.Visuals as RoleVisuals)?.BeginFormationJump(_duration);
+    }
+
+    private float ProgressFor(NCreature node) => (node.Visuals as RoleVisuals)?.FormationJumpProgress(_elapsed / _duration)
+        ?? MotionTimeline.Ease("EaseInOutSine", _elapsed / _duration);
+
     public override void _Process(double delta)
     {
         if (!_moving || CombatManager.Instance.IsPaused) return;
-        _elapsed = Math.Min(.2f, _elapsed + (float)delta);
+        if (_acting is { IsDead: true } dead) BeginWindup(dead, .4f);
+        if (_acting != null) return;
+        var mode = SaveManager.Instance.PrefsSave.FastMode;
+        _elapsed = mode == FastModeType.Instant ? _duration : Math.Min(_duration, _elapsed + (float)delta);
         foreach (var (node, start) in _starts)
             if (GodotObject.IsInstanceValid(node) && node.IsInsideTree())
-                node.Position = start.Lerp(_destinations[node], _elapsed / .2f);
-        if (_elapsed >= .2f) { _moving = false; _starts.Clear(); }
+            {
+                node.Position = start.Lerp(_destinations[node], ProgressFor(node));
+                if (node.Entity == _movingActor && node.Visuals is RoleVisuals { RoleId: "kuma" } actor)
+                    actor.MovementAfterimage(delta);
+            }
+        if (_elapsed >= _duration) { _moving = false; _starts.Clear(); }
     }
 
     public override void _ExitTree() { _moving = false; _starts.Clear(); _destinations.Clear(); }

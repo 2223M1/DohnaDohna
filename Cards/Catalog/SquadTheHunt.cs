@@ -35,7 +35,7 @@ public sealed class SquadTheHunt : SquadCatalogCard
 
 	protected override IEnumerable<DynamicVar> OriginalVars => [new DamageVar(10m, ValueProp.Move)];
 
-	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+	public override IEnumerable<CardKeyword> CanonicalKeywords => [.. base.CanonicalKeywords, CardKeyword.Exhaust];
 
 	protected override IEnumerable<IHoverTip> AdditionalHoverTips => [HoverTipFactory.Static(StaticHoverTip.Fatal)];
 
